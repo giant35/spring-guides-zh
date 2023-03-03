@@ -177,13 +177,13 @@ void function() {
    <p>从服务交互考虑开始。</p>
   </div>
   <div class="paragraph">
-   <p>服务将处理 <code>GET</code> 请求 <code>/问候</code>, 在查询字符串中可选的 <code>名称</code> 参数。 <code>GET</code> 请求应该返回 <code>200 OK</code> 在表示问候的机构中使用 JSON 回复。 它应类似于下列产出：</p>
+   <p>服务将处理 <code>GET</code> <code>/greeting </code> 请求, 查询字符串中有可选参数 <code>name</code> 。 <code>GET</code> 请求应该返回 <code>200 OK</code> 并在消息内容中用 JSON 表示回复信息。 它应类似于下列输出：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
     <div class="listingblock">
      <div class="content">
-      <pre class="prettyprint highlight"><code data-lang="json">主席:
+      <pre class="prettyprint highlight"><code data-lang="json">{
     "id": 1,
     "content": "Hello, World!"
 }</code></pre>
@@ -192,16 +192,16 @@ void function() {
    </div>
   </div>
   <div class="paragraph">
-   <p><code>id</code> 字段是问候独特的标识符， <code>内容</code> 是问候的文字描述。</p>
+   <p><code>id</code> 字段是 greeting 的唯一标识 ， <code> content </code> 是问候的文字描述。</p>
   </div>
   <div class="paragraph">
-   <p>为了树立问候代表的样板，设立了一个资源代表班级。 要这样做，请为 <code>id</code> 和 <code>内容</code> 提供一个 Java 记录类。 以下列表(从 <code>src/main/java/com/example/restservice/Greeting) ava</code>显示：</p>
+   <p>为了建模 greeting ，创建一个资源表示类。 要这样做，请为 <code>id</code> 和 <code> content </code> 提供一个 Java record class。 如下 (从 <code>src/main/java/com/example/restservice/Greeting.java</code>) 所示：</p>
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="prettyprint highlight"><code data-lang="java">包 com.example.restservice;
+    <pre class="prettyprint highlight"><code data-lang="java">package com.example.restservice;
 
-公开记录 Greeting(long id, String content) { }</code></pre>
+public record Greeting(long id, String content) { }</code></pre>
    </div>
   </div>
   <div class="exampleblock">
@@ -211,7 +211,7 @@ void function() {
       <tbody>
        <tr>
         <td class="icon"><i class="fa icon-note" title="说明"></i></td>
-        <td class="content">这个应用程序使用 <a href="https://github.com/FasterXML/jackson">Jackson JSON</a> 库来自动将类型 <code>类型的实例收集到 JSON</code> 到 JSON 中。 Web 启动默认包含杰克逊。</td>
+        <td class="content">本应用使用 <a href="https://github.com/FasterXML/jackson">Jackson JSON</a> 库来自动将<code> Greeting </code>类映射到 JSON 中。 web starter 中默认包含了 Jackson 。</td>
        </tr>
       </tbody>
      </table>
@@ -221,32 +221,32 @@ void function() {
  </div>
 </div>
 <div class="sect1">
- <h2 id="_create_a_resource_controller">创建资源控制器</h2>
+ <h2 id="_create_a_resource_controller">创建资源 Controller</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>在Spring构建RESTful web 服务的方法中，HTTP请求由控制器处理。 这些组件由 <a href="https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/RestController.html"><code>@RestController</code></a> 注解中标识， 和 <code>问候控制器</code> 显示在以下列表中(来自 <code>src/main/java/com/example/restservice/GreetingController)。 ava</code>) 处理 <code>GET</code> 请求 <code>/ 问候</code> 通过返回 <code>问候</code> 类：</p>
+   <p>采用 Spring 来构建 RESTful web 服务时，HTTP 请求由 controller 来处理。 这些组件注解了 <a href="https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/RestController.html"><code>@RestController</code></a> ，如下所示的 <code>GreetingController</code> (在 <code>src/main/java/com/example/restservice/GreetingController.java</code>) 处理了 <code>GET</code> <code>/greeting</code> 请求并返回一个 <code>Greeting</code> 类的实例:</p>
   </div>
   <div class="exampleblock">
    <div class="content">
     <div class="listingblock">
      <div class="content">
-      <pre class="prettyprint highlight"><code data-lang="java">软件包 com.example.restservice;
+      <pre class="prettyprint highlight"><code data-lang="java">package com.example.restservice;
 
-importer java.util.combut.atomic.AtomicLong;
+import java.util.concurrent.atomic.AtomicLong;
 
-importer org.springframework.web.bind.annotation.GetMapping;
-importer org.springframework.bind.annotation.RequestParam;
-importer org.springframework.web.bind.annotation. estController；
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class GreetingController @un.org
+public class GreetingController {
 
-	private static final String template = "Hello, %s！ ；
-	私人最终原子长计计数器=新的原子长计数器；
+	private static final String template = "Hello, %s!";
+	private final AtomicLong counter = new AtomicLong();
 
-	@GetMapping("/问候")
-	公开问候(@RequestParam(value = "name", defaultValue = "World") String name)
-		return new Greeting(计数器). ncrementAndGet(), String.format (template, name);
+	@GetMapping("/greeting")
+	public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
+		return new Greeting(counter.incrementAndGet(), String.format(template, name));
 	}
 }</code></pre>
      </div>
@@ -254,35 +254,35 @@ public class GreetingController @un.org
    </div>
   </div>
   <div class="paragraph">
-   <p>这个控制器简明扼要，但仍然有很多人在这个场合。 我们一步地将其打开。</p>
+   <p>这个 Controller 简明扼要，但底层比较复杂。 我们一步一步看一下。</p>
   </div>
   <div class="paragraph">
-   <p><code>@GetMap</code> 注解确保到 <code>/问候</code> 的 HTTP GET 请求被映射到 <code>问候()</code> 方法。</p>
+   <p>注解<code>@GetMapping</code>确保 HTTP GET <code>/greeting</code> 请求映射到了 <code>greeting()</code> 方法.</p>
   </div>
   <div class="admonitionblock note">
    <table>
     <tbody>
      <tr>
       <td class="icon"><i class="fa icon-note" title="说明"></i></td>
-      <td class="content">其它HTTP动词也有配套注释(例如 <code>@PostMapping</code> for POST)。 还有一个 <code>@RequestMap</code> 注解，它们都来自并且可以用作同义词(例如， <code>@RequestMapping(method=GET)</code>)。</td>
+      <td class="content">还配套其它一些 HTTP 动作注解 (如 POST 对应的 <code>@PostMapping</code>). 它们都派生于 <code>@RequestMap</code> 注解，意义相同(如， <code>@RequestMapping(method=GET)</code>)。</td>
      </tr>
     </tbody>
    </table>
   </div>
   <div class="paragraph">
-   <p><code>@RequestParam</code> 将查询字符串参数 <code>名称</code> 绑定到 <code>名称</code> 参数的 <code>问候()</code> 方法中。 如果请求中缺少 <code>name</code> 参数，请使用 <code>World</code> 的 <code>默认值</code>。</p>
+   <p><code>@RequestParam</code> 将查询字符串参数 <code>name</code> 绑定到 <code>greeting()</code>方法的 <code>name</code> 参数。 如果请求中缺少 <code>name</code> 参数，默认使用<code>defaultValue</code> <code>World</code> 。</p>
   </div>
   <div class="paragraph">
-   <p>方法正文的实现创建并返回一个新的 <code>问候</code> 对象, 含 <code>id</code> 和 <code>内容</code> 属性, 基于来自 <code>计数器的下一个值</code> 并使用问候 <code>模板</code> 格式化给定的 <code>名称</code>。</p>
+   <p>实现方法正文时创建并返回一个包含 <code>id</code> 和 <code>content</code> 属性的新 <code> Greeting </code> 对象. content 基于 <code>counter</code> 的下一个值， 并使用问候语 <code>template</code> 格式化给定的<code>name</code> 。</p>
   </div>
   <div class="paragraph">
-   <p>传统的 MVC 控制器和先前显示的 RESTful web 服务控制器之间的关键区别是如何创建HTTP 响应体。 不要依靠视图技术向HTML服务器端提供问候数据， 这个RESTful web 服务控制器装满并返回一个 <code>Greeting</code> 对象。 对象数据将直接以 JSON 格式写入 HTTP 响应。</p>
+   <p>传统的 MVC 控制器和刚才看到的 RESTful web 服务 Controller 之间的关键区别是如何创建 HTTP 响应体。 相对依靠视图技术在服务器端生成问候数据到 HTML ，RESTful web 服务Controller 生成并返回一个 <code>Greeting</code> 对象。 HTTP 响应时直接将对象数据以 JSON 格式输出。</p>
   </div>
   <div class="paragraph">
-   <p>此代码使用 Spring <a href="https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/RestController.html"><code>@RestController</code></a> 批注， 它将类标记为控制器，每个方法返回一个域对象而不是视图。 它是包含 <code>@Controller</code> 和 <code>@ResponseBody</code> 的短语。</p>
+   <p>此代码使用Spring <a href="https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/RestController.html"><code>@RestController</code></a> 注解， 它将类标为Controller，它每个方法返回一个领域对象而不是视图。 它是同时注解 <code>@Controller</code> 和 <code>@ResponseBody</code> 的缩写。</p>
   </div>
   <div class="paragraph">
-   <p><code>问候</code> 对象必须转换为 JSON 。 由于Spring的HTTP消息转换器支持，您不需要手动转换。 因为 <a href="https://github.com/FasterXML/jackson">Jackson 2</a> 在类路径， Spring's <a href="https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/http/converter/json/MappingJackson2HttpMessageConverter.html"><code>MappingJackson2HttpMessageConverter</code></a> 被自动选择将 <code>Greeting</code> 实例转换为 JSON</p>
+   <p><code> Greeting </code> 对象必须转为 JSON 。 由于 Spring 的 HTTP 消息转换器支持，您不需要手动进行转换。 由于 <a href="https://github.com/FasterXML/jackson">Jackson 2</a> 在classpath中， Spring 的 <a href="https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/http/converter/json/MappingJackson2HttpMessageConverter.html"><code>MappingJackson2HttpMessageConverter</code></a> 被自动选中用于<code>Greeting</code> 实例转换为 JSON 。</p>
   </div>
   <div class="paragraph">
    <p><code>@SpringBootApplication</code> 是一个添加以下所有内容的方便注释：</p>
@@ -290,38 +290,38 @@ public class GreetingController @un.org
   <div class="ulist">
    <ul>
     <li><p><code>@Configuration</code>: 将类标记为应用程序上下文的 bean 定义的一个来源。</p></li>
-    <li><p><code>@EnableAutoConfiguration</code>: Tells Spring Boot, 以便开始基于类路径设置、其他豆类和各种属性设置添加豆类。 例如，如果 <code>spring-webmvc</code> 在类路径上 此注解将应用程序标记为 web 应用程序并激活密钥行为，例如设置 <code>DispatcherServlet</code>。</p></li>
-    <li><p><code>@ComponentScan</code>: Tells Spring在 <code>com/example</code> 包中寻找其他组件、配置和服务, 让它找到控制器。</p></li>
+    <li><p><code>@EnableAutoConfiguration</code>: 让 Spring Boot 基于 classpath 设置、其它 beans 及其它属性设置来添加 beans. 例如，如果 <code>spring-webmvc</code> 在类路径上 ，此注解将应用程序标记为 web 应用程序并激活一些关键行为，例如设置 <code>DispatcherServlet</code>。</p></li>
+    <li><p><code>@ComponentScan</code>: 让 Spring 在 <code>com/example</code> package 中寻找其他组件、配置和服务, 让它找到 controllers。</p></li>
    </ul>
   </div>
   <div class="paragraph">
-   <p><code>main()</code> 方法使用 Spring Boot <code>SpringApplication.run()</code> 方法来启动一个应用。 您是否注意到没有一条XML线？ 没有 <code>web.xml</code> 文件。 此 web 应用程序纯度为 100% 的 Java ，您无需处理配置任何管道或基础设施的问题。</p>
+   <p>方法<code>main()</code> 使用 Spring Boot <code>SpringApplication.run()</code> 方法来启动一个应用。 您是否注意到没有出现一行XML代码？ 也没有 <code>web.xml</code> 文件。 此 web 应用程序是 100% 的纯 Java ，您也无需配置其它东西。</p>
   </div>
   <div class="sect2">
    <h3 id="_build_an_executable_jar">构建可执行的 JAR</h3>
    <div class="paragraph">
-    <p>您可以从 Gradle 或 Maven 的命令行运行该应用程序。 您也可以构建一个包含所有必要依赖、类和资源的单个可执行文件并运行它。 构建一个可执行的 jar 可以方便船舶，版本， 并在整个开发生命周期、在不同环境中等地将服务作为一种应用来部署。</p>
+    <p>您可以从 Gradle 或 Maven 的命令行运行该应用程序。 您也可以构建一个包含所有必要依赖、类和资源的单个可执行文件并运行它。 构建一个可执行的 jar 可以在整个开发周期或在不同环境中方便打包、发版、部署等等。</p>
    </div>
    <div class="paragraph">
-    <p>如果您使用 Gradle, 您可以使用 <code>运行应用程序。/gradlew bootRun</code>。 或者，您可以使用 <code>/gradlew build</code> 来构建JAR 文件，然后运行 JAR 文件，如下所示：</p>
+    <p>如果您使用 Gradle, 您可以使用 <code>./gradlew bootRun</code> 运行应用程序。 或者，您可以使用 <code>/gradlew build</code> 来构建JAR 文件，然后运行 JAR 文件，如下所示：</p>
    </div>
    <div class="exampleblock">
     <div class="content">
      <div class="listingblock has-copy-button">
       <div class="content">
-       <pre>java -jar build/libs/gs-rest-service 0.1.0.jar</pre>
+       <pre>java -jar build/libs/gs-rest-service-0.1.0.jar</pre>
       </div>
      </div>
     </div>
    </div>
    <div class="paragraph">
-    <p>如果您使用 Maven，您可以使用 <code>运行应用程序。/mvnw spring-boot:run</code>。 或者，您可以使用 <code>构建JAR 文件。/mvnw 干净的包</code> 然后运行 JAR 文件，如下所示：</p>
+    <p>如果您使用 Maven，您可以使用 <code>./mvnw spring-boot:run</code>运行应用程序。 或者，您可以使用 <code>./mvnw clean package</code>. 然后运行 JAR 文件，如下所示：</p>
    </div>
    <div class="exampleblock">
     <div class="content">
      <div class="listingblock has-copy-button">
       <div class="content">
-       <pre>java -jar target/gs-rest-service 0.1.0.jar</pre>
+       <pre>java -jar target/gs-rest-service-0.1.0.jar</pre>
       </div>
      </div>
     </div>
@@ -337,7 +337,7 @@ public class GreetingController @un.org
     </table>
    </div>
    <div class="paragraph">
-    <p>日志输出已显示。 服务应该在几秒钟内启动和运行。</p>
+    <p>日志输出已显示。 服务应该在几秒钟内启动运行。</p>
    </div>
   </div>
  </div>
@@ -346,7 +346,7 @@ public class GreetingController @un.org
  <h2 id="_test_the_service">测试服务</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>现在服务已经开始，请访问 <code><a href="http://localhost:8080/greeting" class="bare">http://localhost:8080/remitting</a></code>，您应该在哪里看到：</p>
+   <p>现在服务已经起来了，请访问 <code><a href="http://localhost:8080/greeting" class="bare">http://localhost:8080/greeting</a></code>，您会看到：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
@@ -358,7 +358,7 @@ public class GreetingController @un.org
    </div>
   </div>
   <div class="paragraph">
-   <p>提供一个 <code>name</code> 查询字符串参数，通过访问 <code><a href="http://localhost:8080/greeting?name=User" class="bare">http://localhost:8080/remitting?name=User</a></code> 请注意 <code>内容</code> 属性的值如何从 <code>Hello, World!</code> to <code>Hello, User!</code>, 如下列表显示：</p>
+   <p>提供一个查询字符串参数 <code>name</code>，通过访问 <code><a href="http://localhost:8080/greeting?name=User" class="bare">http://localhost:8080/greeting?name=User</a></code>. 请注意 <code>content</code> 属性的值如何从<code>Hello, World!</code> 变成了 <code>Hello, User!</code>, 如下显示：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
@@ -370,18 +370,18 @@ public class GreetingController @un.org
    </div>
   </div>
   <div class="paragraph">
-   <p>此更改表明 <code>GreetingController</code> 中的 <code>@RequestParam</code> 安排正在按预期工作。 <code>name</code> 参数已经被指定为 <code>World</code> 的默认值，但可以通过查询字符串明确覆盖。</p>
+   <p>此更改表明 <code>GreetingController</code> 中的 <code>@RequestParam</code> 正如我们希望的那样正常工作。 参数<code>name</code> 的默认值已经被指定为 <code>World</code> ，但可以通过查询字符串覆盖。</p>
   </div>
   <div class="paragraph">
-   <p>也请注意 <code>id</code> 属性如何从 <code>1</code> 更改为 <code>2</code>。 这证明您正在对付相同的 <code>GreetingController</code> 实例，并且它的 <code>计数器</code> 字段正在按预期在每次通话上递增。</p>
+   <p>也请注意 <code>id</code> 属性如何从 <code>1</code> 更改为 <code>2</code>。 这证明您正面对同一 <code>GreetingController</code> 实例，并且它的<code>counter</code> 字段正如预期每次调用时递增。</p>
   </div>
  </div>
 </div>
 <div class="sect1">
- <h2 id="_summary">Summary</h2>
+ <h2 id="_summary">总结</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>恭喜！ 您刚刚开发了一个带Spring的 RESTful Web 服务。</p>
+   <p>恭喜！ 您刚刚用 Spring 开发了一个的 RESTful Web 服务。</p>
   </div>
  </div>
 </div>
@@ -399,13 +399,13 @@ public class GreetingController @un.org
     <li><p><a href="https://spring.io/guides/gs/accessing-data-rest/">使用 REST 访问 JPA 数据</a></p></li>
     <li><p><a href="https://spring.io/guides/gs/accessing-neo4j-data-rest/">使用 REST 访问 Neo4j 数据</a></p></li>
     <li><p><a href="https://spring.io/guides/gs/consuming-rest/">使用 RESTful Web 服务</a></p></li>
-    <li><p><a href="https://spring.io/guides/gs/consuming-rest-angularjs/">使用 AngularJS 消费RESTful Web 服务</a></p></li>
-    <li><p><a href="https://spring.io/guides/gs/consuming-rest-jquery/">使用 jQuery 消费RESTful Web 服务</a></p></li>
+    <li><p><a href="https://spring.io/guides/gs/consuming-rest-angularjs/">使用 AngularJS 调用 RESTful Web 服务</a></p></li>
+    <li><p><a href="https://spring.io/guides/gs/consuming-rest-jquery/">使用 jQuery 调用 RESTful Web 服务</a></p></li>
     <li><p><a href="https://spring.io/guides/gs/consuming-rest-restjs/">使用 rest.js 消费RESTful Web 服务</a></p></li>
-    <li><p><a href="https://spring.io/guides/gs/securing-web/">正在保护 Web 应用程序</a></p></li>
+    <li><p><a href="https://spring.io/guides/gs/securing-web/">保护 Web 应用程序</a></p></li>
     <li><p><a href="https://spring.io/guides/tutorials/rest/">使用 Spring 构建REST 服务</a></p></li>
     <li><p><a href="https://spring.io/guides/tutorials/react-and-spring-data-rest/">React.js 和 Spring 数据 REST</a></p></li>
-    <li><p><a href="https://spring.io/guides/gs/spring-boot/">用Spring Boot构建应用程序</a></p></li>
+    <li><p><a href="https://spring.io/guides/gs/spring-boot/">用 Spring Boot 构建应用程序</a></p></li>
     <li><p><a href="https://spring.io/guides/gs/testing-restdocs/">使用 Restdocs 创建 API 文档</a></p></li>
     <li><p><a href="https://spring.io/guides/gs/rest-service-cors/">启用交叉源请求提供RESTful Web 服务</a></p></li>
     <li><p><a href="https://spring.io/guides/gs/rest-hateoas/">构建超媒体驱动的RESTFF Web 服务</a></p></li>
