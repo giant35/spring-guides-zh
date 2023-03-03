@@ -63,7 +63,7 @@ void function() {
    <div class="content">
     <div class="listingblock">
      <div class="content">
-      <pre class="prettyprint highlight"><code data-lang="text">http://localhost:8080/remitting?name=用户</code></pre>
+      <pre class="prettyprint highlight"><code data-lang="text">http://localhost:8080/greeting?name=User</code></pre>
      </div>
     </div>
    </div>
@@ -88,13 +88,13 @@ void function() {
   <div class="ulist">
    <ul>
     <li><p>约15分钟</p></li>
-    <li><p>收藏的文本编辑器或IDE</p></li>
+    <li><p>喜欢的文本编辑器或IDE</p></li>
     <li><p><a href="https://www.oracle.com/java/technologies/downloads/">Java 17</a> 或更高版本</p></li>
     <li><p><a href="https://gradle.org/install/">Gradle 7.5+</a> 或 <a href="https://maven.apache.org/download.cgi">Maven 3.5+</a></p></li>
     <li><p>您也可以直接导入代码到您的 IDE：</p>
      <div class="ulist">
       <ul>
-       <li><p><a href="/guides/gs/sts">Spring工具套件 (STS)</a></p></li>
+       <li><p><a href="/guides/gs/sts">Spring Tool Suite (STS)</a></p></li>
        <li><p><a href="/guides/gs/intellij-idea/">IntelliJ IDEA</a></p></li>
        <li><p><a href="/guides/gs/guides-with-vscode/">VSCode</a></p></li>
       </ul>
@@ -110,7 +110,7 @@ void function() {
    <p>像大部分 Spring <a href="/guides">入门指南</a> 样，您可以从零开始并完成每一步，或者你可以跳过已经熟悉的基本安装步骤。 无论哪种方式，你最终将有可工作代码。</p>
   </div>
   <div class="paragraph">
-   <p><strong>从零开始</strong>, 请进入 <a href="#scratch">用 Spring Initializr 开始</a>.</p>
+   <p>要<strong>从零开始</strong>, 请进入 <a href="#scratch">从 Spring Initializr 开始</a>.</p>
   </div>
   <div class="paragraph">
    <p>要<strong>跳过基本操作</strong>，请执行以下操作：</p>
@@ -128,21 +128,21 @@ void function() {
  </div>
 </div>
 <div class="sect1">
- <h2 id="scratch">从Spring初始化开始</h2>
+ <h2 id="scratch">从 Spring Initializr 开始</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>您可以使用此 <a href="https://start.spring.io/#!type=maven-project&amp;groupId=com.example&amp;artifactId=rest-service&amp;name=rest-service&amp;description=Demo%20project%20for%20Spring%20Boot&amp;packageName=com.example.rest-service&amp;dependencies=web">预初始化项目</a> 并点击生成以下载ZIP 文件。 此项目被配置为适合本教程中的示例。</p>
+   <p>您可以使用此 <a href="https://start.spring.io/#!type=maven-project&amp;groupId=com.example&amp;artifactId=rest-service&amp;name=rest-service&amp;description=Demo%20project%20for%20Spring%20Boot&amp;packageName=com.example.rest-service&amp;dependencies=web">已初始化的项目</a> 并点击 Generate 下载ZIP 文件。 此项目已被配置为适合本教程中的示例。</p>
   </div>
   <div class="paragraph">
-   <p>手动初始化项目：</p>
+   <p>要手动初始化项目的话：</p>
   </div>
   <div class="olist arabic">
    <ol class="arabic">
-    <li><p>导航到 <a href="https://start.spring.io" class="bare">https://start.spring.io</a>。 此服务在您需要应用程序的所有依赖关系中拉动，并且为您进行了大部分设置。</p></li>
+    <li><p>访问 <a href="https://start.spring.io" class="bare">https://start.spring.io</a>。 此服务有您应用程序所需的所有依赖库，并且大部分都已经配置好了。</p></li>
     <li><p>选择 Gradle 或 Maven 以及您想要使用的语言。 本指南假定您选择了Java。</p></li>
     <li><p>点击 <strong>依赖关系</strong> 并选择 <strong>Spring Web</strong>。</p></li>
     <li><p>点击 <strong>生成</strong>。</p></li>
-    <li><p>下载由此产生的 ZIP 文件，这是一个 web 应用程序的归档，通过您的选择进行配置。</p></li>
+    <li><p>下载由此产生的 ZIP 文件，这是您选择后进行配置好的一个 web 应用程序的压缩包。</p></li>
    </ol>
   </div>
   <div class="admonitionblock note">
@@ -171,10 +171,10 @@ void function() {
  <h2 id="initial">创建资源代表类</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>现在您已经建立了项目和构建系统了，您可以创建您的网络服务。</p>
+   <p>现在您已经设置好项目和构建系统了，您可以创建您的 web 服务。</p>
   </div>
   <div class="paragraph">
-   <p>通过考虑服务交互来开始进程。</p>
+   <p>从服务交互考虑开始。</p>
   </div>
   <div class="paragraph">
    <p>服务将处理 <code>GET</code> 请求 <code>/问候</code>, 在查询字符串中可选的 <code>名称</code> 参数。 <code>GET</code> 请求应该返回 <code>200 OK</code> 在表示问候的机构中使用 JSON 回复。 它应类似于下列产出：</p>
