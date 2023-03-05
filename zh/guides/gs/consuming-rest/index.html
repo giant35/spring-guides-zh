@@ -42,7 +42,7 @@ void function() {
  <h2 id="_what_you_will_build">你将创建什么</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>您将使用 Spring <code>RestTemplate</code> 构建一个从 <a href="http://localhost:8080/api/random" class="bare">http://localhost:8080/api/random</a> 获取随机额度的应用程序。</p>
+   <p>您将使用 Spring <code>RestTemplate</code> 构建一个从 <a href="http://localhost:8080/api/random" class="bare">http://localhost:8080/api/random</a> 获取随机报价的应用程序。</p>
   </div>
  </div>
 </div>
@@ -71,7 +71,7 @@ void function() {
  <h2 id="_how_to_complete_this_guide">如何完成本指南</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>像大部分 Spring <a href="/guides">入门指南</a> 样，您可以从零开始并完成每一步，或者你可以跳过已经熟悉的基本安装步骤。 无论哪种方式，你最终将有可工作代码。</p>
+   <p>像大部分 Spring <a href="/guides">入门指南</a> 那样，您可以从零开始并完成每一步，或者你可以跳过已经熟悉的基本安装步骤。 无论哪种方式，你最终将有可工作代码。</p>
   </div>
   <div class="paragraph">
    <p><strong>从零开始</strong>, 请进入 <a href="#scratch">用 Spring Initializr 开始</a>.</p>
@@ -81,7 +81,7 @@ void function() {
   </div>
   <div class="ulist">
    <ul>
-    <li><p><a href="https://github.com/spring-guides/gs-consuming-rest/archive/main.zip">下载</a> 并解压缩本指南的源代码库， 或克隆它使用 <a href="/understanding/Git">Git</a>: <code>git 克隆 <a href="https://github.com/spring-guides/gs-consuming-rest.git" class="bare">https://github。 om/spring-guides/gs-consuming-rest.git</a></code></p></li>
+    <li><p><a href="https://github.com/spring-guides/gs-consuming-rest/archive/main.zip">下载</a> 并解压缩本指南的源代码库， 或使用 <a href="/understanding/Git">Git</a> 克隆它: <code>git clone <a href="https://github.com/spring-guides/gs-consuming-rest.git" class="bare">https://github.com/spring-guides/gs-consuming-rest.git</a></code></p></li>
     <li><p>cd 到 <code>gs-consuming-rest/initial</code></p></li>
     <li><p>跳转到 <a href="#initial">获取REST 资源</a>。</p></li>
    </ul>
@@ -135,13 +135,13 @@ void function() {
  <h2 id="initial">获取 REST 资源</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>在项目设置完成后，您可以创建一个简单的应用程序来消耗一个RESTFI服务。</p>
+   <p>在项目设置好后，您可以创建一个简单的应用程序来调用 RESTful 服务。</p>
   </div>
   <div class="paragraph">
-   <p>在您可以这样做之前，您需要一个REST 资源的来源。 我们在 <a href="https://github.com/spring-guides/quoters" class="bare">https://github.com/spring-guides/quotes</a> 上提供了这种服务的例子。 您可以在一个单独的终端中运行这个应用程序，并在 <a href="http://localhost:8080/api/random" class="bare">http://localhost:8080/api/randround</a> 上访问结果。 这个地址随机获取关于Spring Boot的引文并返回为 JSON 文档。 其他有效地址包括 <a href="http://localhost:8080/api/" class="bare">http://localhost:8080/api/</a> (所有引用) 和 <a href="http://localhost:8080/api/1" class="bare">http://localhost:8080/api/1</a> (第一个引用), <a href="http://localhost:8080/api/2" class="bare">http://localhost:8080/api/2</a> (第二个引文)，等等(目前最多10个)。</p>
+   <p>在您这样做之前，您需要一个REST 资源。 我们在 <a href="https://github.com/spring-guides/quoters" class="bare">https://github.com/spring-guides/quotes</a> 上提供了这种服务的例子。 您可以在一个单独的终端中运行这个应用程序，并在 <a href="http://localhost:8080/api/random" class="bare">http://localhost:8080/api/random</a> 上访问结果。 这个网址随机获取 Spring Boot 的报价并返回为 JSON 文档。 其他有效地址包括 <a href="http://localhost:8080/api/" class="bare">http://localhost:8080/api/</a> (所有引用) 和 <a href="http://localhost:8080/api/1" class="bare">http://localhost:8080/api/1</a> (第一个引用), <a href="http://localhost:8080/api/2" class="bare">http://localhost:8080/api/2</a> (第二个引文)，等等(目前最多10个)。</p>
   </div>
   <div class="paragraph">
-   <p>如果您通过网页浏览器或曲线请求URL，您将收到一个看起来像这样的JSON文档：</p>
+   <p>如果您通过网页浏览器或 curl 请求URL，您将拿到一份看起来像这样的JSON文档：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
@@ -159,60 +159,60 @@ void function() {
    </div>
   </div>
   <div class="paragraph">
-   <p>这足够容易，但在通过浏览器或通过曲线获取时并没有太大的用处。</p>
+   <p>这很简单，但用浏览器或 curl 获取并没有太大的用处。</p>
   </div>
   <div class="paragraph">
-   <p>应用REST 网络服务的一个更有用的方法是编程的。 为了帮助您完成这项任务，Spring提供了一个方便的模板类，叫做 <a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/client/RestTemplate.html"><code>Rest模板</code></a>。 <code>RestTemplate</code> 使得与大多数RESTfull 服务的交互成为一行内嵌。 而且它甚至可以将该数据绑定到自定义域类型。</p>
+   <p>更有用的方式是编程调用 REST web 服务。 为了帮助您完成这项任务，Spring 提供了一个方便的模板类，叫做<a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/client/RestTemplate.html"><code>RestTemplate</code></a> 。 <code>RestTemplate</code> 通过一行代码就能调用大多数 RESTful 服务。 而且它甚至可以将数据绑定到自定义领域类型。</p>
   </div>
   <div class="paragraph">
-   <p>首先，您需要创建一个域类来包含您需要的数据。 下面的列表显示 <code>引号</code> 记录类，您可以用作您的域类：</p>
+   <p>首先，您需要创建一个领域类来容纳您需要的数据。 下边代码显示 <code>Quote</code> record 类，您可以用作领域类：</p>
   </div>
   <div class="paragraph">
    <p><code>src/main/java/com/example/consumingrest/Quote.java</code></p>
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="prettyprint highlight"><code data-lang="java">包 com.example.cusmingrest;
+    <pre class="prettyprint highlight"><code data-lang="java">package com.example.consumingrest;
 
-导入 com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@JsonIgnoreProperties(ignoreInnound = true)
-公开记录 Quote(String type, Value value) { }</code></pre>
+@JsonIgnoreProperties(ignoreUnknown = true)
+public record Quote(String type, Value value) { }</code></pre>
    </div>
   </div>
   <div class="paragraph">
-   <p>这个简单的 Java 记录类是附加注释的 <code>@JsonIgnoreProperties</code> 来自Jackson JSON 处理库，以表明任何未绑定的属性应该被忽略。</p>
+   <p>这个简单的 Java record 类是注解了Jackson JSON 处理库的 <code>@ JsonIgnoreProperties </code> ，表明任何未绑定的属性应该被忽略。</p>
   </div>
   <div class="paragraph">
-   <p>将您的数据直接绑定到您的自定义类型， 您需要指定变量名称才能与从 API 返回的 JSON 文档中的密钥完全相同。 如果您在 JSON doc 中的变量名称和密钥不匹配， 您可以使用 <code>@JsonProperty</code> 注解来指定 JSON 文档的确切密钥。 (此示例匹配每个变量名称到 JSON 密钥，所以你不需要此注解。)</p>
+   <p>要将您的数据直接绑定到自定义类型， 需要将变量名称与 API 返回的 JSON 文档中的 key 保持一致。 如果变量名称和 JSON 中的 key 不匹配， 您可以使用<code>@JsonProperty</code> 注解来指定 JSON 文档的 key。 (此示例每个变量名称都匹配了 JSON key，所以你不需要那注解。)</p>
   </div>
   <div class="paragraph">
-   <p>你还需要一个额外的类来嵌入内部报价本身。 <code>值</code> 记录类别填充了需要的记录并且显示在以下列表中( <code>src/main/java/com/example/consumingrest/Value.java</code>)：</p>
+   <p>你还需要一个额外的类来嵌入内部报价本身。 <code> Value </code> record 类写好后如下所示( 在 <code>src/main/java/com/example/consumingrest/Value.java</code>)：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
     <div class="listingblock">
      <div class="content">
-      <pre class="prettyprint highlight"><code data-lang="java">包 com.example.cusmingrest;
+      <pre class="prettyprint highlight"><code data-lang="java">package com.example.consumingrest;
 
-导入 com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@JsonIgnoreProperties(ignoreInnound = true)
-公开记录值(Long id, String quote) { }</code></pre>
+@JsonIgnoreProperties(ignoreUnknown = true)
+public record Value(Long id, String quote) { }</code></pre>
      </div>
     </div>
    </div>
   </div>
   <div class="paragraph">
-   <p>这使用相同的批注，但是地图到其他数据域。</p>
+   <p>这使用相同的注解但是映射到别的数据字段。</p>
   </div>
  </div>
 </div>
 <div class="sect1">
- <h2 id="_finishing_the_application">正在完成应用程序</h2>
+ <h2 id="_finishing_the_application">完成应用程序</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>Initalizr 创建了一个 <code>main()</code> 方法的类。 下面的列表显示初始化器创建的类 ( <code>src/main/java/com/example/consumingrest/ConsumingRestApplication.java</code>)：</p>
+   <p>Initalizr 创建了一个 <code>main()</code> 方法的类。 下边展示了 Initializr 创建的代码 (在 <code>src/main/java/com/example/consumingrest/ConsumingRestApplication.java</code>):</p>
   </div>
   <div class="exampleblock">
    <div class="content">
@@ -236,17 +236,17 @@ public class ConsumingRestApplication {
    </div>
   </div>
   <div class="paragraph">
-   <p>现在你需要将其他一些东西添加到 <code>ConsumingRest应用程序</code> 类，才能让它显示来自我们RESTfify源的引文。 您需要添加：</p>
+   <p>现在你需要将其他一些东西添加到<code>ConsumingRestApplication</code> 类，才能显示来自 RESTful 的报价。 您需要添加：</p>
   </div>
   <div class="ulist">
    <ul>
-    <li><p>一个日志，发送输出到日志 (在这个例子中的控制台)。</p></li>
+    <li><p>一个 logger，来输出日志 (在这个例子中的 console)。</p></li>
     <li><p><code>RestTemplate</code>, 它使用Jackson JSON 处理库处理传入的数据。</p></li>
-    <li><p><code>CommandLineRunner</code> 运行 <code>Rest模板</code> (并随后获取我们的报价)</p></li>
+    <li><p><code>CommandLineRunner</code> 在启动时运行 <code>RestTemplate</code> (并随后获取我们的报价)</p></li>
    </ul>
   </div>
   <div class="paragraph">
-   <p>下面的列表显示已完成的 <code>ConsumingRestApplication</code> 类( <code>src/main/java/com/example/consumingrest/ConsumingRestApplication.java</code>)：</p>
+   <p>下面是已完成的 <code> ConsumingRestApplication </code> 类(在 <code>src/main/java/com/example/consumingrest/ConsumingRestApplication.java</code>)：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
@@ -296,10 +296,10 @@ public class ConsumingRestApplication {
  <h2 id="_running_the_application">运行应用程序</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>您可以从 Gradle 或 Maven 的命令行运行该应用程序。 您也可以构建一个包含所有必要依赖、类和资源的单个可执行文件并运行它。 构建一个可执行的 jar 可以方便船舶，版本， 并在整个开发生命周期、在不同环境中等地将服务作为一种应用来部署。</p>
+   <p>您可以从 Gradle 或 Maven 的命令行运行该应用程序。 您也可以构建一个包含所有必要依赖、类和资源的单个可执行文件并运行它。 构建一个可执行的 jar 可以在整个开发周期或在不同环境中方便打包、发版、部署等等。</p>
   </div>
   <div class="paragraph">
-   <p>如果您使用 Gradle, 您可以使用 <code>运行应用程序。/gradlew bootRun</code>。 或者，您可以使用 <code>/gradlew build</code> 来构建JAR 文件，然后运行 JAR 文件，如下所示：</p>
+   <p>如果您使用 Gradle, 您可以使用 <code>./gradlew bootRun</code> 运行应用程序。 或者，您可以使用 <code>./gradlew build</code> 来构建JAR 文件，然后运行 JAR 文件，如下所示：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
@@ -311,7 +311,7 @@ public class ConsumingRestApplication {
    </div>
   </div>
   <div class="paragraph">
-   <p>如果您使用 Maven，您可以使用 <code>运行应用程序。/mvnw spring-boot:run</code>。 或者，您可以使用 <code>构建JAR 文件。/mvnw 干净的包</code> 然后运行 JAR 文件，如下所示：</p>
+   <p>如果您使用 Maven，您可以使用 <code>./mvnw spring-boot:run</code>运行应用程序。 或者，您可以使用 <code>./mvnw clean package</code> 先构建 JAR 文件然后运行 JAR 文件，如下所示：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
@@ -333,11 +333,11 @@ public class ConsumingRestApplication {
    </table>
   </div>
   <div class="paragraph">
-   <p>您应该看到类似于以下但带有随机报价的输出：</p>
+   <p>您会看到跟下边类似但报价随机的输出：</p>
   </div>
   <div class="literalblock">
    <div class="content">
-    <pre>2019-08-22 14:06:46.506 INFO 42940 --- [ main] c.e.c.c.ConsumingRest应用程序: Quote{type='success', value=Value{id=1, quote='与Spring Boot一起工作像与Spring Developers. '}}</pre>
+    <pre>2019-08-22 14:06:46.506  INFO 42940 --- [           main] c.e.c.ConsumingRestApplication           : Quote{type='success', value=Value{id=1, quote='Working with Spring Boot is like pair-programming with the Spring developers.'}}</pre>
    </div>
   </div>
   <div class="admonitionblock note">
@@ -345,7 +345,7 @@ public class ConsumingRestApplication {
     <tbody>
      <tr>
       <td class="icon"><i class="fa icon-note" title="说明"></i></td>
-      <td class="content">如果您看到读取错误， <code>无法提取响应：找不到适合响应类型的 HttpMessageConvert[class com.example.cusmingrest. ]</code>, , 您可能处于无法连接到后端服务的环境(如果您能够发送JSON)。 也许你在公司代理后面。 尝试设置 <code>http.proxyHost</code> 和 <code>http.proxyPort</code> 系统属性到适合您环境的值。</td>
+      <td class="content">如果您看到读取错误， <code>Could not extract response: no suitable HttpMessageConverter found for response type [class com.example.consumingrest.Quote]</code> ，可能是因为无法连接到后端服务(which sends JSON if you can reach it)。 也许你在公司 proxy 后面。 尝试设置环境中的 <code>http.proxyHost</code> 和 <code>http.proxyPort</code> 系统属性。</td>
      </tr>
     </tbody>
    </table>
@@ -353,10 +353,10 @@ public class ConsumingRestApplication {
  </div>
 </div>
 <div class="sect1">
- <h2 id="_summary">Summary</h2>
+ <h2 id="_summary">总结</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>恭喜！ 您刚刚通过使用 Spring Boot开发了一个简单的REST 客户端。</p>
+   <p>恭喜！ 您刚刚使用 Spring Boot 开发了一个简单的 REST 客户端。</p>
   </div>
  </div>
 </div>
