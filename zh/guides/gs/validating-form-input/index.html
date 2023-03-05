@@ -104,8 +104,8 @@ void function() {
    <ol class="arabic">
     <li><p>导航到 <a href="https://start.spring.io" class="bare">https://start.spring.io</a>。 此服务有您应用程序所需的所有依赖库，并且大部分都已经配置好了。</p></li>
     <li><p>选择 Gradle 或 Maven 以及您想要使用的语言。 本指南假定您选择了Java。</p></li>
-    <li><p>点击 <strong>依赖关系</strong> 并选择 <strong>Spring Web</strong>, <strong>Thymeleaf</strong>, 和 <strong>校验</strong>.</p></li>
-    <li><p>点击 <strong>生成</strong>。</p></li>
+    <li><p>点击 <strong> Dependencies </strong> 并选择 <strong>Spring Web</strong>, <strong>Thymeleaf</strong>, 和 <strong>Validation </strong>.</p></li>
+    <li><p>点击 <strong> Generate </strong>。</p></li>
     <li><p>下载由此产生的 ZIP 文件，这是您根据选择配置生成的一个 web 应用程序的压缩包。</p></li>
    </ol>
   </div>
@@ -187,20 +187,20 @@ public class PersonForm {
   <div class="ulist">
    <ul>
     <li><p><code>@Size(min=2, max=30)</code>: 允许 name 长度在2到30个字符之间。</p></li>
-    <li><p><code>@NotNull</code>: 不允许空值，这是Spring MVC 生成的，如果条目是空的。</p></li>
-    <li><p><code>@Min(18)</code>: 不允许年龄小于18岁。</p></li>
+    <li><p><code>@NotNull</code>: 不允许 null 值, which is what Spring MVC generates if the entry is empty.</p></li>
+    <li><p><code>@Min(18)</code>: 不允许 age 小于18岁。</p></li>
    </ul>
   </div>
   <div class="paragraph">
-   <p>除此之外，还有： 您也可以看到 <code>name</code> and <code>age</code> 和 <code>toString()</code> 方法的 getters 和设置器。</p>
+   <p>除此之外，还有 <code>name</code> 、 <code>age</code> 的 getters & setters 和 <code>toString()</code> 方法。</p>
   </div>
  </div>
 </div>
 <div class="sect1">
- <h2 id="_create_a_web_controller">创建 Web 控制器</h2>
+ <h2 id="_create_a_web_controller">创建 Web Controller</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>既然你已经定义了一个支持表单的对象，现在是创建一个简单的 web 控制器的时候了。 下面的列表(来自 <code>src/main/java/com/example/validatingforminput/WebController.java</code>) 显示了如何这样做：</p>
+   <p>既然你已经定义了一个表单支持对象，现在是创建一个简单的 web controller 的时候了。 下列代码(来自 <code>src/main/java/com/example/validatingforminput/WebController.java</code>) 显示了如何这样做：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
@@ -246,33 +246,33 @@ public class WebController implements WebMvcConfigurer {
    </div>
   </div>
   <div class="paragraph">
-   <p>此控制器有一个 GET 方法和 POST 方法。 这两种方法都映射到 <code>/</code>。</p>
+   <p>此 Controller 有一个 GET 方法和 POST 方法。 这两个方法都映射到 <code>/</code>。</p>
   </div>
   <div class="paragraph">
-   <p><code>显示表单</code> 方法返回 <code>表单</code> 模板。 它在其方法签名中包含 <code>个人表单</code> ，以便模板能够将表单属性与 <code>PersonForm</code> 关联起来。</p>
+   <p><code>showForm</code> 方法返回 <code>form</code> 模板。 它在其方法签名中包含 <code>PersonForm</code>，以便模板能够将表单属性与 <code>PersonForm</code> 关联起来。</p>
   </div>
   <div class="paragraph">
    <p><code>checkPersonInfo</code> 方法接受两个参数：</p>
   </div>
   <div class="ulist">
    <ul>
-    <li><p>一个 <code>个人表单</code> 对象标记为 <code>@valid</code> 来收集填写表单的属性。</p></li>
-    <li><p><code>绑定结果</code> 对象，以便您可以测试并检索验证错误。</p></li>
+    <li><p>一个标记为 <code>@Valid</code> 的 <code>personForm</code> 对象用来收集填写表单中的属性。</p></li>
+    <li><p><code>bindingResult</code> 对象，以便您可以测试并检索验证错误。</p></li>
    </ul>
   </div>
   <div class="paragraph">
-   <p>您可以从表格中检索所有属性，它绑定到 <code>PersonForm</code> 对象。 在代码中，您测试了错误。 如果您遇到错误，您可以将用户发送回原来的 <code>表单</code> 模板。 在这种情况下，显示所有错误属性。</p>
+   <p>您可以从表格中检索所有属性，它绑定到 <code>PersonForm</code>对象。 在代码中，您测试了错误。 如果您遇到错误，您可以将用户发回原来的 <code>form</code>模板。 在这种情况下，显示所有错误属性。</p>
   </div>
   <div class="paragraph">
-   <p>如果所有人的属性都是有效的，它会将浏览器重定向到最终的 <code>结果</code> 模板。</p>
+   <p>如果所有 person 的属性都是有效的，它会将浏览器重定向到最终的 <code>results</code> 模板。</p>
   </div>
  </div>
 </div>
 <div class="sect1">
- <h2 id="_build_an_html_front_end">构建HTML前端结束</h2>
+ <h2 id="_build_an_html_front_end">构建HTML前端</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>现在构建“main”页面，如下列表(来自 <code>src/main/resources/templates/form.html</code>) 显示：</p>
+   <p>现在构建 “main” 页面，如下所示(来自 <code>src/main/resources/templates/form.html</code>) ：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
@@ -305,13 +305,13 @@ public class WebController implements WebMvcConfigurer {
    </div>
   </div>
   <div class="paragraph">
-   <p>这个页面包含一个简单的表格，每个字段都放在一个单独的单元格中。 表单适合发布到 <code>/</code>。 它被标记为您在 <code>GET</code> 网络控制器中看到的 <code>个人表单</code> 对象备份。 这种形式被称为“以肉体为支撑的形式”。 <code>PersonForm</code> 豆中有两个字段, 你可以看到他们被标记为 <code>th:field="*{name}"</code> 和 <code>th:field="*{age}"</code> 每个字段旁边是一个用来显示任何验证错误的次要元素。</p>
+   <p>这个页面包含一个简单的表格，每个字段都放在一个单独的单元格中。 表单发到 <code>/</code>。 它对应 web controller 中看到的 <code>GET</code> 方法 <code>personForm</code> 对象. 这种形式被称为“bean-backed form”。 <code>PersonForm</code> bean 中有两个字段, 你可以看到他们被标为 <code>th:field="*{name}"</code> 和 <code>th:field="*{age}"</code>. 每个字段旁边是一个用来显示任何验证错误的次要元素。</p>
   </div>
   <div class="paragraph">
-   <p>最后，您有一个提交表单的按钮。 一般来说，如果用户输入了一个违反 <code>@valid</code> 限制的名字或年龄。 它以显示错误消息退回到这个页面。 如果输入了有效的名称和年龄，用户将被路由到下一个网页。</p>
+   <p>最后，您有一个提交表单的按钮。 一般来说，如果用户输入了一个违反 <code>@Valid</code> 限制的名字或年龄。 它会退回到这个页面并显示错误消息。 如果输入了有效的名称和年龄，用户将被路由到下一个网页。</p>
   </div>
   <div class="paragraph">
-   <p>下面的示例(来自 <code>src/main/resources/templates/result.html</code>) 显示结果页面：</p>
+   <p>下面的代码(来自 <code>src/main/resources/templates/results.html</code>) 显示结果页面：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
@@ -319,7 +319,7 @@ public class WebController implements WebMvcConfigurer {
      <div class="content">
       <pre class="prettyprint highlight"><code data-lang="html">&lt;html&gt;
 	&lt;body&gt;
-		恭喜！ 您的旧版足以注册此站点。
+		Congratulations! You are old enough to sign up for this site.
 	&lt;/body&gt;
 &lt;/html&gt;</code></pre>
      </div>
@@ -342,22 +342,22 @@ public class WebController implements WebMvcConfigurer {
  <h2 id="_run_the_application">运行应用程序</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>对于此应用，您正在使用 <a href="https://www.thymeleaf.org/doc/tutorials/3.0/thymeleafspring.html">Thymeleaf</a> 的模板语言。 此应用程序需要超过原始的 HTML。 Spring初始化器为您创建了应用程序类。 下面的列表(来自 <code>src/main/java/com/example/validatingforminput/ValidatingFormInputApplication.java</code>) 显示了该类：</p>
+   <p>对于此应用，您正在使用 <a href="https://www.thymeleaf.org/doc/tutorials/3.0/thymeleafspring.html">Thymeleaf</a> 模板语言。 此应用程序需要超过原始的 HTML。 Spring Initializr为您创建了应用程序类。 下列代码(来自<code>src/main/java/com/example/validatingforminput/ValidatingFormInputApplication.java</code>) 显示了如何这样做：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
     <div class="listingblock">
      <div class="content">
-      <pre class="prettyprint highlight"><code data-lang="java">软件包 com.example.validatingforminput;
+      <pre class="prettyprint highlight"><code data-lang="java">package com.example.validatingforminput;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure. pringBootApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ValidatingFormInputApplication
+public class ValidatingFormInputApplication {
 
-	public static line main(String] args) passs Exception 然后提交
-		SpringApplication.run(ValidatingForpputApplication.classs, args);
+	public static void main(String[] args) throws Exception {
+		SpringApplication.run(ValidatingFormInputApplication.class, args);
 	}
 
 }</code></pre>
@@ -366,18 +366,18 @@ public class ValidatingFormInputApplication
    </div>
   </div>
   <div class="paragraph">
-   <p>要激活Spring MVC，您通常会将 <code>@EnableWebMvc</code> 添加到 <code>应用程序</code> 类。 但Spring Boot's <code>@SpringBootApplication</code> 已经在您的类路径检测 <code>spring-webmvc</code> 时添加了这个注解。 此注解让它找到注释 <code>@Controller</code> 类及其方法。</p>
+   <p>要激活Spring MVC，您通常会将 <code>@EnableWebMvc</code> 添加到 <code>Application</code> 类。 但 Spring Boot 的 <code>@SpringBootApplication</code> 在 classpath 检测到 <code>spring-webmvc</code> 时已添加了这个注解。 此注解让它找到注解过 <code>@Controller</code> 的类及其方法。</p>
   </div>
   <div class="paragraph">
-   <p>Thymeleaf 配置也由 <code>@SpringBootApplication</code> 负责处理。 默认情况下，模板位于 <code>模板/</code> 下的类路径，并通过擦除 '作为视图解析。 tml的后缀关闭文件名。 (Thymeleaf 设置可以更改并以各种方式覆盖) 取决于您需要实现的目标，但细节与本指南无关。)</p>
+   <p>Thymeleaf 配置也由 <code>@SpringBootApplication</code> 负责处理。 默认，模板位于classpath <code>templates/</code>下，并通过截掉文件名 '.html' 后缀作为视图解析。 (Thymeleaf 的设置可以更改并以多种方式覆盖 ，取决于您需要实现的目标，但细节与本指南无关。)</p>
   </div>
   <div class="sect2">
    <h3 id="_build_an_executable_jar">构建可执行的 JAR</h3>
    <div class="paragraph">
-    <p>您可以从 Gradle 或 Maven 的命令行运行该应用程序。 您也可以构建一个包含所有必要依赖、类和资源的单个可执行文件并运行它。 构建一个可执行的 jar 可以方便船舶，版本， 并在整个开发生命周期、在不同环境中等地将服务作为一种应用来部署。</p>
+    <p>您可以从 Gradle 或 Maven 的命令行运行该应用程序。 您也可以构建一个包含所有必要依赖、类和资源的单个可执行文件并运行它。 构建一个可执行的 jar 可以在整个开发周期或在不同环境中方便打包、发版、部署等等。</p>
    </div>
    <div class="paragraph">
-    <p>如果您使用 Gradle, 您可以使用 <code>运行应用程序。/gradlew bootRun</code>。 或者，您可以使用 <code>/gradlew build</code> 来构建JAR 文件，然后运行 JAR 文件，如下所示：</p>
+    <p>如果您使用 Gradle, 您可以使用 <code>./gradlew bootRun</code> 运行应用程序。 或者，您可以使用 <code>./gradlew build</code> 来构建JAR 文件，然后运行 JAR 文件，如下所示：</p>
    </div>
    <div class="exampleblock">
     <div class="content">
@@ -389,7 +389,7 @@ public class ValidatingFormInputApplication
     </div>
    </div>
    <div class="paragraph">
-    <p>如果您使用 Maven，您可以使用 <code>运行应用程序。/mvnw spring-boot:run</code>。 或者，您可以使用 <code>构建JAR 文件。/mvnw 干净的包</code> 然后运行 JAR 文件，如下所示：</p>
+    <p>如果您使用 Maven，您可以使用 <code>./mvnw spring-boot:run</code>运行应用程序。 或者，您可以使用 <code>./mvnw clean package</code> 先构建 JAR 文件然后运行 JAR 文件，如下所示：</p>
    </div>
    <div class="exampleblock">
     <div class="content">
@@ -405,7 +405,7 @@ public class ValidatingFormInputApplication
      <tbody>
       <tr>
        <td class="icon"><i class="fa icon-note" title="说明"></i></td>
-       <td class="content">这里描述的步骤创建一个可运行的 JAR。 您也可以 <a href="/guides/gs/convert-jar-to-war/">构建一个经典的 WAR 文件</a>。</td>
+       <td class="content">这里描述创建一个可运行的 JAR的步骤。 您也可以 <a href="/guides/gs/convert-jar-to-war/">构建一个经典的 WAR 文件</a>。</td>
       </tr>
      </tbody>
     </table>
@@ -414,14 +414,14 @@ public class ValidatingFormInputApplication
     <p>应用程序应该在几秒钟内启动和运行。</p>
    </div>
    <div class="paragraph">
-    <p>如果您访问了 <code><a href="http://localhost:8080/" class="bare">http://localhost:8080/</a></code>，您应该看到如下图像：</p>
+    <p>如果您访问了 <code><a href="http://localhost:8080/" class="bare">http://localhost:8080/</a></code>，您应该看到如图所示：</p>
    </div>
    <div class="imageblock">
     <div class="content"><img src="https://raw.githubusercontent.com/spring-guides/gs-validating-form-input/main/images/valid-01.png" alt="valid 01">
     </div>
    </div>
    <div class="paragraph">
-    <p>以下两组图像显示了如果您输入 <code>N</code> 的名称和 <code>15</code> 的年龄，点击 <strong>提交</strong>：</p>
+    <p>如果您输入 name 为 <code>N</code> 和 age 为 <code>15</code> ，点击<strong>Submit</strong>会出现以下两图：</p>
    </div>
    <div class="imageblock">
     <div class="content"><img src="https://raw.githubusercontent.com/spring-guides/gs-validating-form-input/main/images/valid-02.png" alt="valid 02">
@@ -432,14 +432,14 @@ public class ValidatingFormInputApplication
     </div>
    </div>
    <div class="paragraph">
-    <p>前面的图像显示，由于值违反了 <code>PersonForm</code> 类中的约束，你被退回到“主”页面。 Note that, if you click on <strong>Submit</strong> with nothing in the entry box, you get a different error, as the following image shows:</p>
+    <p>前面的图像显示，由于值违反了 <code>PersonForm</code> 类中的约束，你被退回到 “main” 页面。 请注意，如果什么也不填点击 <strong>Submit</strong> ，您会遇到一个不同的错误，如下图显示：</p>
    </div>
    <div class="imageblock">
     <div class="content"><img src="https://raw.githubusercontent.com/spring-guides/gs-validating-form-input/main/images/valid-04.png" alt="valid 04">
     </div>
    </div>
    <div class="paragraph">
-    <p>如果您输入了一个有效的名称和年龄，您最终会在 <code>结果</code> 页面上，如下面的图像所示：</p>
+    <p>如果您输入了一个有效的 name 和 age ，您最终会在<code>results</code> 页面上，如下面的图像所示：</p>
    </div>
    <div class="imageblock">
     <div class="content"><img src="https://raw.githubusercontent.com/spring-guides/gs-validating-form-input/main/images/valid-05.png" alt="valid 05">
@@ -449,7 +449,7 @@ public class ValidatingFormInputApplication
  </div>
 </div>
 <div class="sect1">
- <h2 id="_summary">Summary</h2>
+ <h2 id="_summary">总结</h2>
  <div class="sectionbody">
   <div class="paragraph">
    <p>恭喜！ 您已经编译了一个简单的 web 应用程序，并且在一个域对象中进行验证。 这样，您可以确保数据符合某些标准，并确保用户正确输入数据。</p>
