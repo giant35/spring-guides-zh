@@ -42,7 +42,7 @@ void function() {
  <h2 id="_what_you_will_build">你将创建什么</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>您将构建一个使用 Spring's <code>JdbcTemplate</code> 访问关系数据库中存储的数据的应用程序。</p>
+   <p>您将使用 Spring's <code>JdbcTemplate</code> 构建一个访问存储在关系数据库中数据的应用程序。</p>
   </div>
  </div>
 </div>
@@ -52,13 +52,13 @@ void function() {
   <div class="ulist">
    <ul>
     <li><p>约15分钟</p></li>
-    <li><p>收藏的文本编辑器或IDE</p></li>
-    <li><p><a href="https://www.oracle.com/java/technologies/downloads/">Java 1.8</a> 或更后</p></li>
+    <li><p>喜欢的文本编辑器或IDE</p></li>
+    <li><p><a href="https://www.oracle.com/java/technologies/downloads/">Java 1.8</a> 或更高版本</p></li>
     <li><p><a href="https://gradle.org/install/">Gradle 7.5+</a> 或 <a href="https://maven.apache.org/download.cgi">Maven 3.5+</a></p></li>
     <li><p>您也可以直接导入代码到您的 IDE：</p>
      <div class="ulist">
       <ul>
-       <li><p><a href="/guides/gs/sts">Spring工具套件 (STS)</a></p></li>
+       <li><p><a href="/guides/gs/sts">Spring Tool Suite (STS)</a></p></li>
        <li><p><a href="/guides/gs/intellij-idea/">IntelliJ IDEA</a></p></li>
        <li><p><a href="/guides/gs/guides-with-vscode/">VSCode</a></p></li>
       </ul>
@@ -81,9 +81,9 @@ void function() {
   </div>
   <div class="ulist">
    <ul>
-    <li><p><a href="https://github.com/spring-guides/gs-relational-data-access/archive/main.zip">下载</a> 并解压缩本指南的源代码库， 或克隆它使用 <a href="/understanding/Git">Git</a>: <code>git 克隆 <a href="https://github.com/spring-guides/gs-relational-data-access.git" class="bare">https://github。 om/spring-guides/gs-relational-data-access.git</a></code></p></li>
-    <li><p>cd into <code>gs-relational-data-access/initial</code></p></li>
-    <li><p>跳转到 <a href="#initial">创建 <code>客户</code> 对象</a>。</p></li>
+    <li><p><a href="https://github.com/spring-guides/gs-relational-data-access/archive/main.zip">下载</a> 并解压缩本指南的源代码库, 或者用 <a href="/understanding/Git">Git</a>: <code>git clone <a href="https://github.com/spring-guides/gs-relational-data-access.git" class="bare">https://github.com/spring-guides/gs-relational-data-access.git</a></code> 克隆它.</p></li>
+    <li><p>cd 到 <code>gs-relational-data-access/initial</code></p></li>
+    <li><p>跳转到 <a href="#initial">创建 <code> Customer </code> 对象</a>。</p></li>
    </ul>
   </div>
   <div class="paragraph">
@@ -92,7 +92,7 @@ void function() {
  </div>
 </div>
 <div class="sect1">
- <h2 id="scratch">从Spring初始化开始</h2>
+ <h2 id="scratch">从 Spring Initializr 开始</h2>
  <div class="sectionbody">
   <div class="paragraph">
    <p>您可以使用此 <a href="https://start.spring.io/#!type=maven-project&amp;language=java&amp;platformVersion=2.5.5&amp;packaging=jar&amp;jvmVersion=11&amp;groupId=com.example&amp;artifactId=relational-data-access&amp;name=relational-data-access&amp;description=Demo%20project%20for%20Spring%20Boot&amp;packageName=com.example.relational-data-access&amp;dependencies=jdbc,h2">预初始化项目</a> 并点击生成以下载ZIP 文件。 此项目被配置为适合本教程中的示例。</p>
@@ -102,11 +102,11 @@ void function() {
   </div>
   <div class="olist arabic">
    <ol class="arabic">
-    <li><p>导航到 <a href="https://start.spring.io" class="bare">https://start.spring.io</a>。 此服务在您需要应用程序的所有依赖关系中拉动，并且为您进行了大部分设置。</p></li>
+    <li><p>导航到 <a href="https://start.spring.io" class="bare">https://start.spring.io</a>。 此服务有您应用程序所需的所有依赖库，并且大部分都已经配置好了。</p></li>
     <li><p>选择 Gradle 或 Maven 以及您想要使用的语言。 本指南假定您选择了Java。</p></li>
     <li><p>点击 <strong>依赖项</strong> 并选择 <strong>JDBC API</strong> 和 <strong>H2 数据库</strong>。</p></li>
     <li><p>点击 <strong>生成</strong>。</p></li>
-    <li><p>下载由此产生的 ZIP 文件，这是一个 web 应用程序的归档，通过您的选择进行配置。</p></li>
+    <li><p>下载由此产生的 ZIP 文件，这是您根据选择配置生成的一个 web 应用程序的压缩包。</p></li>
    </ol>
   </div>
   <div class="admonitionblock note">
@@ -114,7 +114,7 @@ void function() {
     <tbody>
      <tr>
       <td class="icon"><i class="fa icon-note" title="说明"></i></td>
-      <td class="content">如果您的 IDE 有Spring Initializr 集成，您可以从 IDE 完成此进程。</td>
+      <td class="content">如果您的 IDE 集成了 Spring Initializr ，您可以从 IDE 完成此操作。</td>
      </tr>
     </tbody>
    </table>
@@ -124,7 +124,7 @@ void function() {
     <tbody>
      <tr>
       <td class="icon"><i class="fa icon-note" title="说明"></i></td>
-      <td class="content">您也可以从 Github 派生项目并在您的 IDE 或其他编辑器中打开。</td>
+      <td class="content">您也可以从 Github 项目 fork 并在您的 IDE 或其它编辑器中打开。</td>
      </tr>
     </tbody>
    </table>
@@ -132,10 +132,10 @@ void function() {
  </div>
 </div>
 <div class="sect1">
- <h2 id="initial">创建一个 <code>客户</code> 对象</h2>
+ <h2 id="initial">创建一个 <code> Customer </code> 对象</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>您将使用简单的数据访问逻辑来管理客户的姓氏。 要在应用程序一级代表此数据，请创建 <code>客户</code> 类，如下列列表(来自 <code>src/main/java/com/example/relationaldataaccess/Customer.java</code>) 显示：</p>
+   <p>您将使用简单的数据访问逻辑来管理客户的姓和名。 要在应用程序一级表示此数据，请创建 <code> Customer </code> 类，如下列所示(来自 <code>src/main/java/com/example/relationaldataaccess/Customer.java</code>) ：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
@@ -172,7 +172,7 @@ public class Customer {
  <h2 id="_store_and_retrieve_data">存储和检索数据</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>Spring提供了一个名为 <code>JdbcTemplate</code> 的模板类，使它很容易与 SQL 关联数据库和 JDBC一起工作。 大多数JDBC 代码都陷于资源获取、连接管理、异常处理中。 和一般错误检查，这与代码要达到的目标完全无关。 <code>JdbcTemplate</code> 负责你的所有那些。 你必须做的只是把重点放在手头的任务上。 下面的列表(来自 <code>src/main/java/com/example/relationaldataaccesss/RelationalDataAccessation.java</code>) 显示了一个可以通过 JDBC存储和检索数据的类：</p>
+   <p>Spring 提供了一个名为 <code>JdbcTemplate</code> 的模板类，使它很容易与 SQL 关系型数据库及 JDBC 一起工作。 大多数JDBC 代码都陷于资源获取、连接管理、异常处理中及一般错误检查，这与代码要达到的目标完全无关。 <code>JdbcTemplate</code> 为你负责处理那些。 你只需把重点放在手头的任务上。 下面的代码(来自 <code>src/main/java/com/example/relationaldataaccess/RelationalDataAccessApplication.java</code>) 显示了一个使用 JDBC存储和检索数据的类：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
@@ -180,54 +180,55 @@ public class Customer {
      <div class="content">
       <pre class="prettyprint highlight"><code data-lang="java">package com.example.relationaldataaccess;
 
-importer org.slf4j.LoggerFactory;
-importer org.springframework.beans.factory.annotation.Autowied;
-importer org.springframework.boot.CommandLineRunner;
-importer org. pringframework.boot.SpringApplication;
-importer org.springframework.boot.autoconfigure.SpringBootApplication;
-importer org.springframework.jdbc.core.JdbcTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.jdbc.core.JdbcTemplate;
 
-importal java.util.Arrays;
-importing java.util.List;
-importjava.util.stream. lectors;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @SpringBootApplication
-public class RelealDataAccessApplication implements CommandLineRunner Group,
+public class RelationalDataAccessApplication implements CommandLineRunner {
 
-  private 静态最后Logger log = LoggerFactory. etLogger(RelationalDataAccessApplication.class);
+  private static final Logger log = LoggerFactory.getLogger(RelationalDataAccessApplication.class);
 
-  public static invate main(String args[]) 让您了解
-    SpringApplication。 un(RelationalDataAccessApplication.class args);
+  public static void main(String args[]) {
+    SpringApplication.run(RelationalDataAccessApplication.class, args);
   }
 
   @Autowired
-  JdbcTemplate;
+  JdbcTemplate jdbcTemplate;
 
   @Override
-  公共无效运行(String). . strings passes Exception 然后抛出如下异常情况。
+  public void run(String... strings) throws Exception {
 
-    log.info("Creating tables")；
+    log.info("Creating tables");
 
-    jdbcTemplate. xecute("DROP TABLE Customs IF EXISTS")；
-    jdbcTemplate。 xecute("CREATE TABLE客户(" +
-        "id SERIAL, first_name VARCHAR(255)，last_name VARCHAR(255)")；
+    jdbcTemplate.execute("DROP TABLE customers IF EXISTS");
+    jdbcTemplate.execute("CREATE TABLE customers(" +
+        "id SERIAL, first_name VARCHAR(255), last_name VARCHAR(255))");
 
-    // 将整数组中的所有名称拆分成一个名字的数组
-    列表&lt;Object[]&gt; 分割名称=数组。 sList(“John Woo”、“Jeff Dean”、“Josh Bloch”、“Josh Long”)。 tream()
-        .map(name -&gt; name. plit(" "))
-        .collect(Collectors. 文 件：
+    // Split up the array of whole names into an array of first/last names
+    List&lt;Object[]&gt; splitUpNames = Arrays.asList("John Woo", "Jeff Dean", "Josh Bloch", "Josh Long").stream()
+        .map(name -&gt; name.split(" "))
+        .collect(Collectors.toList());
 
-    // 使用 Java 8 流打印列表的每个音量
-    分割名称。 orEach(name -&gt; log.info(String). ormat("插入客户记录的 %s %s", name[0], name[1]));
+    // Use a Java 8 stream to print out each tuple of the list
+    splitUpNames.forEach(name -&gt; log.info(String.format("Inserting customer record for %s %s", name[0], name[1])));
 
-    // 使用 JdbcTemplate 操作批量负载数据
-    jdbcTemplate。 atchUpdate("INSERT INTO 客户(first_name, last_name) VALUES (?,?)", splitUpNames);
+    // Uses JdbcTemplate's batchUpdate operation to bulk load data
+    jdbcTemplate.batchUpdate("INSERT INTO customers(first_name, last_name) VALUES (?,?)", splitUpNames);
 
-    log. nfo("查询客户记录, first_name = 'Josh':");
-    jdbcTemplate。 uery(
-        "SELECT id, first_name, last_name FROM clients WHERE first_name = ? , new Object[……] por "Josh" },
-        (rs, rowNum) -&gt; new Customer(rs. etLong("id"), rs.getString("first_name"), rs.getString("last_name"))
-    ).forEach(client -&gt; log.info(customer.toString());
+    log.info("Querying for customer records where first_name = 'Josh':");
+    jdbcTemplate.query(
+        "SELECT id, first_name, last_name FROM customers WHERE first_name = ?", new Object[] { "Josh" },
+        (rs, rowNum) -&gt; new Customer(rs.getLong("id"), rs.getString("first_name"), rs.getString("last_name"))
+    ).forEach(customer -&gt; log.info(customer.toString()));
   }
 }</code></pre>
      </div>
@@ -235,39 +236,39 @@ public class RelealDataAccessApplication implements CommandLineRunner Group,
    </div>
   </div>
   <div class="paragraph">
-   <p><code>@SpringBootApplication</code> 是一个添加以下所有内容的方便注释：</p>
+   <p><code>@SpringBootApplication</code> 是一个便捷注解，添加了以下所有内容：</p>
   </div>
   <div class="ulist">
    <ul>
-    <li><p><code>@Configuration</code>: 将类标记为应用程序上下文的 bean 定义的一个来源。</p></li>
-    <li><p><code>@EnableAutoConfiguration</code>: 在类路径设置、其他豆类和各种属性设置的基础上，电话启动Spring Boot开始添加豆类。</p></li>
-    <li><p><code>@ComponentScan</code>: 在 <code>com.example.relationaldataaccess</code> 软件包中拨打其他组件、配置和服务。 在这种情况下，没有人反对。</p></li>
+    <li><p><code>@Configuration</code>: 将类标记为应用程序上下文中定义 bean 的一个来源。</p></li>
+    <li><p><code>@EnableAutoConfiguration</code>: 让 Spring Boot 基于 classpath 设置、其它 beans 及其它属性设置来添加 beans.</p></li>
+    <li><p><code>@ComponentScan</code>: 让 Spring 在 <code>com.example.relationaldataaccess</code> package 中寻找其他组件、配置和服务。 现在还没有。</p></li>
    </ul>
   </div>
   <div class="paragraph">
-   <p><code>main()</code> 方法使用 Spring Boot <code>SpringApplication.run()</code> 方法来启动一个应用。</p>
+   <p>方法<code>main()</code> 使用 Spring Boot <code>SpringApplication.run()</code> 方法来启动应用。</p>
   </div>
   <div class="paragraph">
-   <p>Spring Boot支持H2(内存关系数据库引擎)，并自动创建连接。 因为我们使用 <code>spring-jdbc</code>，Spring Boot 自动创建 <code>JdbcTemplate</code>。 <code>@Autowired JdbcTemplate</code> 字段自动加载并可用。</p>
+   <p>Spring Boot支持H2(一个内存关系数据库引擎)，并自动创建连接。 因为我们使用 <code>spring-jdbc</code>，Spring Boot 自动创建一个 <code>JdbcTemplate</code>。 <code>@Autowired JdbcTemplate</code> 字段自动加载并可用。</p>
   </div>
   <div class="paragraph">
-   <p>此 <code>应用程序</code> 类实现Spring Boot <code>CommandLineRunner</code>, 这意味着它将在应用程序上下文加载后执行 <code>run()</code> 方法。</p>
+   <p>此 <code> Application </code> 类实现Spring Boot <code>CommandLineRunner</code>, 这意味着它将在应用程序上下文加载后执行 <code>run()</code> 方法。</p>
   </div>
   <div class="paragraph">
-   <p>首先，使用 <code>安装</code> 方法安装 <code>JdbcTemplate</code> 的 DDL 。</p>
+   <p>首先，使用 <code>JdbcTemplate</code>的 <code>execute</code>方法安装一些 DDL 。</p>
   </div>
   <div class="paragraph">
-   <p>第二，取一个字符串列表，并通过使用 Java 8流，将其分割成Java 数组中的名字/姓氏对。</p>
+   <p>然后，取一个字符串列表，并通过使用 Java 8 stream，将其分割成 Java 数组中的名字/姓氏对。</p>
   </div>
   <div class="paragraph">
-   <p>Then install some records in your newly created table by using the <code>batchUpdate</code> method of <code>JdbcTemplate</code>. 方法调用的第一个参数是查询字符串。 最后一个参数( <code>对象</code> 实例的数组)将变量替换到查询中 <code>?</code> 个字符是</p>
+   <p>然后用 <code>JdbcTemplate</code> 的 <code>batchUpdate</code> 方法往新建的表里边添加一些记录。 方法调用的第一个参数是查询字符串。 最后一个参数( <code> Object </code> 实例的数组) 将变量替入查询中 <code>?</code> 字符</p>
   </div>
   <div class="admonitionblock tip">
    <table>
     <tbody>
      <tr>
       <td class="icon"><i class="fa icon-tip" title="Tip"></i></td>
-      <td class="content">对于单个插入语句， <code>插入</code> 方法 <code>JdbcTemplate</code> 很好。 然而，对于多次插入，最好使用 <code>批次更新</code>。</td>
+      <td class="content">要插入单条记录， 用 <code>JdbcTemplate</code>的 <code>insert</code> 方法。 然而，对于批量插入，最好使用 <code>batchUpdate</code>。</td>
      </tr>
     </tbody>
    </table>
@@ -277,20 +278,20 @@ public class RelealDataAccessApplication implements CommandLineRunner Group,
     <tbody>
      <tr>
       <td class="icon"><i class="fa icon-important" title="重要的"></i></td>
-      <td class="content">使用 <code>?</code> 作为参数以避免 <a href="https://en.wikipedia.org/wiki/SQL_injection">SQL 注入攻击</a> 通过指示JDBC 绑定变量。</td>
+      <td class="content">使用 <code>?</code> 作为参数指示JDBC 绑定变量以避免 <a href="https://en.wikipedia.org/wiki/SQL_injection">SQL 注入攻击</a> 。</td>
      </tr>
     </tbody>
    </table>
   </div>
   <div class="paragraph">
-   <p>最后，使用 <code>查询</code> 方法来搜索您的表中符合条件的记录。 您再次使用 <code>？</code> 参数为查询创建参数，在您进行通话时传递实际值。 最后一个参数是 Java 8 lambda ，用于将每个结果行转换为新的 <code>客户</code> 对象。</p>
+   <p>最后，使用 <code>query</code> 方法来搜索您表中符合条件的记录。 再次使用 <code>?</code> 参数为查询创建参数，在您调用时传递实际值。 最后一个参数是 Java 8 lambda ，用于将结果中每个行转换为新的 <code> Customer </code> 对象。</p>
   </div>
   <div class="admonitionblock note">
    <table>
     <tbody>
      <tr>
       <td class="icon"><i class="fa icon-note" title="说明"></i></td>
-      <td class="content">Java 8 lambdas 地图很好地进入单一方法界面，例如Spring's <code>RowMapper</code>。 如果您使用 Java 7或更早， 您可以插入匿名接口实现，并让方法体与 lambda 表达式的身体相同。</td>
+      <td class="content">Java 8 lambdas map nicely onto single method interfaces, such as Spring’s <code>RowMapper</code>. 如果您使用 Java 7或更老的版本， 您可以插入匿名接口实现，方法体与 lambda 表达式的方法体相同。</td>
      </tr>
     </tbody>
    </table>
@@ -301,10 +302,10 @@ public class RelealDataAccessApplication implements CommandLineRunner Group,
  <h2 id="_build_an_executable_jar">构建可执行的 JAR</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>您可以从 Gradle 或 Maven 的命令行运行该应用程序。 您也可以构建一个包含所有必要依赖、类和资源的单个可执行文件并运行它。 构建一个可执行的 jar 可以方便船舶，版本， 并在整个开发生命周期、在不同环境中等地将服务作为一种应用来部署。</p>
+   <p>您可以从 Gradle 或 Maven 的命令行运行该应用程序。 您也可以构建一个包含所有必要依赖、类和资源的单个可执行文件并运行它。 构建一个可执行的 jar 可以在整个开发周期或在不同环境中方便打包、发版、部署等等。</p>
   </div>
   <div class="paragraph">
-   <p>如果您使用 Gradle, 您可以使用 <code>运行应用程序。/gradlew bootRun</code>。 或者，您可以使用 <code>/gradlew build</code> 来构建JAR 文件，然后运行 JAR 文件，如下所示：</p>
+   <p>如果您使用 Gradle, 您可以使用 <code>./gradlew bootRun</code> 运行应用程序。 或者，您可以使用 <code>./gradlew build</code> 来构建JAR 文件，然后运行 JAR 文件，如下所示：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
@@ -316,7 +317,7 @@ public class RelealDataAccessApplication implements CommandLineRunner Group,
    </div>
   </div>
   <div class="paragraph">
-   <p>如果您使用 Maven，您可以使用 <code>运行应用程序。/mvnw spring-boot:run</code>。 或者，您可以使用 <code>构建JAR 文件。/mvnw 干净的包</code> 然后运行 JAR 文件，如下所示：</p>
+   <p>如果您使用 Maven，您可以使用 <code>./mvnw spring-boot:run</code>运行应用程序。 或者，您可以使用 <code>./mvnw clean package</code> 先构建 JAR 文件然后运行 JAR 文件，如下所示：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
@@ -332,7 +333,7 @@ public class RelealDataAccessApplication implements CommandLineRunner Group,
     <tbody>
      <tr>
       <td class="icon"><i class="fa icon-note" title="说明"></i></td>
-      <td class="content">这里描述的步骤创建一个可运行的 JAR。 您也可以 <a href="/guides/gs/convert-jar-to-war/">构建一个经典的 WAR 文件</a>。</td>
+      <td class="content">这里描述创建一个可运行的 JAR的步骤。 您也可以 <a href="/guides/gs/convert-jar-to-war/">构建一个经典的 WAR 文件</a>。</td>
      </tr>
     </tbody>
    </table>
@@ -344,16 +345,16 @@ public class RelealDataAccessApplication implements CommandLineRunner Group,
    <div class="content">
     <div class="listingblock">
      <div class="content">
-      <pre class="prettyprint highlight"><code data-lang="bash">2019-09-26 13:46:58.561 INFO 47569 - -- [ main] c.e.r.RelealDataAccess应用程序: 创建表
-2019-09-26 13:46:58.564 INFO 47569 - -- [ main] com.zaxer.hikari.HikariDataSource : HikariPool-1 - 开始...
-2019-09-26 13:46:58.708 INFO 47569 - -- [ main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - 开始完成
-2019-09-26 13：46：58.809 INFO 47569 - -- [ main] c.r. elationalDataAccess应用程序：为John Woo
-2019-09-26 13:46:58插入客户记录。 10 INFO 47569 — — [ main] c.e.r。 elationalDataAccessApplication: 插入Jeff Dean
-2019-09-26 13:46:58的客户记录。 10 INFO 47569 — — [ main] c.e.r。 elationalDataAccess应用程序：插入Josh Blog的客户记录
-2019-09-26 13:46:58。 10 INFO 47569 — — [ main] c.e.r。 elationalDataAccess应用程序：为Josh Long插入客户记录
-2019-09-26 13:46:58。 25 INFO 47569 ---- [ main] c。 .r.RelealDataAccess应用程序：查询客户记录，在这些记录中，first_name = 'Josh'：
-2019-09-26 13:46:58。 35 INFO 47569 ---- [ main] c.e.r. elationalDataAccess应用程序: Customer[id=3, firstName='Josh', lastName='Bloch']
-2019-09-26 13:46:58。 35 INFO 47569 ---- [ main] c.e.r.RelealDataAccess应用程序: Customer[id=4, firstName='Josh', lastName='Long']</code></pre>
+      <pre class="prettyprint highlight"><code data-lang="bash">2019-09-26 13:46:58.561  INFO 47569 --- [           main] c.e.r.RelationalDataAccessApplication    : Creating tables
+2019-09-26 13:46:58.564  INFO 47569 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2019-09-26 13:46:58.708  INFO 47569 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2019-09-26 13:46:58.809  INFO 47569 --- [           main] c.e.r.RelationalDataAccessApplication    : Inserting customer record for John Woo
+2019-09-26 13:46:58.810  INFO 47569 --- [           main] c.e.r.RelationalDataAccessApplication    : Inserting customer record for Jeff Dean
+2019-09-26 13:46:58.810  INFO 47569 --- [           main] c.e.r.RelationalDataAccessApplication    : Inserting customer record for Josh Bloch
+2019-09-26 13:46:58.810  INFO 47569 --- [           main] c.e.r.RelationalDataAccessApplication    : Inserting customer record for Josh Long
+2019-09-26 13:46:58.825  INFO 47569 --- [           main] c.e.r.RelationalDataAccessApplication    : Querying for customer records where first_name = 'Josh':
+2019-09-26 13:46:58.835  INFO 47569 --- [           main] c.e.r.RelationalDataAccessApplication    : Customer[id=3, firstName='Josh', lastName='Bloch']
+2019-09-26 13:46:58.835  INFO 47569 --- [           main] c.e.r.RelationalDataAccessApplication    : Customer[id=4, firstName='Josh', lastName='Long']</code></pre>
      </div>
     </div>
    </div>
@@ -361,7 +362,7 @@ public class RelealDataAccessApplication implements CommandLineRunner Group,
  </div>
 </div>
 <div class="sect1">
- <h2 id="_summary">Summary</h2>
+ <h2 id="_summary">总结</h2>
  <div class="sectionbody">
   <div class="paragraph">
    <p>恭喜！ 您刚刚使用Spring来开发一个简单的 JDBC 客户端。</p>
