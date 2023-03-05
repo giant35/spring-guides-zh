@@ -7,14 +7,14 @@
  <h2 id="_what_you_will_build">你将创建什么</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>您将创建 MySQL 数据库，构建Spring 应用程序并将其连接到新创建的数据库。</p>
+   <p>您将创建 MySQL 数据库，构建一个 Spring 应用程序并将其连接到新创建的数据库。</p>
   </div>
   <div class="admonitionblock note">
    <table>
     <tbody>
      <tr>
       <td class="icon"><i class="fa icon-note" title="说明"></i></td>
-      <td class="content">MySQL 被GPL许可，因此任何程序二进制文件都必须使用 GPL。 查看 <a href="https://www.gnu.org/licenses/gpl.html">GNU 通用公共许可证</a>。</td>
+      <td class="content">MySQL is licensed with the GPL, so any program binary that you distribute with it must use the GPL, too. 查看 <a href="https://www.gnu.org/licenses/gpl.html">GNU General Public Licence</a>.</td>
      </tr>
     </tbody>
    </table>
@@ -26,19 +26,19 @@
  <div class="sectionbody">
   <div class="ulist">
    <ul>
-    <li><p><a href="https://dev.mysql.com/downloads/">MySQL</a> 版本 5.6 或更好. 如果您安装了 Docker 程序，运行数据库可能是有用的 <a href="https://hub.docker.com/_/mysql/">容器</a>。</p></li>
+    <li><p><a href="https://dev.mysql.com/downloads/">MySQL</a> 版本 5.6 或更好. 如果您安装了 Docker，作为 <a href="https://hub.docker.com/_/mysql/">container</a> 来运行数据库它会比较有用。</p></li>
    </ul>
   </div>
   <div class="ulist">
    <ul>
     <li><p>约15分钟</p></li>
-    <li><p>收藏的文本编辑器或IDE</p></li>
+    <li><p>喜欢的文本编辑器或IDE</p></li>
     <li><p><a href="https://www.oracle.com/java/technologies/downloads/">Java 17</a> 或更高版本</p></li>
     <li><p><a href="https://gradle.org/install/">Gradle 7.5+</a> 或 <a href="https://maven.apache.org/download.cgi">Maven 3.5+</a></p></li>
     <li><p>您也可以直接导入代码到您的 IDE：</p>
      <div class="ulist">
       <ul>
-       <li><p><a href="/guides/gs/sts">Spring工具套件 (STS)</a></p></li>
+       <li><p><a href="/guides/gs/sts">Spring Tool Suite (STS)</a></p></li>
        <li><p><a href="/guides/gs/intellij-idea/">IntelliJ IDEA</a></p></li>
        <li><p><a href="/guides/gs/guides-with-vscode/">VSCode</a></p></li>
       </ul>
@@ -61,18 +61,18 @@
   </div>
   <div class="ulist">
    <ul>
-    <li><p><a href="https://github.com/spring-guides/gs-accessing-data-mysql/archive/main.zip">下载</a> 并解压缩本指南的源代码库， 或克隆它使用 <a href="/understanding/Git">Git</a>: <code>git 克隆 <a href="https://github.com/spring-guides/gs-accessing-data-mysql.git" class="bare">https://github。 om/spring-guides/gs-accessing-mysql.git</a></code></p></li>
-    <li><p>cd into <code>gs-access-data-mysql/initial</code></p></li>
+    <li><p><a href="https://github.com/spring-guides/gs-accessing-data-mysql/archive/main.zip">下载</a> 并解压缩本指南的源代码库， 或使用<a href="/understanding/Git">Git</a>: <code>git clone <a href="https://github.com/spring-guides/gs-accessing-data-mysql.git" class="bare">https://github.com/spring-guides/gs-accessing-data-mysql.git</a></code>克隆它</p></li>
+    <li><p>cd 到 <code>gs-access-data-mysql/initial</code></p></li>
     <li><p>跳转到 <a href="#initial">创建数据库</a>。</p></li>
    </ul>
   </div>
   <div class="paragraph">
-   <p><strong>当您完成</strong>时，您可以对照 <code>gs-access-data-mysql/completing</code> 中的代码检查您的结果。</p>
+   <p><strong>当您完成</strong>时，您可以对照 <code>gs-accessing-data-mysql/complete</code> 中的代码检查您的结果。</p>
   </div>
  </div>
 </div>
 <div class="sect1">
- <h2 id="scratch">从Spring初始化开始</h2>
+ <h2 id="scratch">从 Spring Initializr 开始</h2>
  <div class="sectionbody">
   <div class="paragraph">
    <p>您可以使用此 <a href="https://start.spring.io/#!type=maven-project&amp;language=java&amp;platformVersion=3.0.1&amp;packaging=jar&amp;jvmVersion=17&amp;groupId=com.example&amp;artifactId=accessing-data-mysql&amp;name=accessing-data-mysql&amp;description=Demo%20project%20for%20Spring%20Boot&amp;packageName=com.example.accessing-data-mysql&amp;dependencies=web,data-jpa,mysql">预初始化项目</a> 并点击生成以下载ZIP 文件。 此项目被配置为适合本教程中的示例。</p>
@@ -82,9 +82,9 @@
   </div>
   <div class="olist arabic">
    <ol class="arabic">
-    <li><p>导航到 <a href="https://start.spring.io" class="bare">https://start.spring.io</a>。 此服务在您需要应用程序的所有依赖关系中拉动，并且为您进行了大部分设置。</p></li>
+    <li><p>导航到 <a href="https://start.spring.io" class="bare">https://start.spring.io</a>。 此服务有您应用程序所需的所有依赖库，并且大部分都已经配置好了。</p></li>
     <li><p>选择 Gradle 或 Maven 以及您想要使用的语言。 本指南假定您选择了Java。</p></li>
-    <li><p>点击 <strong>依赖关系</strong> 并选择 <strong>Spring Web</strong>, <strong>Spring Data JPA</strong>, 和 <strong>MySQL 驱动程序</strong>.</p></li>
+    <li><p>点击 <strong> Dependencies </strong> 并选择 <strong>Spring Web</strong>, <strong>Spring Data JPA</strong>, 和 <strong>MySQL Driver</strong>.</p></li>
     <li><p>点击 <strong>生成</strong>。</p></li>
     <li><p>下载由此产生的 ZIP 文件，这是一个 web 应用程序的归档，通过您的选择进行配置。</p></li>
    </ol>
