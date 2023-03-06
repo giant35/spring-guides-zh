@@ -371,7 +371,7 @@ dependencies {
  <h2 id="_build_your_project_with_gradle_wrapper">使用 Gradle Wrapper 构建您的项目</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>Gradle Wrapper 是开始 Gradle 构建的首选方式。 它包含一个Windows的批处理脚本和一个 OS X 、 Linux 的 shell 脚本。 这些脚本让您无需预先在系统上安装 Gradle 便可运行 Gradle 构建。 以前需要在 build. gradle 中添加一些东西，现在已被整合到 Gradle 不需要任何修改。 相反，您只需使用以下命令。</p>
+   <p>Gradle Wrapper 是开始 Gradle 构建的首选方式。 它包含一个Windows的批处理脚本和一个 OS X 、 Linux 的 shell 脚本。 这些脚本让您无需预先在系统上安装 Gradle 便可运行 Gradle 构建。 以前需要在 build. gradle 中添加一些东西，现在已被整合到 Gradle 不需要任何修改。 现在您只需使用以下命令。</p>
   </div>
   <div class="listingblock">
    <div class="content">
@@ -379,73 +379,71 @@ dependencies {
    </div>
   </div>
   <div class="paragraph">
-   <p>完成此任务后，您将注意到一些新文件。 两个脚本位于文件夹根目录， 在 wrapper jar 和属性文件已添加到新的 <code>gradle/wrapper</code> 文件夹中。</p>
+   <p>完成此任务后，您将注意到有一些新文件。 在根目录文件夹有两个脚本， wrapper jar 和 properties 文件已添加到新的 <code>gradle/wrapper</code> 文件夹中。</p>
   </div>
   <div class="literalblock">
    <div class="content">
-    <pre>cientified --- &lt;project folder&gt;
-    --gradlew
-    --gradlew
-    --gradle.bat
-        --gradle 
- --wrapper
-            ---gradle-wrapper.jar
-            --gradle-wrapper.proper.</pre>
+    <pre>└── &lt;project folder&gt;
+    └── gradlew
+    └── gradlew.bat
+    └── gradle
+        └── wrapper
+            └── gradle-wrapper.jar
+            └── gradle-wrapper.properties</pre>
    </div>
   </div>
   <div class="paragraph">
-   <p>Gradle Wrapper现在可以用于构建您的项目。 将其添加到您的版本控制系统，每个克隆您的项目都可以建立它。 它可以与已安装的 Gradle 版本完全一样使用。 运行包装脚本来执行构建任务，就像你以前那样：</p>
+   <p>Gradle Wrapper 现在可以用于构建您的项目。 将其添加到您的版本控制系统，克隆项目的每个人都可以构建它。 它跟预先安装 Gradle 完全一样使用。 运行包装脚本来执行构建任务，就像你以前那样：</p>
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre>./gradlew Building</pre>
+    <pre>./gradlew build</pre>
    </div>
   </div>
   <div class="paragraph">
-   <p>第一次你运行包装器的特定版本Gradle，它下载并缓存该版本的 Gradle 二进制文件。 Gradle Wrapper文件旨在实现源控制，从而使任何人都可以建立项目，而不必先安装和配置特定版本的 Gradle。</p>
+   <p>第一次你运行特定版本Gradle包装器，它会下载并缓存该版本的 Gradle 执行文件。 Gradle Wrapper 文件旨在实现源代码控制，从而使任何人不必先安装和配置特定版本的 Gradle 就可以构建项目。</p>
   </div>
   <div class="paragraph">
-   <p>在这个阶段，您将已经建立了您的代码。 您可以在这里看到结果：</p>
+   <p>At this stage, you will have built your code. 您可以看到结果：</p>
   </div>
   <div class="listingblock">
    <div class="content">
     <pre>build
---- class
-x&nbsp;&nbsp; --main
-x&nbsp;&nbsp;     --hello
-ximum&nbsp;&nbsp;         --Greeter. lass
-x&nbsp;&nbsp;         --HelloWorld. lass
-
- - --dependency-cache
-/ --libs
-x&nbsp;&nbsp; - gs-gradle-0. .0.jar
-interest - - tmp
-    intervention-- jar
-        约束- - MANIFEST.MF</pre>
+├── classes
+│&nbsp;&nbsp; └── main
+│&nbsp;&nbsp;     └── hello
+│&nbsp;&nbsp;         ├── Greeter.class
+│&nbsp;&nbsp;         └── HelloWorld.class
+├── dependency-cache
+├── libs
+│&nbsp;&nbsp; └── gs-gradle-0.1.0.jar
+└── tmp
+    └── jar
+        └── MANIFEST.MF</pre>
    </div>
   </div>
   <div class="paragraph">
-   <p>包含 <code>Greeter</code> 和 <code>HelloWorld</code>的两个预期的类文件，以及一个 JAR 文件。 使用快速peek：</p>
+   <p>包含 <code>Greeter</code> 和 <code>HelloWorld</code> 两个期望 class 文件，以及一个 JAR 文件。 Take a quick peek:</p>
   </div>
   <div class="listingblock">
    <div class="content">
     <pre>$ jar tvf build/libs/gs-gradle-0.1.0.jar
-  Fri May 30 16:02:32 CDT 2014 META-INF/
- 25 Fri May 30 16:02:32 CDT 2014 META-INF/MANIFEST F
+  0 Fri May 30 16:02:32 CDT 2014 META-INF/
+ 25 Fri May 30 16:02:32 CDT 2014 META-INF/MANIFEST.MF
   0 Fri May 30 16:02:32 CDT 2014 hello/
-369 Fri May 30 16:02:32 CDT 2014 hello/Greeter. lass
+369 Fri May 30 16:02:32 CDT 2014 hello/Greeter.class
 988 Fri May 30 16:02:32 CDT 2014 hello/HelloWorld.class</pre>
    </div>
   </div>
   <div class="paragraph">
-   <p>类文件被捆绑。 重要的是要注意，即使你宣布joda时间为依赖状态，但库并未包含在这里。 JAR 文件也不能运行。</p>
+   <p>class 文件已经被打包了。 值得注意的是，即使你声明了 joda-time 依赖，但这个库并未包含在这里。 JAR 文件也不能运行。</p>
   </div>
   <div class="paragraph">
-   <p>要使这个代码可以运行，我们可以使用成绩级的 <code>应用程序</code> 插件。 将其添加到您的 <code>build.gradle</code> 文件。</p>
+   <p>要使这个代码可以运行，我们可以使用 gradle 的 <code>application</code> 插件。 将其添加到您的 <code>build.gradle</code> 文件。</p>
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre>应用插件：“应用程序”
+    <pre>apply plugin: 'application'
 
 mainClassName = 'hello.HelloWorld'</pre>
    </div>
@@ -455,12 +453,12 @@ mainClassName = 'hello.HelloWorld'</pre>
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre>$ ./gradlew 运行
+    <pre>$ ./gradlew run
 :compileJava UP-TO-DATE
 :processResources UP-TO-DATE
-:classUP-TO-DATE
+:classes UP-TO-DATE
 :run
-当前当地时间是：16:20.544
+The current local time is: 16:16:20.544
 Hello world!
 
 BUILD SUCCESSFUL
@@ -469,7 +467,7 @@ Total time: 3.798 secs</pre>
    </div>
   </div>
   <div class="paragraph">
-   <p>要捆绑依赖关系需要更多思考。 例如，如果我们正在构建一个 WAR 文件，一个通常与第三方依赖的包装相关联的格式， 我们可以使用成绩级的 <a href="https://www.gradle.org/docs/current/userguide/war_plugin.html">WAR 插件</a>。 如果您正在使用 Spring 启动器并想要一个可运行的 JAR 文件， <a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-gradle">spring-boot-gradle-plugin</a> 就很简单。 在这个阶段，评分不足以了解您的系统来做出选择。 但现在，这应该足以开始使用等级。</p>
+   <p>要打包依赖关系需要进一步思考。 例如，如果我们正在构建一个 WAR 文件，一个通常与第三方依赖包相关联的格式， 我们可以使用 gradle 的 <a href="https://www.gradle.org/docs/current/userguide/war_plugin.html">WAR plugin</a>. 如果您使用 Spring Boot 并想得到一个可运行的 JAR 文件， <a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-gradle">spring-boot-gradle-plugin</a> 就很好用。 在这个阶段，gradle 不了解您系统来做出选择。 但现在，这些使用对 gradle 入门来说已经足够了。</p>
   </div>
   <div class="paragraph">
    <p>若要为本指南打包东西，此处是已完成的 <code>build.gradle</code> 文件：</p>
@@ -479,37 +477,37 @@ Total time: 3.798 secs</pre>
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="prettyprint highlight"><code data-lang="gradle">应用插件：'java'
-应用插件：'eclipse'
-应用插件：'application'
+    <pre class="prettyprint highlight"><code data-lang="gradle">apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'application'
 
-mainClassName = 'hello. elloWorld”
+mainClassName = 'hello.HelloWorld'
 
-// tag::repositionies[]
-repositions } 
+// tag::repositories[]
+repositories { 
     mavenCentral() 
 }
-// end::reposies[
+// end::repositories[]
 
 // tag::jar[]
-jar @un.org
+jar {
     archiveBaseName = 'gs-gradle'
-    archiveVersion = '0. .0'
+    archiveVersion =  '0.1.0'
 }
-// end::jar[……]
+// end::jar[]
 
-// tag::dependencies[……]
-sourceCompatibility = 1。
+// tag::dependencies[]
+sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-依赖关系。
-    implementation "joda-time:joda-time:2.
+dependencies {
+    implementation "joda-time:joda-time:2.2"
     testImplementation "junit:junit:4.12"
 }
-// end::dependencies[……]
+// end::dependencies[]
 
-// tag::wrapper[……]
-// end::wrapper[……]</code></pre>
+// tag::wrapper[]
+// end::wrapper[]</code></pre>
    </div>
   </div>
   <div class="admonitionblock note">
@@ -517,7 +515,7 @@ targetCompatibility = 1.8
     <tbody>
      <tr>
       <td class="icon"><i class="fa icon-note" title="说明"></i></td>
-      <td class="content">这里有许多开始/结束评论。 这就可以将构建文件的积分提取到本指南中，以详细解释上面。 您的生产构建文件中不需要它们。</td>
+      <td class="content">这里头尾嵌入了很多注释。 This makes it possible to extract bits of the build file into this guide for the detailed explanations above. 您生产的构建文件不需要它们。</td>
      </tr>
     </tbody>
    </table>
@@ -525,10 +523,10 @@ targetCompatibility = 1.8
  </div>
 </div>
 <div class="sect1">
- <h2 id="_summary">Summary</h2>
+ <h2 id="_summary">总结</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>恭喜！ 您现在已经创建了一个简单但有效的 Gradle 构建文件来建造Java 项目。</p>
+   <p>恭喜！ 您现在已经创建了一个简单但有效的 Gradle build 文件来建造Java 项目。</p>
   </div>
  </div>
 </div>
