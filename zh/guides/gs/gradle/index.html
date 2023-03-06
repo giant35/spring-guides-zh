@@ -141,19 +141,19 @@ public class Greeter {
 
 Welcome to Gradle 6.0.1.
 
-要进行构建，请运行 gradle &lt;task&gt; ...
+To run a build, run gradle &lt;task&gt; ...
 
-要查看可用任务列表, 请运行 gradle tasks
+To see a list of available tasks, run gradle tasks
 
-查看命令行选项列表。 运行 gradle --help
+To see a list of command-line options, run gradle --help
 
-若要查看更多关于某项任务的详细信息，请运行 gradle help --task &lt;task&gt;
+To see more detail about a task, run gradle help --task &lt;task&gt;
 
-若要排除故障，请访问 https://help.gradle.org 。 在这个建筑中使用了过时的Gradle.org
+For troubleshooting, visit https://help.gradle.org
 
-本构建使用了一些被废弃的功能，造成它与 Gradle 7.0 不兼容。
-使用 '--warning-mode all' 来显示个别废弃警告。
-参见 https://docs.gradle.org/6.0.1/userguide/command_line_interface.html#sec:command_line_warnings
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 7.0.
+Use '--warning-mode all' to show the individual deprecation warnings.
+See https://docs.gradle.org/6.0.1/userguide/command_line_interface.html#sec:command_line_warnings
 
 BUILD SUCCESSFUL in 455ms
 1 actionable task: 1 executed</pre>
@@ -205,16 +205,16 @@ projects - Displays the sub-projects of root project 'gs-gradle'.
 properties - Displays the properties of root project 'gs-gradle'.
 tasks - Displays the tasks runnable from root project 'gs-gradle'.
 
-要查看所有任务和更多详细信息，请运行 gradle tasks --all
+To see all tasks and more detail, run gradle tasks --all
 
-以查看更多关于任务的详细信息。 运行 gradle help --task &lt;task&gt;
+To see more detail about a task, run gradle help --task &lt;task&gt;
 
-已过时的 Gradle 功能在此构建中被使用，使其与 Gradle 7.0不兼容。
-使用 '--warning-mode all' 来显示个别废弃警告。
-见 https://docs.gradle.org/6.0.1/userguide/command_line_interface.html#sec:command_line_warns
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 7.0.
+Use '--warning-mode all' to show the individual deprecation warnings.
+See https://docs.gradle.org/6.0.1/userguide/command_line_interface.html#sec:command_line_warnings
 
 BUILD SUCCESSFUL in 477ms
-1 可执行的任务：1 已执行</pre>
+1 actionable task: 1 executed</pre>
    </div>
   </div>
   <div class="paragraph">
@@ -229,7 +229,7 @@ BUILD SUCCESSFUL in 477ms
  <h2 id="_build_java_code">生成 Java 代码</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>开始简单，在 &lt;project folder&gt; 你在本指南开始创建时，建一个非常基本的 <code>build.gradle</code> 文件。 只给它一行：</p>
+   <p>开始简单，你在本指南开始创建的 &lt;project folder&gt; ，建一个非常基本的 <code>build.gradle</code> 文件。 只给它一行：</p>
   </div>
   <div class="listingblock">
    <div class="content">
@@ -270,7 +270,7 @@ BUILD SUCCESSFUL in 477ms
    <p>Reports 文件夹应包含项目中单元测试执行报告。 由于该项目尚未进行任何单位测试，这份报告将是无趣的。</p>
   </div>
   <div class="paragraph">
-   <p>libs 文件夹应包含以项目文件夹命名的 JAR 文件。 后变，您将看到如何指定JAR 名称及其版本。</p>
+   <p>libs 文件夹应包含以项目文件夹命名的 JAR 文件。 后面，您将看到如何指定JAR 名称及其版本。</p>
   </div>
  </div>
 </div>
@@ -281,7 +281,7 @@ BUILD SUCCESSFUL in 477ms
    <p>此简单的 Hello World 例子是完全自包含的，并不依赖任何其他的库。 然而，大多数应用程序依靠外部库来处理常见、复杂的功能。</p>
   </div>
   <div class="paragraph">
-   <p>例如，假定除了说"Hello World!"外，您希望应用程序打印当前的日期和时间。 您可以使用 Java 原生库中的日期和时间函数，但你可以使用 Joda 时间库来使事情更加有趣。</p>
+   <p>例如，假定除了说"Hello World!"外，您希望应用程序打印当前的日期和时间。 您可以使用 Java 原生库中的日期和时间函数，为了更加有趣你可以使用 Joda 时间库。</p>
   </div>
   <div class="paragraph">
    <p>首先，将 HelloWorld.java 改成这样：</p>
@@ -307,7 +307,7 @@ public class HelloWorld {
    <p>在这里 <code>HelloWorld</code> 使用 Joda Time 的 <code>LocalTime</code> 类来获取和打印当前时间。</p>
   </div>
   <div class="paragraph">
-   <p>如果你现在运行 <code>gradle build</code> 来建造这个项目，构建将会失败，因为你没有在 build. gradle 中将Joda Time 声明compile dependency。</p>
+   <p>如果你现在运行 <code>gradle build</code> 来建造这个项目，构建将会失败，因为你没有在 build.gradle 中将Joda Time 声明compile dependency。</p>
   </div>
   <div class="paragraph">
    <p>For starters, 您需要为第三方库添加一个源。</p>
