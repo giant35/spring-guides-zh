@@ -20,7 +20,7 @@
    <ul>
     <li><p>约15分钟</p></li>
     <li><p>收藏的文本编辑器或IDE</p></li>
-    <li><p><a href="https://www.oracle.com/technetwork/java/javase/downloads/index.html">JDK 6</a> 或以后的</p></li>
+    <li><p><a href="https://www.oracle.com/technetwork/java/javase/downloads/index.html">Java 6</a> 或更高版本</p></li>
    </ul>
   </div>
  </div>
@@ -39,7 +39,7 @@
   </div>
   <div class="ulist">
    <ul>
-    <li><p><a href="https://github.com/spring-guides/gs-gradle/archive/main.zip">下载</a> 并解压缩本指南的源代码库， 或克隆它使用 <a href="/understanding/Git">Git</a>: <code>git 克隆 <a href="https://github.com/spring-guides/gs-gradle.git" class="bare">https://github。 om/spring-guides/gs-gradle.git</a></code></p></li>
+    <li><p><a href="https://github.com/spring-guides/gs-gradle/archive/main.zip">下载</a> 并解压缩本指南的源代码库， 或使用<a href="/understanding/Git">Git</a>: <code>git clone <a href="https://github.com/spring-guides/gs-gradle.git" class="bare">https://github.com/spring-guides/gs-gradle.git</a></code>克隆它</p></li>
     <li><p>cd 到 <code>gs-gradle/initial</code></p></li>
     <li><p>跳转到 <a href="#initial">安装 Gradle</a>。</p></li>
    </ul>
@@ -69,7 +69,7 @@
     </div>
    </div>
    <div class="paragraph">
-    <p>在 <code>src/main/java/hello</code> 目录中，您可以创建任何您想要的 Java 类。 为简单起见，为了与本指南其余部分一致，Spring建议您创建两个类： <code>HelloWorld。 va</code> and <code>Greeter.java</code></p>
+    <p>在 <code>src/main/java/hello</code> 目录中，您可以创建任何您想要的 Java 类。 为简单起见，为了与本指南其余部分一致，Spring建议您创建两个类： <code>HelloWorld.java</code> 和 <code>Greeter.java</code>.</p>
    </div>
    <div class="paragraph">
     <p><code>src/main/java/hello/HelloWorld.java</code></p>
@@ -78,10 +78,10 @@
     <div class="content">
      <pre class="prettyprint highlight"><code data-lang="java">package hello;
 
-public class HelloWorldv.
-  public static invent main(String[……] args) 让您了解
-  Greeter changter = new Greeter();
-  系统。 ut.println(opeter.sayHello());
+public class HelloWorld {
+  public static void main(String[] args) {
+  Greeter greeter = new Greeter();
+  System.out.println(greeter.sayHello());
   }
 }</code></pre>
     </div>
@@ -104,10 +104,10 @@ public class Greeter {
  </div>
 </div>
 <div class="sect1">
- <h2 id="initial">Install Gradle</h2>
+ <h2 id="initial">安装 Gradle</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>现在你可以使用 Gradle 构建一个项目，你可以安装 Gradle。</p>
+   <p>现在你有一个项目可以用 Gradle 来构建了，你可以安装 Gradle。</p>
   </div>
   <div class="paragraph">
    <p>强烈建议使用安装程序：</p>
@@ -115,17 +115,17 @@ public class Greeter {
   <div class="ulist">
    <ul>
     <li><p><a href="https://sdkman.io/">SDKMAN</a></p></li>
-    <li><p><a href="https://brew.sh">自制程序</a> (安装分级)</p></li>
+    <li><p><a href="https://brew.sh">Homebrew</a> (brew install gradle)</p></li>
    </ul>
   </div>
   <div class="paragraph">
-   <p>作为最后的手段，如果这些工具都不适合您的需要，您可以从 <a href="https://www.gradle.org/downloads" class="bare">https://www.gradle.org/downloads</a> 下载二进制文件。 只需要二进制文件，所以寻找成绩链接-<em>版本</em>-bin.zip。 (您也可以选择成绩-<em>版本</em>-all.zip 以获取源和文档以及二进制文件。)</p>
+   <p>如果这些工具都不适合您的需要，您也可以从 <a href="https://www.gradle.org/downloads" class="bare">https://www.gradle.org/downloads</a> 下载执行文件。 只需要执行文件，所以寻找 gradle-<em>version</em>-bin.zip。 (您也可以选择 gradle-<em>version</em>-all.zip 以获取源代码和文档以及执行文件。)</p>
   </div>
   <div class="paragraph">
    <p>解压文件到您的电脑，然后将文件夹添加到您的路径。</p>
   </div>
   <div class="paragraph">
-   <p>要测试Gradle 安装，请从命令行运行 Gradle ：</p>
+   <p>要测试 Gradle 安装好，请从命令行运行 Gradle ：</p>
   </div>
   <div class="listingblock">
    <div class="content">
@@ -139,78 +139,78 @@ public class Greeter {
    <div class="content">
     <pre>:help
 
-欢迎使用 Gradle 6.0.1。
+Welcome to Gradle 6.0.1.
 
-要运行构建，请运行 &lt;task&gt;...
+要进行构建，请运行 gradle &lt;task&gt; ...
 
-要查看可用任务列表, 请运行分级任务
+要查看可用任务列表, 请运行 gradle tasks
 
 查看命令行选项列表。 运行 gradle --help
 
 若要查看更多关于某项任务的详细信息，请运行 gradle help --task &lt;task&gt;
 
-若要排除故障，请访问 https://help。 在这个建筑中使用了过时的Gradle.org
+若要排除故障，请访问 https://help.gradle.org 。 在这个建筑中使用了过时的Gradle.org
 
-Gradle特征，使其与 Gradle 7.0 不兼容。
-使用 '--warning-mode 所有' 来显示个别的废弃警告。
-见 https://docs.gradle.org/6.0.1/userguide/command_line_interface.html#sec:command_line_warns
+本构建使用了一些被废弃的功能，造成它与 Gradle 7.0 不兼容。
+使用 '--warning-mode all' 来显示个别废弃警告。
+参见 https://docs.gradle.org/6.0.1/userguide/command_line_interface.html#sec:command_line_warnings
 
 BUILD SUCCESSFUL in 455ms
-1 可执行的任务：1 执行。</pre>
+1 actionable task: 1 executed</pre>
    </div>
   </div>
   <div class="paragraph">
-   <p>您现在已经安装 Gradle。</p>
+   <p>您现在已经安装好 Gradle。</p>
   </div>
  </div>
 </div>
 <div class="sect1">
- <h2 id="_find_out_what_gradle_can_do">了解Gradle 可以做什么</h2>
+ <h2 id="_find_out_what_gradle_can_do">看看 Gradle 可以做什么</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>现在安装了Gradle，请看它能做些什么。 甚至在您创建项目的 build.gradle 文件之前，您可以询问哪些任务可用：</p>
+   <p>现在安装了Gradle，看看它能做些什么。 甚至在您创建项目 build.gradle 文件之前，您可以询问哪些任务可用：</p>
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre>分级任务</pre>
+    <pre>gradle tasks</pre>
    </div>
   </div>
   <div class="paragraph">
-   <p>您应该看到可用任务列表。 假定您在 <em>build.gradle</em> 文件中运行Gradle ，您将看到一些非常基本的任务，例如：</p>
+   <p>您应该看到可用任务列表。 如果您在没有 <em>build.gradle</em> 文件的文件夹中运行Gradle ，您将看到一些非常基本的任务，例如：</p>
   </div>
   <div class="literalblock">
    <div class="content">
     <pre>:tasks
 
-------------------------------------------------------------------------------------
-任务可从根项目运行
-----------------------------------------------------------------------------
+------------------------------------------------------------
+Tasks runnable from root project
+------------------------------------------------------------
 
-构建任务
-----------------
-init - 初始化一个新的 Gradle 构建。
-包装器 - 生成Gradle 包装器文件。
+Build Setup tasks
+-----------------
+init - Initializes a new Gradle build.
+wrapper - 生成 Gradle wrapper 文件.
 
-帮助任务
+Help tasks
 ----------
-buildEnvironment - 显示 root 项目 'gs-gradle' 中声明的所有构建脚本依赖项。
-组件——显示根项目产生的组件“gs-gradle”。 [incubating]
-依赖关系 - 显示根项目中声明的所有依赖项 'gs-gradle' 。
-依赖关系分析——显示根项目“gs-gradle”的特定依赖性。
-依赖组件 - 在 root 项目 'gs-gradle' 中显示组件依赖的组件。 [incubating]
-帮助 - 显示帮助消息。
-模型 - 显示根项目的配置模型“gs-gradle”。 [incubating]
-出站变量 - 显示 root 项目 'gs-gradle' 的出站变量。
-项目 - 显示根项目的子项目 'gs-gradle'.
-属性 - 显示 root 项目 'gs-gradle' 的属性。
-任务 - 显示可从 root 项目 'gs-gradle' 运行的任务。
+buildEnvironment - Displays all buildscript dependencies declared in root project 'gs-gradle'.
+components - Displays the components produced by root project 'gs-gradle'. [incubating]
+dependencies - Displays all dependencies declared in root project 'gs-gradle'.
+dependencyInsight - Displays the insight into a specific dependency in root project 'gs-gradle'.
+dependentComponents - Displays the dependent components of components in root project 'gs-gradle'. [incubating]
+help - Displays a help message.
+model - Displays the configuration model of root project 'gs-gradle'. [incubating]
+outgoingVariants - Displays the outgoing variants of root project 'gs-gradle'.
+projects - Displays the sub-projects of root project 'gs-gradle'.
+properties - Displays the properties of root project 'gs-gradle'.
+tasks - Displays the tasks runnable from root project 'gs-gradle'.
 
-要查看所有任务和更多详细信息，请运行分级任务--all
+要查看所有任务和更多详细信息，请运行 gradle tasks --all
 
-以查看更多关于任务的详细信息。 运行gradle help --task &lt;task&gt;
+以查看更多关于任务的详细信息。 运行 gradle help --task &lt;task&gt;
 
 已过时的 Gradle 功能在此构建中被使用，使其与 Gradle 7.0不兼容。
-使用 '--warning-mode 所有' 来显示个别的废弃警告。
+使用 '--warning-mode all' 来显示个别废弃警告。
 见 https://docs.gradle.org/6.0.1/userguide/command_line_interface.html#sec:command_line_warns
 
 BUILD SUCCESSFUL in 477ms
@@ -218,7 +218,7 @@ BUILD SUCCESSFUL in 477ms
    </div>
   </div>
   <div class="paragraph">
-   <p>即使这些任务可用，但如果没有项目构建配置，它们不会提供很多价值。 当你充实 <code>build.gradle</code> 文件时，一些任务将更有用。 当你添加插件到 <code>构建时，任务列表将会增加。 radle</code>, 所以你会偶尔想要运行 <strong>任务</strong> 再来看看哪些任务是可用的。</p>
+   <p>即使这些任务可用，但如果没有项目构建配置，它们没有多少价值。 当你补充了 <code>build.gradle</code> 文件时，一些任务将更有用。 当你添加 plugins 到 <code>build.gradle</code> 时，任务列表将会增加，所以你会偶尔想要重新运行 <strong>tasks</strong>来看看哪些任务可用的。</p>
   </div>
   <div class="paragraph">
    <p>谈到添加插件，下面你添加一个能启用基本的 Java 构建功能的插件。</p>
@@ -229,48 +229,48 @@ BUILD SUCCESSFUL in 477ms
  <h2 id="_build_java_code">生成 Java 代码</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>开始简单，创建一个非常基本的 <code>build.gradle</code> 文件，在 &lt;project folder&gt; 你在本指南开始时创建。 只给它一行：</p>
+   <p>开始简单，在 &lt;project folder&gt; 你在本指南开始创建时，建一个非常基本的 <code>build.gradle</code> 文件。 只给它一行：</p>
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="prettyprint highlight"><code data-lang="groovy">应用插件：“java”</code></pre>
+    <pre class="prettyprint highlight"><code data-lang="groovy">apply plugin: 'java'</code></pre>
    </div>
   </div>
   <div class="paragraph">
-   <p>构建配置中的这条线带来了相当大的能量。 再次运行 <strong>gradle 任务</strong> ，你看到新任务添加到列表中。 包括构建项目、创建 JavaScript 和运行测试的任务。</p>
+   <p>构建配置中的这行代码很有作用。 重新运行 <strong>gradle tasks</strong> ，你看到有新任务添加到列表中， 包括构建项目、创建 JavaDoc 和运行测试的任务。</p>
   </div>
   <div class="paragraph">
-   <p>您将经常使用 <strong>gradle build</strong> 任务。 此任务编译、测试并将代码组装到一个 JAR 文件中。 你可以像这样运行它：</p>
+   <p>您将经常使用<strong>gradle build</strong>任务。 此任务编译、测试并将代码组装到一个 JAR 文件中。 你可以像这样运行它：</p>
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre>打造gradle</pre>
+    <pre>gradle build</pre>
    </div>
   </div>
   <div class="paragraph">
-   <p>几秒钟后，“BUILD SUCCESSFUL”表示构建已完成。</p>
+   <p>几秒钟后，"BUILD SUCCESSFUL"表示构建已完成。</p>
   </div>
   <div class="paragraph">
-   <p>要看看构建努力的结果，请在 <em>构建</em> 文件夹中看看。 你会在这里找到几个目录，包括这三个值得注意的文件夹：</p>
+   <p>要看看努力构建的结果，看一下 <em>build</em> 文件夹。 你会看到几个目录，包括这三个值得注意的文件夹：</p>
   </div>
   <div class="ulist">
    <ul>
-    <li><p><em>类</em>。 项目已编译.class 文件。</p></li>
-    <li><p><em>报告</em>。 建筑物产生的报告(例如测试报告)。</p></li>
-    <li><p><em>libs</em>. 已集合的项目库 (通常是 JAR 或 WAR 文件)。</p></li>
+    <li><p><em>classes</em>. 项目中已编译的 .class 文件。</p></li>
+    <li><p><em>reports</em>. 构建生成的报告(例如测试报告)。</p></li>
+    <li><p><em>libs</em>. 打包的项目库 (通常是 JAR 或 WAR 文件)。</p></li>
    </ul>
   </div>
   <div class="paragraph">
-   <p>类文件夹有 .class 文件生成于编译Java 代码。 具体而言，你应该找到 HelloWorld.class 和 Greeter.class。</p>
+   <p>classes 文件夹有从 Java 代码编译生成的 .class 文件。 具体而言，你应该找到 HelloWorld.class 和 Greeter.class.</p>
   </div>
   <div class="paragraph">
-   <p>此时此刻，该项目没有任何库依赖关系，因此 <strong>依赖关系缓存</strong> 文件夹中没有任何内容。</p>
+   <p>此时，该项目没有任何库依赖关系，因此 <strong>dependency_cache</strong> 文件夹中没有任何内容。</p>
   </div>
   <div class="paragraph">
-   <p>报告文件夹应包含项目上运行单元测试的报告。 由于该项目尚未进行任何单位测试，这份报告将是无趣的。</p>
+   <p>Reports 文件夹应包含项目中单元测试执行报告。 由于该项目尚未进行任何单位测试，这份报告将是无趣的。</p>
   </div>
   <div class="paragraph">
-   <p>libs 文件夹应包含以项目文件夹命名的 JAR 文件。 进一步，您将看到如何指定JAR 及其版本的名称。</p>
+   <p>libs 文件夹应包含以项目文件夹命名的 JAR 文件。 后变，您将看到如何指定JAR 名称及其版本。</p>
   </div>
  </div>
 </div>
@@ -278,13 +278,13 @@ BUILD SUCCESSFUL in 477ms
  <h2 id="_declare_dependencies">声明依赖关系</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>简单的Hello World 样本是完全自成一体的，并不依赖任何其他的图书馆。 然而，大多数应用程序依靠外部图书馆来处理共同和/或复杂的功能。</p>
+   <p>此简单的 Hello World 例子是完全自包含的，并不依赖任何其他的库。 然而，大多数应用程序依靠外部库来处理常见、复杂的功能。</p>
   </div>
   <div class="paragraph">
-   <p>例如，假定除了使用"Hello World!"外，您希望应用程序打印当前的日期和时间。 您可以使用本地的 Java 库中的日期和时间设施。 但你可以通过使用 Joda 时间库来使事情更加有趣。</p>
+   <p>例如，假定除了说"Hello World!"外，您希望应用程序打印当前的日期和时间。 您可以使用 Java 原生库中的日期和时间函数，但你可以使用 Joda 时间库来使事情更加有趣。</p>
   </div>
   <div class="paragraph">
-   <p>首先，更改 HelloWorld.java 看起来像这样：</p>
+   <p>首先，将 HelloWorld.java 改成这样：</p>
   </div>
   <div class="listingblock">
    <div class="content">
@@ -304,23 +304,23 @@ public class HelloWorld {
    </div>
   </div>
   <div class="paragraph">
-   <p>在这里 <code>HelloWorld</code> 使用 Joda Time <code>LocalTime</code> 类来获取和打印当前时间。</p>
+   <p>在这里 <code>HelloWorld</code> 使用 Joda Time 的 <code>LocalTime</code> 类来获取和打印当前时间。</p>
   </div>
   <div class="paragraph">
-   <p>如果你运行了 <code>gradle build</code> 来建造这个项目。 构建失败，因为你没有将Joda Time 声明为编译依赖建筑物。</p>
+   <p>如果你现在运行 <code>gradle build</code> 来建造这个项目，构建将会失败，因为你没有在 build. gradle 中将Joda Time 声明compile dependency。</p>
   </div>
   <div class="paragraph">
-   <p>对于启动器，您需要为第三方库添加一个源。</p>
+   <p>For starters, 您需要为第三方库添加一个源。</p>
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="prettyprint highlight"><code data-lang="groovy">repositions 
+    <pre class="prettyprint highlight"><code data-lang="groovy">repositories { 
     mavenCentral() 
 }</code></pre>
    </div>
   </div>
   <div class="paragraph">
-   <p><code>仓库</code> 块表示构建应该解决Maven 中央仓库的依赖性。 Gradle leans highly on many conventions and facilities established by Maven building tools. 包括使用 Maven Central 作为库依赖源的选项。</p>
+   <p><code> repositories </code> 块表示构建应该从 Maven 中央仓库解决依赖性。 Gradle leans heavily on many conventions and facilities established by the Maven build tool, including the option of using Maven Central as a source of library dependencies.</p>
   </div>
   <div class="paragraph">
    <p>现在我们已经准备好了第三方库，让我们声明一些东西。</p>
@@ -330,40 +330,40 @@ public class HelloWorld {
     <pre class="prettyprint highlight"><code data-lang="groovy">sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-依赖关系。
-    实现"joda-time:joda-time:2.2"
+dependencies {
+    implementation "joda-time:joda-time:2.2"
     testImplementation "junit:junit:4.12"
 }</code></pre>
    </div>
   </div>
   <div class="paragraph">
-   <p>使用 <code>依赖关系</code> 块，您声明了一个 Joda 时间的单一依赖关系。 具体而言，您正在请求(向右阅读)在 joda 时间组中的 joda 时间库的2.2版。</p>
+   <p>使用 <code> dependencies</code> 块，您声明了一个 Joda Time 的依赖关系。 具体而言，您正在请求(向右阅读) joda-time 组中的 joda-time 库2.2版。</p>
   </div>
   <div class="paragraph">
-   <p>关于此依赖关系的另一件事是，它是一个 <code>编译的</code> 依赖关系， 表示它应该可以在编译时间(如果你正在构建WAR 文件，包含在WEB-INF/libs 文件夹中)。 其他值得注意的依赖类型包括：</p>
+   <p>关于此依赖关系的另一件事是，它是一个 <code>compile</code> 依赖， 表示它应该可以在编译时可用(如果你正在构建WAR 文件，会包含到 WAR 的 /WEB-INF/libs 文件夹中)。 其他值得注意的依赖类型包括：</p>
   </div>
   <div class="ulist">
    <ul>
-    <li><p><code>实现</code>。 编译项目代码所需的依赖关系 但这将在运行时由运行代码的容器提供(例如，Java Servlet API)。</p></li>
-    <li><p><code>测试实现</code>。 用于编译和运行测试的依赖关系，但不需要用于构建或运行项目的运行时代码。</p></li>
+    <li><p><code>implementation</code>. 项目代码编译时所需的依赖关系，但运行时将由运行容器提供(例如，Java Servlet API)。</p></li>
+    <li><p><code>testImplementation</code>. 用于测试编译运行的依赖关系，但项目运行代码构建、运行时不需要。</p></li>
    </ul>
   </div>
   <div class="paragraph">
-   <p>最后，请指定我们的 JAR 艺人的名称。</p>
+   <p>最后，请指定我们的 JAR 的名称。</p>
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="prettyprint highlight"><code data-lang="groovy">jar @un.org.
+    <pre class="prettyprint highlight"><code data-lang="groovy">jar {
     archiveBaseName = 'gs-gradle'
-    archiveVersion = '0.1.0'
+    archiveVersion =  '0.1.0'
 }</code></pre>
    </div>
   </div>
   <div class="paragraph">
-   <p><code>jar</code> 块指定了 JAR 文件的命名。 在这种情况下，它会渲染 <code>gs-gradle-0.1.0.jar</code>。</p>
+   <p><code>jar</code> 块指定了 JAR 文件的命名。 在这种情况下，它会成为 <code>gs-gradle-0.1.0.jar</code>。</p>
   </div>
   <div class="paragraph">
-   <p>现在，如果你运行 <code>gradle build</code>, Gradle 应该从Maven中央仓库解决Joda Time 依赖关系，建筑物将会成功。</p>
+   <p>现在，如果你运行 <code>gradle build</code>, Gradle 应该从Maven中央仓库解决Joda Time 依赖关系，构建将会成功。</p>
   </div>
  </div>
 </div>
@@ -371,7 +371,7 @@ targetCompatibility = 1.8
  <h2 id="_build_your_project_with_gradle_wrapper">使用 Gradle Wrapper 构建您的项目</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>Gradle Wrapper是开始Gradle 建筑的首选方式。 它包含一个Windows的批量脚本和一个 OS X 和 Linux 的 shell 脚本。 这些脚本允许您运行 Gradle 构建，而无需在您的系统上安装 Gradle 。 这以前是添加到您的构建文件中的东西，但它已被折叠到Gradle，所以不再有任何需要。 相反，您只需使用以下命令。</p>
+   <p>Gradle Wrapper 是开始 Gradle 构建的首选方式。 它包含一个Windows的批处理脚本和一个 OS X 、 Linux 的 shell 脚本。 这些脚本让您无需预先在系统上安装 Gradle 便可运行 Gradle 构建。 以前需要在 build. gradle 中添加一些东西，现在已被整合到 Gradle 不需要任何修改。 相反，您只需使用以下命令。</p>
   </div>
   <div class="listingblock">
    <div class="content">
