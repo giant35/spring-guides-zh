@@ -176,7 +176,7 @@ public class Customer {
  <h2 id="_create_simple_queries">创建简单查询</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>Spring Data JPA 聚焦于使用 JPA 将数据存储到关系数据库。 其最令人信服的功能是能够在运行时从 repository 接口自动创建实现功能的 repository。</p>
+   <p>Spring Data JPA 聚焦于使用 JPA 将数据存储到关系数据库。 其最令人信服的功能是能够在运行时为 repository 接口自动创建实现类。</p>
   </div>
   <div class="paragraph">
    <p>看看它是如何工作的， 创建一个与 <code> Customer </code> 配合工作的 repository 接口如下所示(在 <code>src/main/java/com/example/accessingdatajpa/CustomerRepository.java</code>) ：</p>
@@ -324,7 +324,7 @@ public class AccessingDataJpaApplication {
    </div>
   </div>
   <div class="paragraph">
-   <p><code>AccessingDataJpaApplication</code> 类包含一个 <code>demo()</code> 方法，通过几个测试展示了下 <code>CustomerRepository</code>。 首先，它从 Spring 应用程序环境中获取 <code> CustomerRepository </code>。 然后保存几个 <code> Customer </code> 对象，演示 <code>save()</code> 方法并设置一些数据来处理它。 接下来，它调用 <code>findAll()</code> 从数据库获取所有 <code> Customer </code> 对象。 然后它调用 <code>findById()</code> 通过ID获取单个 <code> Customer </code> 。 最后，它调用 <code>findByLastName()</code> 来查找 last name 是 "Bauer" 的所有customer。 <code>demo()</code> 方法返回 <code>CommandLineRunner</code> 这样当应用程序启动时会自动运行代码。</p>
+   <p><code>AccessingDataJpaApplication</code> 类包含一个 <code>demo()</code> 方法，通过几个测试展示了下 <code>CustomerRepository</code>。 首先，它从 Spring 应用程序环境中获取 <code> CustomerRepository </code>。 然后保存几个 <code> Customer </code> 对象，演示 <code>save()</code> 方法并设置一些数据来处理它。 接下来，它调用 <code>findAll()</code> 从数据库获取所有 <code> Customer </code> 对象。 然后它调用 <code>findById()</code> 通过ID获取单个 <code> Customer </code> 。 最后，它调用 <code>findByLastName()</code> 来查找 last name 是 "Bauer" 的所有customer。 当应用程序启动时会自动运行 <code>demo()</code> 方法返回的 <code>CommandLineRunner</code> 代码。</p>
   </div>
   <div class="admonitionblock note">
    <table>
