@@ -71,10 +71,10 @@
  </div>
 </div>
 <div class="sect1">
- <h2 id="scratch">从Spring初始化开始</h2>
+ <h2 id="scratch">从 Spring Initializr 开始</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>您可以使用此 <a href="https://start.spring.io/#!type=maven-project&amp;language=java&amp;platformVersion=2.5.5&amp;packaging=jar&amp;jvmVersion=11&amp;groupId=com.example&amp;artifactId=crud-with-vaadin&amp;name=crud-with-vaadin&amp;description=Demo%20project%20for%20Spring%20Boot&amp;packageName=com.example.crud-with-vaadin&amp;dependencies=data-jpa,h2">预初始化项目</a> 并点击生成以下载ZIP 文件。 此项目被配置为适合本教程中的示例。</p>
+   <p>您可以使用此 <a href="https://start.spring.io/#!type=maven-project&amp;language=java&amp;platformVersion=2.5.5&amp;packaging=jar&amp;jvmVersion=11&amp;groupId=com.example&amp;artifactId=crud-with-vaadin&amp;name=crud-with-vaadin&amp;description=Demo%20project%20for%20Spring%20Boot&amp;packageName=com.example.crud-with-vaadin&amp;dependencies=data-jpa,h2">已初始化项目</a> 并点击生成以下载ZIP 文件。 此项目被配置为适合本教程中的示例。</p>
   </div>
   <div class="paragraph">
    <p>要手动初始化项目：</p>
@@ -155,7 +155,7 @@
    <p>如果你开始了一个新项目，你需要添加实体和仓库对象。 如果您从 <code>初始项目</code> 开始，那么这些对象已经存在。</p>
   </div>
   <div class="paragraph">
-   <p>下面的列表(来自 <code>src/main/java/com/example/crudwitvaadin/Customer.java</code>) 定义了客户实体：</p>
+   <p>下边代码(来自 <code>src/main/java/com/example/crudwitvaadin/Customer.java</code>) 定义了客户实体：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
@@ -218,7 +218,7 @@ public class Customer {
    </div>
   </div>
   <div class="paragraph">
-   <p>下面的列表(来自 <code>src/main/java/com/example/crudwithvaadin/CustomerRepository.java</code>) 定义了客户仓库：</p>
+   <p>下边代码(来自 <code>src/main/java/com/example/crudwithvaadin/CustomerRepository.java</code>) 定义了客户仓库：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
@@ -239,7 +239,7 @@ public interface CustomerRepository extends JpaRepository&lt;Customer, Long&gt; 
    </div>
   </div>
   <div class="paragraph">
-   <p>下面的列表(来自 <code>src/main/java/com/example/crudwitvaadin/CrudwithVaadinApplication.java</code>) 显示了应用程序类，为您创建了一些数据：</p>
+   <p>下边代码(来自 <code>src/main/java/com/example/crudwitvaadin/CrudwithVaadinApplication.java</code>) 显示了应用程序类，为您创建了一些数据：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
@@ -363,7 +363,7 @@ public class CrudWithVaadinApplication {
  <h2 id="_define_the_main_view_class">定义主视图类</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>主视图类 (在本指南中名为 <code>MainView</code> ) 是Vaadin的 UI 逻辑的切入点。 在Spring Boot应用程序 你只需要使用 <code>@Route</code> 批注它，它会被Spring 自动拿起，并显示在您的 web 应用程序的根目录上。 您可以通过给 <code>@Route</code> 注解给一个参数来自定义显示视图的 URL。 下面的列表(从 <code>初始</code> 项目 at <code>src/main/java/com/example/crudwitvaadin/MainView.java</code>) 显示了一个简单的“Hello, World”视图：</p>
+   <p>主视图类 (在本指南中名为 <code>MainView</code> ) 是Vaadin的 UI 逻辑的切入点。 在Spring Boot应用程序 你只需要使用 <code>@Route</code> 批注它，它会被Spring 自动拿起，并显示在您的 web 应用程序的根目录上。 您可以通过给 <code>@Route</code> 注解给一个参数来自定义显示视图的 URL。 下边代码(从 <code>初始</code> 项目 at <code>src/main/java/com/example/crudwitvaadin/MainView.java</code>) 显示了一个简单的“Hello, World”视图：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
@@ -627,7 +627,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  <h2 id="_wire_the_editor">连接编辑器</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>在前几个步骤中，您已经看到了基于组件的编程的一些基本知识。 使用 <code>按钮</code> 并将选择侦听器添加到 <code>格子</code>, 您可以将您的编辑器完全整合到主视图。 下面的列表(来自 <code>src/main/java/com/example/crudwitvaadin/MainView.java</code>) 显示了 <code>MainView</code> 类的最终版本：</p>
+   <p>在前几个步骤中，您已经看到了基于组件的编程的一些基本知识。 使用 <code>按钮</code> 并将选择侦听器添加到 <code>格子</code>, 您可以将您的编辑器完全整合到主视图。 下边代码(来自 <code>src/main/java/com/example/crudwitvaadin/MainView.java</code>) 显示了 <code>MainView</code> 类的最终版本：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
