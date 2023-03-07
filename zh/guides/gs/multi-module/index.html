@@ -242,7 +242,7 @@ $ mv gradlew* gradle ..</code></pre>
      <p>库项目没有主要方法的班级(因为它不是应用程序)。 因此，您必须告诉构建系统不要尝试为库项目构建一个可执行的 jar。 (默认情况下，Spring Initializr 构建可执行项目。)</p>
     </div>
     <div class="paragraph">
-     <p>要告诉Maven不要为库项目构建可执行的 jar，您必须从 <code>番茄钟中移除以下方块。 Spring初始化器创建的 ml</code>：</p>
+     <p>要告诉Maven不要为库项目构建可执行的 jar，您必须从 <code>番茄钟中移除以下方块。 Spring Initializr创建的 ml</code>：</p>
     </div>
     <div class="exampleblock">
      <div class="content">
@@ -306,7 +306,7 @@ $ mv gradlew* gradle ..</code></pre>
      </div>
     </div>
     <div class="paragraph">
-     <p>要告诉Gradle 为库项目构建可执行的 jar，您必须将以下块添加到 <code>构建。 Spring初始化器创建的radle</code></p>
+     <p>要告诉Gradle 为库项目构建可执行的 jar，您必须将以下块添加到 <code>构建。 Spring Initializr创建的radle</code></p>
     </div>
     <div class="exampleblock">
      <div class="content">
@@ -373,7 +373,7 @@ dependencies {
  <h2 id="_create_a_service_component">创建服务组件</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>库将提供一个可以被应用程序使用的 <code>MyService</code> 类。 下面的列表(从 <code>library/src/main/java/com/example/multimodule/service/MyService.java</code>) 显示 <code>MyService</code> 类：</p>
+   <p>库将提供一个可以被应用程序使用的 <code>MyService</code> 类。 下边代码(从 <code>library/src/main/java/com/example/multimodule/service/MyService.java</code>) 显示 <code>MyService</code> 类：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
@@ -749,7 +749,7 @@ dependencies *
  <h2 id="_write_the_application">写下应用程序</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>应用程序中的主类可以是一个 <code>@RestController</code> 来使用 <code>服务</code> 来渲染消息。 下面的列表(从 <code>application/src/main/java/com/example/multimodule/application/DemoApplication.java</code>) 显示了这样一个类：</p>
+   <p>应用程序中的主类可以是一个 <code>@RestController</code> 来使用 <code>服务</code> 来渲染消息。 下边代码(从 <code>application/src/main/java/com/example/multimodule/application/DemoApplication.java</code>) 显示了这样一个类：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
