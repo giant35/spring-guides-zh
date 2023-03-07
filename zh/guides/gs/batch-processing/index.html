@@ -123,7 +123,7 @@ CREATE TABLE people  (
    <ol class="arabic">
     <li><p>导航到 <a href="https://start.spring.io" class="bare">https://start.spring.io</a>。 此服务有您应用程序所需的所有依赖库，并且大部分都已经配置好了。</p></li>
     <li><p>选择 Gradle 或 Maven 以及您想要使用的语言。 本指南假定您选择了Java。</p></li>
-    <li><p>点击 <strong>依赖关系</strong> 并选择 <strong>Spring 批处理</strong> 和 <strong>HyperSQL 数据库</strong>。</p></li>
+    <li><p>点击 <strong>Dependencies</strong> 并选择 <strong>Spring 批处理</strong> 和 <strong>HyperSQL 数据库</strong>。</p></li>
     <li><p>点击 <strong> Generate </strong>。</p></li>
     <li><p>下载由此生成的 ZIP 文件，这是根据你选择配置生成的一个 web 应用程序的压缩包。</p></li>
    </ol>
@@ -260,7 +260,7 @@ public class PersonItemProcessor implements ItemProcessor&lt;Person, Person&gt; 
  </div>
 </div>
 <div class="sect1">
- <h2 id="_put_together_a_batch_job">合并一个批处理作业</h2>
+ <h2 id="_put_together_a_batch_job">合并一个批处理作业(Job)</h2>
  <div class="sectionbody">
   <div class="paragraph">
    <p>现在你需要把实际的批处理作业放在一起。 Spring Batch 提供了许多实用类，减少了编写定制代码。 相反，你可以把注意力放在业务逻辑上。</p>
@@ -309,7 +309,7 @@ public JdbcBatchItemWriter&lt;Person&gt; writer(DataSource dataSource) {
    <ul>
     <li><p><code>reader()</code> 创建一个 <code> ItemReader </code>。 它寻找 <code>sample-data.csv</code>文件并解析每一行得到足够的信息后将其转换为 <code> Person </code>。</p></li>
     <li><p><code>processor()</code> 创建了之前定义的 <code>PersonItemProcessor</code> 的实例，意在将数据转换为大写。</p></li>
-    <li><p><code>writer(DataSource)</code> 创建一个 <code>ItemWriter</code>. This one is aimed at a JDBC destination and automatically gets a copy of the dataSource created by <code>@EnableBatchProcessing</code>. 它包含了插入一个 <code>人员</code>所需的 SQL 语句，由 Java Bean 属性驱动。</p></li>
+    <li><p><code>writer(DataSource)</code> 创建一个 <code>ItemWriter</code>. 这是 JDBC 目的地，自动获取到 <code>@EnableBatchProcessing</code> 创建的 dataSource 。 它包含了插入一个 <code> Person </code>所需的 SQL 语句，由 Java bean 属性填充。</p></li>
    </ul>
   </div>
   <div class="paragraph">
@@ -320,23 +320,23 @@ public JdbcBatchItemWriter&lt;Person&gt; writer(DataSource dataSource) {
     <div class="listingblock">
      <div class="content">
       <pre class="prettyprint highlight"><code data-lang="java">@Bean
-公开作业导入UserJob(JobRepository job仓库，
-    JobCompltionNotificationListener 监听器， Stepstep1):
+public Job importUserJob(JobRepository jobRepository,
+    JobCompletionNotificationListener listener, Step step1) {
   return new JobBuilder("importUserJob", jobRepository)
-    ncrementer(新 RunId增量())
-    . istener(listener)
+    .incrementer(new RunIdIncrementer())
+    .listener(listener)
     .flow(step1)
     .end()
-    . uild();
+    .build();
 }
 
 @Bean
-公开步骤1(Job仓库作业仓库，
-    平台交易管理器, JdbcBatchItemWriter&lt;Person&gt; 撰写者) v.
+public Step step1(JobRepository jobRepository,
+    PlatformTransactionManager transactionManager, JdbcBatchItemWriter&lt;Person&gt; writer) {
   return new StepBuilder("step1", jobRepository)
-&lt;Person, Person&gt; chunk(10, transactionManager)
+    .&lt;Person, Person&gt; chunk(10, transactionManager)
     .reader(reader())
-    . rocessor(processor())
+    .processor(processor())
     .writer(writer)
     .build();
 }</code></pre>
@@ -345,26 +345,26 @@ public JdbcBatchItemWriter&lt;Person&gt; writer(DataSource dataSource) {
    </div>
   </div>
   <div class="paragraph">
-   <p>第一种方法界定了工作，第二种方法界定了单一步骤。 工作是从步骤生成的，每一步都可以让读者、处理者和作者参与。</p>
+   <p>第一种方法定义 job ，第二种方法定义了其中一步。 Job 是从步骤生成的，每一步都可以让reader、processor和writer参与。</p>
   </div>
   <div class="paragraph">
-   <p>在这个作业定义中，您需要递增，因为作业使用数据库来保持执行状态。 您然后列出每个步骤(虽然此作业只有一个步骤)。 作业结束，Java API 产生了一个完美配置的作业。</p>
+   <p>在这个Job定义中，您需要递增，因为Job使用数据库来保持执行状态。 您然后列出每个步骤(虽然此作业只有一个步骤)。 作业结束，Java API 完美配置了一个Job。</p>
   </div>
   <div class="paragraph">
-   <p>在步骤定义中，您定义了一次要写多少数据。 在这种情况下，它每次编写最多10个记录。 接下来，你先使用注入的豆类来配置读者、处理者和写作者。</p>
+   <p>在步骤定义中，您定义了一次要写多少数据。 本例中，它每次编写最多10个记录。 接下来，你之前注入的 bean 来配置 reader 、processor 和 writer 。</p>
   </div>
   <div class="admonitionblock note">
    <table>
     <tbody>
      <tr>
       <td class="icon"><i class="fa icon-note" title="说明"></i></td>
-      <td class="content"><code>chunk()</code> 是预设 <code>&lt;Person,Person&gt;</code> 因为它是一个通用的方法。 这表示每个“数据块”的输入和输出类型，包含 <code>个项目阅读器&lt;Person&gt;</code> 和 <code>个项目撰写器&lt;Person&gt;</code>。</td>
+      <td class="content"><code>chunk()</code> 是内置的<code>&lt;Person,Person&gt;</code> 因为它是一个通用的方法。 这表示处理时每批 “数据块”的输入和输出类型及从 <code>ItemReader&lt;Person&gt;</code> & <code>ItemWriter&lt;Person&gt;</code> 来了多少。</td>
      </tr>
     </tbody>
    </table>
   </div>
   <div class="paragraph">
-   <p>最后一个批量配置是当任务完成时收到通知的方式。 下面的示例(来自 <code>src/main/java/com/example/batchprocessing/JobCompltionNotificationListener.java</code>) 显示了这样一个类：</p>
+   <p>批处理配置中最后一点是当任务完成时收到通知的方式。 下面的示例(来自 <code>src/main/java/com/example/batchprocessing/JobCompltionNotificationListener.java</code>) 显示了这样一个类：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
@@ -396,13 +396,13 @@ public class JobCompletionNotificationListener implements JobExecutionListener {
   @Override
   public void afterJob(JobExecution jobExecution) {
     if(jobExecution.getStatus() == BatchStatus.COMPLETED) {
-      log.info("!!! 任务完成！ 验证结果的时间。”)；
+      log.info("!!! Job 完成！ Time to verify the results");
 
-      jdbcTemplate。 uery("SELECT first_name, last_name FROM person",
-        (rs, 行) -&gt; 新的个人(
-          位) etString(1),
+      jdbcTemplate.query("SELECT first_name, last_name FROM people",
+        (rs, row) -&gt; new Person(
+          rs.getString(1),
           rs.getString(2))
-      .forEach(person -&gt; log. nfo("在数据库中找到 &lt;{{}}&gt; ", persons)。
+      ).forEach(person -&gt; log.info("Found &lt;{{}}&gt; in the database.", person));
     }
   }
 }</code></pre>
@@ -411,33 +411,33 @@ public class JobCompletionNotificationListener implements JobExecutionListener {
    </div>
   </div>
   <div class="paragraph">
-   <p><code>作业完成通知侦听器</code> 监听任务完成于 <code>BatchStatus。完成</code> 然后使用 <code>Jdbc模板</code> 查看结果。</p>
+   <p><code> JobCompletionNotificationListener </code> 监听 job 变成 <code>BatchStatus.COMPLETED</code> 时使用 <code>JdbcTemplate</code> 查看结果。</p>
   </div>
  </div>
 </div>
 <div class="sect1">
- <h2 id="_make_the_application_executable">使应用程序可执行文件</h2>
+ <h2 id="_make_the_application_executable">使应用程序可执行</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>虽然批量处理可以嵌入网页应用和 WAR 文件中，但下面显示的简单方法创建了一个独立的应用程序。 你将所有东西打包在一个单一的、可执行的 JAR 文件中，由一个很好的 Java <code>main()</code> 方法驱动。</p>
+   <p>虽然批量处理可以嵌入在 web 应用和 WAR 文件中，但下面创建一个独立的应用程序的方式更简单。 你将所有东西打包在一个单一的、可执行的 JAR 文件中，由 Java <code>main()</code> 方法启动。</p>
   </div>
   <div class="paragraph">
-   <p>Spring初始化器为您创建了应用程序类。 就这个简单的例子而言，它的工作没有进一步的修改。 下边代码(来自 <code>src/main/java/com/example/batchprocessing/BatchProcessing.java</code>) 显示应用程序类：</p>
+   <p>Spring Initializr为您创建了应用程序类。 就这个简单的例子而言，它的工作没有进一步的修改。 下边代码(来自 <code>src/main/java/com/example/batchprocessing/BatchProcessing.java</code>) 显示应用程序类：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
     <div class="listingblock">
      <div class="content">
-      <pre class="prettyprint highlight"><code data-lang="java">软件包 com.example.batchprocessing;
+      <pre class="prettyprint highlight"><code data-lang="java">package com.example.batchprocessing;
 
-importer org.springframework.boot.SpringApplication;
-importer org.springframework.boot.autoconfigure. pringBootApplication;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BatchProcessingApplication@un.org,
+public class BatchProcessingApplication {
 
-  public static invent main(String[]args) pows Exception 然后抛出异常。
-    System. xit(SpringApplication.exit(SpringApplication.run(BatchProcessingApplication.class, args)));
+  public static void main(String[] args) throws Exception {
+    System.exit(SpringApplication.exit(SpringApplication.run(BatchProcessingApplication.class, args)));
   }
 }</code></pre>
      </div>
@@ -445,31 +445,31 @@ public class BatchProcessingApplication@un.org,
    </div>
   </div>
   <div class="paragraph">
-   <p><code>@SpringBootApplication</code> 是一个添加以下所有内容的方便注释：</p>
+   <p><code>@SpringBootApplication</code> 是一个便捷注解，添加了以下所有内容：</p>
   </div>
   <div class="ulist">
    <ul>
-    <li><p><code>@Configuration</code>: 将类标记为应用程序上下文的 bean 定义的一个来源。</p></li>
-    <li><p><code>@EnableAutoConfiguration</code>: Tells Spring Boot, 以便开始基于类路径设置、其他豆类和各种属性设置添加豆类。 例如，如果 <code>spring-webmvc</code> 在类路径上 此注解将应用程序标记为 web 应用程序并激活密钥行为，例如设置 <code>DispatcherServlet</code>。</p></li>
-    <li><p><code>@ComponentScan</code>: Tells Spring在 <code>com/example</code> 包中寻找其他组件、配置和服务, 让它找到控制器。</p></li>
+    <li><p><code>@Configuration</code>: 将类标记为应用程序上下文中定义 bean 的一个来源。</p></li>
+    <li><p><code>@EnableAutoConfiguration</code>: 让 Spring Boot 基于 classpath 设置、其它 beans 及其它属性设置来添加 beans. 例如，如果 <code>spring-webmvc</code> 在类路径上 ，此注解将应用程序标记为 web 应用程序并激活一些关键行为，例如设置 <code>DispatcherServlet</code>。</p></li>
+    <li><p><code>@ComponentScan</code>: 让 Spring 在 <code>com/example</code> package 中寻找其他组件、配置和服务, 让它找到 controllers。</p></li>
    </ul>
   </div>
   <div class="paragraph">
-   <p><code>main()</code> 方法使用 Spring Boot <code>SpringApplication.run()</code> 方法来启动一个应用。 您是否注意到没有一条XML线？ 没有 <code>web.xml</code> 文件。 此 web 应用程序纯度为 100% 的 Java ，您无需处理配置任何管道或基础设施的问题。</p>
+   <p>方法<code>main()</code> 使用 Spring Boot <code>SpringApplication.run()</code> 方法来启动应用。 您是否注意到没有出现一行XML代码？ 也没有 <code>web.xml</code> 文件。 此 web 应用程序是 100% 的纯 Java ，您也无需配置其它东西。</p>
   </div>
   <div class="paragraph">
-   <p>注意 <code>SpringApplication.exit()</code> and <code>System.exit()</code> 确保JVM 在完成任务后退出。 See the <a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-application-exit">Application Exit section in Spring Boot Reference documentation</a> for more details.</p>
+   <p>注意 <code>SpringApplication.exit()</code> and <code>System.exit()</code> 确保JVM 在 job 完成后退出。 详情请参阅 <a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-application-exit">Application Exit section in Spring Boot Reference documentation</a></p>
   </div>
   <div class="paragraph">
-   <p>为了演示目的，有代码来创建 <code>Jdbc模板</code>， 查询数据库，并打印批处理作业插入人员的姓名。</p>
+   <p>为了演示目的，有代码来创建 <code>JdbcTemplate</code>， 查询数据库，并打印批处理 job 插入人员的姓名。</p>
   </div>
   <div class="sect2">
    <h3 id="_build_an_executable_jar">构建可执行的 JAR</h3>
    <div class="paragraph">
-    <p>您可以从 Gradle 或 Maven 的命令行运行该应用程序。 您也可以构建一个包含所有必要依赖、类和资源的单个可执行文件并运行它。 构建一个可执行的 jar 可以方便船舶，版本， 并在整个开发生命周期、在不同环境中等地将服务作为一种应用来部署。</p>
+    <p>您可以从 Gradle 或 Maven 的命令行运行该应用程序。 您也可以构建一个包含所有必要依赖、类和资源的单个可执行文件并运行它。 构建一个可执行的 jar 可以在整个开发周期或在不同环境中方便打包、发版、部署等等。</p>
    </div>
    <div class="paragraph">
-    <p>如果您使用 Gradle, 您可以使用 <code>运行应用程序。/gradlew bootRun</code>。 或者，您可以使用 <code>/gradlew build</code> 来构建JAR 文件，然后运行 JAR 文件，如下所示：</p>
+    <p>如果您使用 Gradle, 您可以使用 <code>./gradlew bootRun</code> 运行应用程序。 或者，您可以使用 <code>./gradlew build</code> 来构建JAR 文件，然后运行 JAR 文件，如下所示：</p>
    </div>
    <div class="exampleblock">
     <div class="content">
@@ -509,16 +509,16 @@ public class BatchProcessingApplication@un.org,
     <div class="content">
      <div class="listingblock">
       <div class="content">
-       <pre class="prettyprint highlight"><code data-lang="text">转换(名字: Jill, lastName: Doe) 为(名字: JILL, lastName: DOE)
-转换 (名字: Joe, 姓氏： Doe) 改为 (第一名： JOE, 最后名称： DOE)
-转换 (第一名： Justin, 最后名称： Doe) (第一名： JUSTIN, 姓：DOE
-转换 (第一名：Jane, 最后名称：Doe) 为 (第一名：JANE, 最后名称：DOE)
-转换 (第一名：John, 姓：做到(名字：JOHN，姓：DOE)
-数据库中找到 &lt;firstName: JILL, lastName: DOE&gt;。
-在数据库中找到 &lt;firstName: JOE, lastName: DOE&gt;。
-在数据库中找到 &lt;firstName: JUSTIN, lastName: DOE&gt;。
-在数据库中找到 &lt;firstName: JANE, lastName: DOE&gt;。
-在数据库中找到 &lt;firstName: JOHN, lastName: DOE&gt;。</code></pre>
+       <pre class="prettyprint highlight"><code data-lang="text">Converting (firstName: Jill, lastName: Doe) into (firstName: JILL, lastName: DOE)
+Converting (firstName: Joe, lastName: Doe) into (firstName: JOE, lastName: DOE)
+Converting (firstName: Justin, lastName: Doe) into (firstName: JUSTIN, lastName: DOE)
+Converting (firstName: Jane, lastName: Doe) into (firstName: JANE, lastName: DOE)
+Converting (firstName: John, lastName: Doe) into (firstName: JOHN, lastName: DOE)
+Found &lt;firstName: JILL, lastName: DOE&gt; in the database.
+Found &lt;firstName: JOE, lastName: DOE&gt; in the database.
+Found &lt;firstName: JUSTIN, lastName: DOE&gt; in the database.
+Found &lt;firstName: JANE, lastName: DOE&gt; in the database.
+Found &lt;firstName: JOHN, lastName: DOE&gt; in the database.</code></pre>
       </div>
      </div>
     </div>
@@ -530,7 +530,7 @@ public class BatchProcessingApplication@un.org,
  <h2 id="_summary">总结</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>恭喜！ 你构建了一个从电子表格中摄取数据的批处理作业，处理了它，并写入数据库。</p>
+   <p>恭喜！ 你构建了一个从电子表格中读入数据的批处理 job，处理后，并写入数据库。</p>
   </div>
  </div>
 </div>
