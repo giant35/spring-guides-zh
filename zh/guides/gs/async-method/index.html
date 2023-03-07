@@ -293,7 +293,7 @@ public class AsyncMethodApplication volv.
    </ul>
   </div>
   <div class="paragraph">
-   <p><code>main()</code> 方法使用 Spring Boot <code>SpringApplication.run()</code> 方法来启动一个应用。 您是否注意到没有一条XML线？ 没有 <code>web.xml</code> 文件。 此 web 应用程序纯度为 100% 的 Java ，您无需处理配置任何管道或基础设施的问题。</p>
+   <p><code>main()</code> 方法使用 Spring Boot <code>SpringApplication.run()</code> 方法来启动一个应用。 您是否注意到没有出现一行XML代码？ 没有 <code>web.xml</code> 文件。 此 web 应用程序是 100% 的纯 Java ，您也无需配置其它东西。</p>
   </div>
   <div class="paragraph">
    <p>The <a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/html/scheduling.html#scheduling-annotation-support"><code>@EnableAsync</code></a> annotation switches on Spring’s ability to run <code>@Async</code> methods in a background thread pool. 这个类也通过定义一个新豆来自定义 <code>执行器</code>。 这里的方法名为 <code>任务执行者</code>，因为这是Spring search</a> 中的 <a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/scheduling/annotation/EnableAsync.html">特定方法名称。 在我们的情况下，我们希望将并行线程的数量限制在两个，并将队列的大小限制在500。 There are <a href="https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/integration.html#scheduling-task-executor">many more things you can tune</a>. 如果您没有定义 <code>执行器</code> 豆，Spring 创建一个 <code>SimpleAsyncTaskExecutor</code> 并使用它。</p>
