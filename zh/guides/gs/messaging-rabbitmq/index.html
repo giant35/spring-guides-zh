@@ -321,7 +321,7 @@ public class MessagingRabbitmqApplication {
    </ul>
   </div>
   <div class="paragraph">
-   <p><code>main()</code> 方法使用 Spring Boot <code>SpringApplication.run()</code> 方法来启动一个应用。 您是否注意到没有一条XML线？ 没有 <code>web.xml</code> 文件。 此 web 应用程序纯度为 100% 的 Java ，您无需处理配置任何管道或基础设施的问题。</p>
+   <p><code>main()</code> 方法使用 Spring Boot <code>SpringApplication.run()</code> 方法来启动一个应用。 您是否注意到没有出现一行XML代码？ 没有 <code>web.xml</code> 文件。 此 web 应用程序是 100% 的纯 Java ，您也无需配置其它东西。</p>
   </div>
   <div class="paragraph">
    <p><code>监听器Adapter()</code> 方法中定义的蜜蜂在容器中注册为消息监听器(定义在 <code>container()</code>)。 它监听 <code>弹出窗口</code> 队列上的消息。 因为 <code>接收器</code> 类是一个 POJO，它需要被包装在 <code>MessageListener适配器</code>如果您指定它援引了 <code>接收消息</code>。</p>
