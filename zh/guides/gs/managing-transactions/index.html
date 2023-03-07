@@ -196,7 +196,7 @@ public class ManagingTransactionsApplication {
    </ul>
   </div>
   <div class="paragraph">
-   <p><code>main()</code> 方法使用 Spring Boot <code>SpringApplication.run()</code> 方法来启动一个应用。 您是否注意到没有一条XML线？ 没有 <code>web.xml</code> 文件。 此 web 应用程序纯度为 100% 的 Java ，您无需处理配置任何管道或基础设施的问题。</p>
+   <p><code>main()</code> 方法使用 Spring Boot <code>SpringApplication.run()</code> 方法来启动一个应用。 您是否注意到没有出现一行XML代码？ 没有 <code>web.xml</code> 文件。 此 web 应用程序是 100% 的纯 Java ，您也无需配置其它东西。</p>
   </div>
   <div class="paragraph">
    <p>您的应用程序实际配置为零。 Spring Boot检测到 <code>spring-jdbc</code> and <code>h2</code> 在类路径上自动创建一个 <code>数据源</code> 和 <code>Jdbc模板</code> 为您创建。 因为这个基础结构现在可用且您没有专用配置，所以 <code>DataSourceTransactionManager</code> 也是为您创建的。 这是用 <code>@Transactional</code> 截取附加说明的方法的组件(例如， <code>book</code> 方法在 <code>BookingService</code>)。 类路径扫描检测到 <code>预订服务</code>。</p>
