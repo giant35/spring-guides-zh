@@ -59,10 +59,10 @@
  </div>
 </div>
 <div class="sect1">
- <h2 id="scratch">从Spring初始化开始</h2>
+ <h2 id="scratch">从 Spring Initializr 开始</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>您可以使用此 <a href="https://start.spring.io/#!type=gradle-project&amp;language=java&amp;platformVersion=3.0.2&amp;packaging=jar&amp;jvmVersion=17&amp;groupId=com.example&amp;artifactId=centralized-configuration-server&amp;name=centralized-configuration-server&amp;description=Demo%20project%20for%20Spring%20Boot&amp;packageName=com.example.centralized-configuration-server&amp;dependencies=cloud-config-server">预初始化项目</a> (用于服务应用程序) 或此 <a href="https://start.spring.io/#!type=gradle-project&amp;language=java&amp;platformVersion=3.0.2&amp;packaging=jar&amp;jvmVersion=17&amp;groupId=com.example&amp;artifactId=centralized-configuration-client&amp;name=centralized-configuration-client&amp;description=Demo%20project%20for%20Spring%20Boot&amp;packageName=com.example.centralized-configuration-client&amp;dependencies=cloud-config-server,actuator,web">预初始化项目</a> (用于客户端应用程序)，然后单击生成以下载ZIP 文件。 此项目被配置为适合本教程中的示例。</p>
+   <p>您可以使用此 <a href="https://start.spring.io/#!type=gradle-project&amp;language=java&amp;platformVersion=3.0.2&amp;packaging=jar&amp;jvmVersion=17&amp;groupId=com.example&amp;artifactId=centralized-configuration-server&amp;name=centralized-configuration-server&amp;description=Demo%20project%20for%20Spring%20Boot&amp;packageName=com.example.centralized-configuration-server&amp;dependencies=cloud-config-server">已初始化项目</a> (用于服务应用程序) 或此 <a href="https://start.spring.io/#!type=gradle-project&amp;language=java&amp;platformVersion=3.0.2&amp;packaging=jar&amp;jvmVersion=17&amp;groupId=com.example&amp;artifactId=centralized-configuration-client&amp;name=centralized-configuration-client&amp;description=Demo%20project%20for%20Spring%20Boot&amp;packageName=com.example.centralized-configuration-client&amp;dependencies=cloud-config-server,actuator,web">已初始化项目</a> (用于客户端应用程序)，然后单击生成以下载ZIP 文件。 此项目被配置为适合本教程中的示例。</p>
   </div>
   <div class="paragraph">
    <p>要手动初始化项目：</p>
@@ -102,7 +102,7 @@
  <h2 id="initial">站立配置服务器</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>您首先需要配置服务才能在您的Spring应用程序与(通常是)版本控制的配置文件存储库之间起一种中介作用。 您可以使用Spring Cloud的 <code>@EnableConfigServer</code> 来站立一个可以与其他应用程序通信的配置服务器。 This is a regular Spring Boot application with one annotation added to <em>enable</em> the config server. 下面的列表(来自 <code>configuration-service/src/main/java/com/example/configurationservice/ConfigurationServiceApplication.java</code>) 显示了这样一个应用程序：</p>
+   <p>您首先需要配置服务才能在您的Spring应用程序与(通常是)版本控制的配置文件存储库之间起一种中介作用。 您可以使用Spring Cloud的 <code>@EnableConfigServer</code> 来站立一个可以与其他应用程序通信的配置服务器。 This is a regular Spring Boot application with one annotation added to <em>enable</em> the config server. 下边代码(来自 <code>configuration-service/src/main/java/com/example/configurationservice/ConfigurationServiceApplication.java</code>) 显示了这样一个应用程序：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
@@ -149,7 +149,7 @@ public class ConfigurationServiceApplication Windows
    <p>添加一个简单的属性和值 (<code>message = Hello world</code>) 到新创建的 <code>a-botiful-client。 roperties</code> 文件，然后 <code>git 提交</code> 更改.</p>
   </div>
   <div class="paragraph">
-   <p>Specify the path to the Git repository by specifying the <code>spring.cloud.config.server.git.uri</code> property in <code>configuration-service/src/main/resources/application.properties</code>. 您还必须指定一个不同的 <code>服务器。 或</code> 值以避免在您同时运行此服务器和在同一机器上的另一个Spring Boot应用程序时发生端口冲突。 下面的列表(来自 <code>configuration-service/src/main/resources/application.properties</code>) 显示这样的 <code>application.properties</code> 文件：</p>
+   <p>Specify the path to the Git repository by specifying the <code>spring.cloud.config.server.git.uri</code> property in <code>configuration-service/src/main/resources/application.properties</code>. 您还必须指定一个不同的 <code>服务器。 或</code> 值以避免在您同时运行此服务器和在同一机器上的另一个Spring Boot应用程序时发生端口冲突。 下边代码(来自 <code>configuration-service/src/main/resources/application.properties</code>) 显示这样的 <code>application.properties</code> 文件：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
@@ -213,7 +213,7 @@ management.endpoints.web.exposure.include=*</code></pre>
    <p>客户端可以通过使用传统的机制访问配置服务器中的任何值(例如 <code>@ConfigurationProperties</code> or <code>@Value("$·…Et }")</code> 或通过 <code>环境</code> 抽象)。 现在您需要创建Spring MVC REST 控制器，返回解析过的 <code>消息</code> 属性值。 查看 <a href="https://spring.io/guides/gs/rest-service/">构建RESTful Web Service</a> 指南以了解如何通过Spring MVC 和 Spring Boot来构建REST 服务。</p>
   </div>
   <div class="paragraph">
-   <p>默认情况下，配置值会在客户端启动时读取，而不会再次读取。 你可以强制一只蜜蜂进行 <em>刷新</em> 其配置(即：) 通过批注 <code>MessageRestController</code> 与Spring Cloud Config <code>@RefreshScope</code> 从配置服务器拉取更新值，然后触发一个 <em>刷新</em> 事件。 下面的列表(来自 <code>configuration-client/src/main/java/com/example/configurationclient/ConfigurationClientApplication.java</code>) 显示了如何这样做：</p>
+   <p>默认情况下，配置值会在客户端启动时读取，而不会再次读取。 你可以强制一只蜜蜂进行 <em>刷新</em> 其配置(即：) 通过批注 <code>MessageRestController</code> 与Spring Cloud Config <code>@RefreshScope</code> 从配置服务器拉取更新值，然后触发一个 <em>刷新</em> 事件。 下边代码(来自 <code>configuration-client/src/main/java/com/example/configurationclient/ConfigurationClientApplication.java</code>) 显示了如何这样做：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
