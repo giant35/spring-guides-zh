@@ -91,10 +91,10 @@
  </div>
 </div>
 <div class="sect1">
- <h2 id="scratch">从Spring初始化开始</h2>
+ <h2 id="scratch">从 Spring Initializr 开始</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>您可以使用此 <a href="https://start.spring.io/#!type=maven-project&amp;language=java&amp;platformVersion=2.5.5&amp;packaging=jar&amp;jvmVersion=11&amp;groupId=com.example&amp;artifactId=spring-boot&amp;name=spring-boot&amp;description=Demo%20project%20for%20Spring%20Boot&amp;packageName=com.example.spring-boot&amp;dependencies=web">预初始化项目</a> 并点击生成以下载ZIP 文件。 此项目被配置为适合本教程中的示例。</p>
+   <p>您可以使用此 <a href="https://start.spring.io/#!type=maven-project&amp;language=java&amp;platformVersion=2.5.5&amp;packaging=jar&amp;jvmVersion=11&amp;groupId=com.example&amp;artifactId=spring-boot&amp;name=spring-boot&amp;description=Demo%20project%20for%20Spring%20Boot&amp;packageName=com.example.spring-boot&amp;dependencies=web">已初始化项目</a> 并点击生成以下载ZIP 文件。 此项目被配置为适合本教程中的示例。</p>
   </div>
   <div class="paragraph">
    <p>要手动初始化项目：</p>
@@ -103,7 +103,7 @@
    <ol class="arabic">
     <li><p>导航到 <a href="https://start.spring.io" class="bare">https://start.spring.io</a>。 此服务有您应用程序所需的所有依赖库，并且大部分都已经配置好了。</p></li>
     <li><p>选择 Gradle 或 Maven 以及您想要使用的语言。 本指南假定您选择了Java。</p></li>
-    <li><p>点击 <strong>依赖关系</strong> 并选择 <strong>Spring Web</strong>。</p></li>
+    <li><p>点击 <strong>Dependencies</strong> 并选择 <strong>Spring Web</strong>。</p></li>
     <li><p>点击 <strong> Generate </strong>。</p></li>
     <li><p>下载由此生成的 ZIP 文件，这是根据你选择配置生成的一个 web 应用程序的压缩包。</p></li>
    </ol>
@@ -167,7 +167,7 @@ public class HelloController {
  <h2 id="_create_an_application_class">创建应用程序类</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>Spring初始化器为您创建一个简单的应用程序类。 然而，在这种情况下，这种做法太简单。 您需要修改应用程序类以匹配下列列表(来自 <code>src/main/java/com/example/springboot/Application.java</code>):</p>
+   <p>Spring Initializr为您创建一个简单的应用程序类。 然而，在这种情况下，这种做法太简单。 您需要修改应用程序类以匹配下列列表(来自 <code>src/main/java/com/example/springboot/Application.java</code>):</p>
   </div>
   <div class="exampleblock">
    <div class="content">
@@ -346,7 +346,7 @@ viewControllerHandlerMapping</code></pre>
    </div>
   </div>
   <div class="paragraph">
-   <p>现在写一个简单的单元测试，通过你的端点模拟servlet请求和响应，作为下面的列表(从 <code>src/test/java/com/example/springboot/HelloControllerTest)。 ava</code>显示：</p>
+   <p>现在写一个简单的单元测试，通过你的端点模拟servlet请求和响应，作为下边代码(从 <code>src/test/java/com/example/springboot/HelloControllerTest)。 ava</code>显示：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
