@@ -156,19 +156,19 @@ public class Customer {
    </div>
   </div>
   <div class="paragraph">
-   <p>这里有一个 <code> Customer </code> 类，具有三个属性： <code>id</code>、 <code>firstName</code> 和 <code>lastName</code>.。 你还有两个构造器。 默认构造函数仅为 JPA。 您不直接使用它，所以它被指定为 <code>受保护的</code>。 另一个构造函数是你用来创建 <code>客户</code> 实例以保存到数据库。</p>
+   <p>这里有一个 <code> Customer </code> 类，具有三个属性： <code>id</code>、 <code>firstName</code> 和 <code>lastName</code>.。 还有两个构造函数。 默认构造函数仅为了 JPA 需要。 您不直接使用它，所以它被指定为 <code> protected </code>。 另一个构造函数是你用来创建 <code> Customer </code> 实例以保存到数据库。</p>
   </div>
   <div class="paragraph">
-   <p><code>客户</code> 类注释为 <code>@Enty</code>, 表示它是一个 JPA 实体。 (因为没有 <code>@Table</code> 注释，假定此实体已映射到一个叫做 <code>客户</code> 的表格。)</p>
+   <p><code> Customer </code> 类注解了 <code>@Entity</code>, 表示它是一个 JPA 实体。 (因为没有 <code>@Table</code> 注解，会假定此实体已映射到一个叫做 <code> Customer </code> 的表。)</p>
   </div>
   <div class="paragraph">
-   <p><code>客户</code> object's <code>id</code> 属性用 <code>@Id</code> 注释，因此JPA会承认它是对象的 ID。 <code>id</code> 属性也附加了 <code>@GeneratedValue</code> 以表明ID应该自动生成。</p>
+   <p><code> Customer </code> 对象的 <code>id</code> 属性注解了 <code>@Id</code>，因此JPA 会把它当作是对象的 ID。 属性 <code>id</code> 也注解了 <code>@GeneratedValue </code> 以表明ID应该自动生成。</p>
   </div>
   <div class="paragraph">
-   <p>其他两个属性， <code>firstname</code> and <code>lastname</code>, 都没有注释。 假定它们被设计成与财产本身有相同名称的专栏。</p>
+   <p>其他两个属性， <code>firstName</code> and <code>lastName</code>都没有注解。 会认为它们是映射到与它们自己同名的列。</p>
   </div>
   <div class="paragraph">
-   <p>方便的 <code>toString()</code> 方法打印出客户的属性。</p>
+   <p>方便的 <code>toString()</code> 方法打印出 customer 的属性。</p>
   </div>
  </div>
 </div>
@@ -176,10 +176,10 @@ public class Customer {
  <h2 id="_create_simple_queries">创建简单查询</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>Spring Data JPA侧重于使用 JPA将数据存储到关系数据库。 其最令人信服的功能是能够在运行时自动从仓库界面创建仓库实现功能。</p>
+   <p>Spring Data JPA 聚焦于使用 JPA 将数据存储到关系数据库。 其最令人信服的功能是能够在运行时从 repository 接口自动创建实现功能的 repository。</p>
   </div>
   <div class="paragraph">
-   <p>查看此工作方式， 创建一个与 <code>客户</code> 实体兼容的仓库接口作为下列列表( <code>src/main/java/com/example/accessingdatajpa/CustomerRepository)。 ava</code>显示：</p>
+   <p>看看它是如何工作的， 创建一个与 <code> Customer </code> 配合工作的 repository 接口如下所示(在 <code>src/main/java/com/example/accessingdatajpa/CustomerRepository.java</code>) ：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
@@ -202,16 +202,16 @@ public interface CustomerRepository extends CrudRepository&lt;Customer, Long&gt;
    </div>
   </div>
   <div class="paragraph">
-   <p><code>客户存储库</code> 扩展 <code>Crud存储库</code> 接口。 它所用的实体和ID类型， <code>客户</code> and <code>Long</code>, 在 <code>Crud仓库</code> 的通用参数中指定. 通过扩展 <code>Crud存储库</code>, <code>Customer存储库</code> 继承与 <code>客户</code> 持久性的几种工作方法 包括保存、删除和查找的方法 <code>客户</code> 实体</p>
+   <p><code> CustomerRepository </code> extend <code> CrudRepository </code> 接口。 它所用的实体和ID类型， <code> Customer </code> 和 <code>Long</code>, 在 <code> CrudRepository </code> 的范型参数中指定. 通过extend <code> CrudRepository </code>, <code> CustomerRepository </code> 继承了一些保存 <code> Customer <code> 的几个方法 ，包括保存、删除和查找的方法 <0> Customer </code> 实体</p>
   </div>
   <div class="paragraph">
-   <p>Spring Data JPA还允许您通过声明其方法签名来定义其他查询方法。 例如， <code>客户存储库</code> 包含 <code>findByLastName()</code> 方法。</p>
+   <p>Spring Data JPA 还允许您通过方法签名来定义其他查询方法。 例如， <code> CustomerRepository </code> 包含的 <code>findByLastName()</code> 方法。</p>
   </div>
   <div class="paragraph">
-   <p>在一个典型的 Java 应用程序中，您可能会写一个实现 <code>客户存储库</code> 的类。 然而，这正是使Spring Data JPA变得如此强大的原因：你无需写一个版本库接口的实现。 Spring Data JPA创建应用程序运行的实现。</p>
+   <p>在一个典型的 Java 应用程序中，您可能会写一个 <code> CustomerRepository </code> 的实现类。 然而，这正是使Spring Data JPA变得如此强大的原因：你无需写一个 repository 接口的实现。 Spring Data JPA 在运行应用程序时会自动创建一个实现类。</p>
   </div>
   <div class="paragraph">
-   <p>现在你可以把这个示例联系起来，看看看它看起来是什么样子！</p>
+   <p>现在你可以把这个例子连起来，看看它是什么样子！</p>
   </div>
  </div>
 </div>
@@ -219,22 +219,22 @@ public interface CustomerRepository extends CrudRepository&lt;Customer, Long&gt;
  <h2 id="_create_an_application_class">创建应用程序类</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>Spring Initializr 为应用程序创建一个简单的类。 下面的列表显示初始化器为此示例创建的类( <code>src/main/java/com/example/accessingdatajpa/AccessingDataJpaApplication.java</code>)：</p>
+   <p>Spring Initializr 为应用程序创建一个简单的类。 下面的代码显示Initializr 创建的类( <code>src/main/java/com/example/accessingdatajpa/AccessingDataJpaApplication.java</code>)：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
     <div class="listingblock">
      <div class="content">
-      <pre class="prettyprint highlight"><code data-lang="java">软件包 com.example.accessingdatajpa;
+      <pre class="prettyprint highlight"><code data-lang="java">package com.example.accessingdatajpa;
 
 import org.springframework.boot.SpringApplication;
-importer org.springframework.boot.autoconfigure. pringBootApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AccessingDataJpaApplication@un.org,
+public class AccessingDataJpaApplication {
 
-  public static lact main(String[]args) Windows
-    SpringApplication。 un(AccessingDataJpaApplication.class args);
+  public static void main(String[] args) {
+    SpringApplication.run(AccessingDataJpaApplication.class, args);
   }
 
 }</code></pre>
@@ -243,20 +243,20 @@ public class AccessingDataJpaApplication@un.org,
    </div>
   </div>
   <div class="paragraph">
-   <p><code>@SpringBootApplication</code> 是一个添加以下所有内容的方便注释：</p>
+   <p><code>@SpringBootApplication</code> 是一个便捷注解，添加了以下所有内容：</p>
   </div>
   <div class="ulist">
    <ul>
-    <li><p><code>@Configuration</code>: 将类标记为应用程序上下文的 bean 定义的一个来源。</p></li>
-    <li><p><code>@EnableAutoConfiguration</code>: Tells Spring Boot, 以便开始基于类路径设置、其他豆类和各种属性设置添加豆类。 例如，如果 <code>spring-webmvc</code> 在类路径上 此注解将应用程序标记为 web 应用程序并激活密钥行为，例如设置 <code>DispatcherServlet</code>。</p></li>
-    <li><p><code>@ComponentScan</code>: Tells Spring在 <code>com/example</code> 包中寻找其他组件、配置和服务, 让它找到控制器。</p></li>
+    <li><p><code>@Configuration</code>: 将类标记为应用程序上下文中定义 bean 的一个来源。</p></li>
+    <li><p><code>@EnableAutoConfiguration</code>: 让 Spring Boot 基于 classpath 设置、其它 beans 及其它属性设置来添加 beans. 例如，如果 <code>spring-webmvc</code> 在类路径上 ，此注解将应用程序标记为 web 应用程序并激活一些关键行为，例如设置 <code>DispatcherServlet</code>。</p></li>
+    <li><p><code>@ComponentScan</code>: 让 Spring 在 <code>com/example</code> package 中寻找其他组件、配置和服务, 让它找到 controllers。</p></li>
    </ul>
   </div>
   <div class="paragraph">
-   <p><code>main()</code> 方法使用 Spring Boot <code>SpringApplication.run()</code> 方法来启动一个应用。 您是否注意到没有一条XML线？ 没有 <code>web.xml</code> 文件。 此 web 应用程序纯度为 100% 的 Java ，您无需处理配置任何管道或基础设施的问题。</p>
+   <p>方法<code>main()</code> 使用 Spring Boot <code>SpringApplication.run()</code> 方法来启动应用。 您是否注意到没有出现一行XML代码？ 也没有 <code>web.xml</code> 文件。 此 web 应用程序是 100% 的纯 Java ，您也无需配置其它东西。</p>
   </div>
   <div class="paragraph">
-   <p>现在您需要修改初始化器为您创建的简单类。 要获取输出 (在这个例子中的控制台)，您需要设置一个记录器。 然后您需要设置一些数据并使用它来生成输出。 以下列表显示完成的 <code>AccessingDataJpaApplication</code> 类( <code>src/main/java/com/example/accessingdatajpa/AccessingDataJpaApplication.java</code>)：</p>
+   <p>现在您需要修改 Initializr 为您创建的简单类。 要获取输出 (在这个例子中的控制台)，您需要设置一个 logger。 然后您需要设置一些数据并使用它来生成输出。 以下代码展示完成的 <code>AccessingDataJpaApplication</code> 类(在 <code>src/main/java/com/example/accessingdatajpa/AccessingDataJpaApplication.java</code>)：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
@@ -324,14 +324,14 @@ public class AccessingDataJpaApplication {
    </div>
   </div>
   <div class="paragraph">
-   <p><code>AccessingDataJpaApplication</code> 类包含一个 <code>演示()</code> 种方法，将 <code>Customer存储库</code> 通过几个测试进行。 首先，它从 Spring 应用程序环境中获取 <code>客户存储库</code>。 然后保存少数 <code>客户</code> 对象，演示 <code>保存()</code> 方法并设置一些数据来处理它。 接下来，它调用 <code>findAll()</code> 从数据库获取所有 <code>客户</code> 对象。 然后它调用 <code>findById()</code> 来获取一个 <code>客户</code> 通过其ID。 最后，它调用 <code>findByLastName()</code> 来查找姓是“包人”的所有客户。 <code>demo()</code> 方法返回 <code>CommandLineRunner</code> 当应用程序启动时自动运行代码。</p>
+   <p><code>AccessingDataJpaApplication</code> 类包含一个 <code>demo()</code> 方法，通过几个测试展示了下 <code>CustomerRepository</code>。 首先，它从 Spring 应用程序环境中获取 <code> CustomerRepository </code>。 然后保存几个 <code> Customer </code> 对象，演示 <code>save()</code> 方法并设置一些数据来处理它。 接下来，它调用 <code>findAll()</code> 从数据库获取所有 <code> Customer </code> 对象。 然后它调用 <code>findById()</code> 通过ID获取单个 <code> Customer </code> 。 最后，它调用 <code>findByLastName()</code> 来查找 last name 是 "Bauer" 的所有customer。 <code>demo()</code> 方法返回 <code>CommandLineRunner</code> 这样当应用程序启动时会自动运行代码。</p>
   </div>
   <div class="admonitionblock note">
    <table>
     <tbody>
      <tr>
       <td class="icon"><i class="fa icon-note" title="说明"></i></td>
-      <td class="content">默认情况下，Spring Boot能够支持 JPA 版本库，并在 <code>@SpringBootApplication</code> 的软件包(及其子软件包)中看到。 如果您的配置有 JPA 存储库界面定义位于一个不可见的包， 您可以通过使用 <code>@EnableJpaRepositories</code> 及其类型安全 <code>BasePackageClasses=MyRepository来指出替代包。 lass</code> 参数。</td>
+      <td class="content">By default, Spring Boot enables JPA repository support and looks in the package (and its subpackages) where <code>@SpringBootApplication</code> is located. If your configuration has JPA repository interface definitions located in a package that is not visible, you can point out alternate packages by using <code>@EnableJpaRepositories</code> and its type-safe <code>basePackageClasses=MyRepository.class</code> parameter.</td>
      </tr>
     </tbody>
    </table>
@@ -385,19 +385,19 @@ public class AccessingDataJpaApplication {
    <div class="content">
     <div class="listingblock">
      <div class="content">
-      <pre>=== 客户找到的 findAll()：
+      <pre>== Customers found with findAll():
 Customer[id=1, firstName='Jack', lastName='Bauer']
 Customer[id=2, firstName='Chloe', lastName='O'Brian']
 Customer[id=3, firstName='Kim', lastName='Bauer']
 Customer[id=4, firstName='David', lastName='Palmer']
 Customer[id=5, firstName='Michelle', lastName='Dessler']
 
-== 找到了与findById(1L)：
-Customer[id=1，firstName='Jack'，lastName='Bauer']
+== Customer found with findById(1L):
+Customer[id=1, firstName='Jack', lastName='Bauer']
 
-== 找到与 findByLastName('Bauer')关联的客户：
-Customer[id=1，firstName='Jack'，lastName='Bauer']
-Customer[id=3，firstName='Kim'，lastName='Bauer']</pre>
+== Customer found with findByLastName('Bauer'):
+Customer[id=1, firstName='Jack', lastName='Bauer']
+Customer[id=3, firstName='Kim', lastName='Bauer']</pre>
      </div>
     </div>
    </div>
@@ -408,14 +408,14 @@ Customer[id=3，firstName='Kim'，lastName='Bauer']</pre>
  <h2 id="_summary">总结</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>恭喜！ 您已经写了一个简单的应用程序，使用 Spring Data JPA来保存对象并从数据库中获取它们。 没有写入具体的存储库实现。</p>
+   <p>恭喜！ 您已经写了一个简单的应用程序，使用 Spring Data JPA来保存对象并从数据库中获取它们。 实现这些不需要编写具体的 repository 实现。</p>
   </div>
   <div class="admonitionblock note">
    <table>
     <tbody>
      <tr>
       <td class="icon"><i class="fa icon-note" title="说明"></i></td>
-      <td class="content">如果你想要以超媒体的 RESTful 前端来暴露JPA 存储库，几乎没什么努力。 您可能想要读取 <a href="/guides/gs/accessing-data-rest">使用 REST</a> 访问JPA 数据。</td>
+      <td class="content">If you want to expose JPA repositories with a hypermedia-based RESTful front end with little effort, you might want to read <a href="/guides/gs/accessing-data-rest">Accessing JPA Data with REST</a>.</td>
      </tr>
     </tbody>
    </table>
