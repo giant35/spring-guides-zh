@@ -69,10 +69,10 @@
  </div>
 </div>
 <div class="sect1">
- <h2 id="scratch">从Spring初始化开始</h2>
+ <h2 id="scratch">从 Spring Initializr 开始</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>您可以使用此 <a href="https://start.spring.io/#!type=maven-project&amp;groupId=com.example&amp;artifactId=producing-web-service&amp;name=producing-web-service&amp;description=Demo%20project%20for%20Spring%20Boot&amp;packageName=com.example.producing-web-service&amp;dependencies=web,web-services">预初始化项目</a> 并点击生成以下载ZIP 文件。 此项目被配置为适合本教程中的示例。</p>
+   <p>您可以使用此 <a href="https://start.spring.io/#!type=maven-project&amp;groupId=com.example&amp;artifactId=producing-web-service&amp;name=producing-web-service&amp;description=Demo%20project%20for%20Spring%20Boot&amp;packageName=com.example.producing-web-service&amp;dependencies=web,web-services">已初始化项目</a> 并点击生成以下载ZIP 文件。 此项目被配置为适合本教程中的示例。</p>
   </div>
   <div class="paragraph">
    <p>要手动初始化项目：</p>
@@ -81,7 +81,7 @@
    <ol class="arabic">
     <li><p>导航到 <a href="https://start.spring.io" class="bare">https://start.spring.io</a>。 此服务有您应用程序所需的所有依赖库，并且大部分都已经配置好了。</p></li>
     <li><p>选择 Gradle 或 Maven 以及您想要使用的语言。 本指南假定您选择了Java。</p></li>
-    <li><p>点击 <strong>依赖关系</strong> 并选择 <strong>Spring Web</strong> 和 <strong>Spring Web 服务</strong>。</p></li>
+    <li><p>点击 <strong>Dependencies</strong> 并选择 <strong>Spring Web</strong> 和 <strong>Spring Web 服务</strong>。</p></li>
     <li><p>点击 <strong> Generate </strong>。</p></li>
     <li><p>下载由此生成的 ZIP 文件，这是根据你选择配置生成的一个 web 应用程序的压缩包。</p></li>
    </ol>
@@ -166,7 +166,7 @@
    <p>XML schema (XSD) 定义了网络服务域，Spring-WS 将自动导出为 WSDL</p>
   </div>
   <div class="paragraph">
-   <p>创建一个带操作的 XSD 文件来返回一个 Tread <code>名称</code>， <code>人口</code>, <code>资本</code>, 和 <code>货币</code>. 下面的列表(来自 <code>src/main/resources/countries.xsd</code>) 显示了必要的 XSD 文件：</p>
+   <p>创建一个带操作的 XSD 文件来返回一个 Tread <code>名称</code>， <code>人口</code>, <code>资本</code>, 和 <code>货币</code>. 下边代码(来自 <code>src/main/resources/countries.xsd</code>) 显示了必要的 XSD 文件：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
@@ -334,7 +334,7 @@ compileJava.dependsOn genJaxb</code></pre>
  <h2 id="_create_country_repository">创建国家仓库</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>为了向网络服务提供数据，创建一个国家存储库。 在本指南中，您创建一个虚拟的国家存储库实现了硬代码数据。 下面的列表(来自 <code>src/main/java/com/example/producingwebservice/CountryRepository.java</code>) 显示了如何这样做：</p>
+   <p>为了向网络服务提供数据，创建一个国家存储库。 在本指南中，您创建一个虚拟的国家存储库实现了硬代码数据。 下边代码(来自 <code>src/main/java/com/example/producingwebservice/CountryRepository.java</code>) 显示了如何这样做：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
@@ -397,7 +397,7 @@ public class CountryRepository {
  <h2 id="_create_country_service_endpoint">创建国家服务端点</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>要创建一个服务端点，您只需要一个 POJO 带有一些Spring WS 注释来处理传入的 SOAP 请求。 下面的列表(来自 <code>src/main/java/com/example/producingwebservice/CountryEndpoint.java</code>) 显示了这样一个类：</p>
+   <p>要创建一个服务端点，您只需要一个 POJO 带有一些Spring WS 注释来处理传入的 SOAP 请求。 下边代码(来自 <code>src/main/java/com/example/producingwebservice/CountryEndpoint.java</code>) 显示了这样一个类：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
@@ -543,7 +543,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
  <h2 id="_make_the_application_executable">使应用程序可执行文件</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>Spring Boot为您创建一个应用程序类。 在这种情况下，无需作进一步修改。 您可以使用它来运行此应用程序。 下面的列表(来自 <code>src/main/java/com/example/producingwebservice/ProducingWebServiceApplication.java</code>) 显示应用程序类：</p>
+   <p>Spring Boot为您创建一个应用程序类。 在这种情况下，无需作进一步修改。 您可以使用它来运行此应用程序。 下边代码(来自 <code>src/main/java/com/example/producingwebservice/ProducingWebServiceApplication.java</code>) 显示应用程序类：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
@@ -581,10 +581,10 @@ public class ProducingWebServiceApplication {
   <div class="sect2">
    <h3 id="_build_an_executable_jar">构建可执行的 JAR</h3>
    <div class="paragraph">
-    <p>您可以从 Gradle 或 Maven 的命令行运行该应用程序。 您也可以构建一个包含所有必要依赖、类和资源的单个可执行文件并运行它。 构建一个可执行的 jar 可以方便船舶，版本， 并在整个开发生命周期、在不同环境中等地将服务作为一种应用来部署。</p>
+    <p>您可以从 Gradle 或 Maven 的命令行运行该应用程序。 您也可以构建一个包含所有必要依赖、类和资源的单个可执行文件并运行它。 构建一个可执行的 jar 可以在整个开发周期或在不同环境中方便打包、发版、部署等等。</p>
    </div>
    <div class="paragraph">
-    <p>如果您使用 Gradle, 您可以使用 <code>运行应用程序。/gradlew bootRun</code>。 或者，您可以使用 <code>/gradlew build</code> 来构建JAR 文件，然后运行 JAR 文件，如下所示：</p>
+    <p>如果您使用 Gradle, 您可以使用 <code>./gradlew bootRun</code> 运行应用程序。 或者，您可以使用 <code>./gradlew build</code> 来构建JAR 文件，然后运行 JAR 文件，如下所示：</p>
    </div>
    <div class="exampleblock">
     <div class="content">
