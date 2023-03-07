@@ -65,15 +65,15 @@
    <p>您可以使用此 <a href="https://start.spring.io/#!type=maven-project&amp;groupId=com.example&amp;artifactId=uploading-files&amp;name=uploading-files&amp;description=Demo%20project%20for%20Spring%20Boot&amp;packageName=com.example.uploading-files&amp;dependencies=web,thymeleaf">预初始化项目</a> 并点击生成以下载ZIP 文件。 此项目被配置为适合本教程中的示例。</p>
   </div>
   <div class="paragraph">
-   <p>手动初始化项目：</p>
+   <p>要手动初始化项目：</p>
   </div>
   <div class="olist arabic">
    <ol class="arabic">
-    <li><p>导航到 <a href="https://start.spring.io" class="bare">https://start.spring.io</a>。 此服务在您需要应用程序的所有依赖关系中拉动，并且为您进行了大部分设置。</p></li>
+    <li><p>导航到 <a href="https://start.spring.io" class="bare">https://start.spring.io</a>。 此服务有您应用程序所需的所有依赖库，并且大部分都已经配置好了。</p></li>
     <li><p>选择 Gradle 或 Maven 以及您想要使用的语言。 本指南假定您选择了Java。</p></li>
     <li><p>点击 <strong>依赖关系</strong> 并选择 <strong>Spring Web</strong> 和 <strong>Thymeleaf</strong>。</p></li>
-    <li><p>点击 <strong>生成</strong>。</p></li>
-    <li><p>下载由此产生的 ZIP 文件，这是一个 web 应用程序的归档，通过您的选择进行配置。</p></li>
+    <li><p>点击 <strong> Generate </strong>。</p></li>
+    <li><p>下载由此生成的 ZIP 文件，这是根据你选择配置生成的一个 web 应用程序的压缩包。</p></li>
    </ol>
   </div>
   <div class="admonitionblock note">
@@ -81,7 +81,7 @@
     <tbody>
      <tr>
       <td class="icon"><i class="fa icon-note" title="说明"></i></td>
-      <td class="content">如果您的 IDE 有Spring Initializr 集成，您可以从 IDE 完成此进程。</td>
+      <td class="content">如果您的 IDE 集成了 Spring Initializr ，您可以从 IDE 完成此操作。</td>
      </tr>
     </tbody>
    </table>
@@ -91,7 +91,7 @@
     <tbody>
      <tr>
       <td class="icon"><i class="fa icon-note" title="说明"></i></td>
-      <td class="content">您也可以从 Github 派生项目并在您的 IDE 或其他编辑器中打开。</td>
+      <td class="content">您也可以从 Github 项目 fork 并在您的 IDE 或其它编辑器中打开。</td>
      </tr>
     </tbody>
    </table>
@@ -102,24 +102,24 @@
  <h2 id="initial">创建应用程序类</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>要启动Spring Boot MVC 应用程序，您首先需要启动程序。 在这个样本中， <code>spring-boot-starter-thymeleaf</code> and <code>spring-boot-starter-web</code> 已经添加为依赖项。 若要使用 Servlet 容器上传文件，您需要注册 <code>MultipartConfig元素</code> 类(它将是 <code>&lt;multipart-config&gt;</code> 在 web.xml)。 感谢Spring Boot，一切都是为你自动配置的！</p>
+   <p>要启动Spring Boot MVC 应用程序，您首先需要启动程序。 在此例子中， <code>spring-boot-starter-thymeleaf</code> 及 <code>spring-boot-starter-web</code> 已经添加为依赖项。 若要使用 Servlet 容器上传文件，您需要注册 <code>MultipartConfigElement</code> 类(在 web.xml 中的 <code>&lt;multipart-config&gt;</code>)。 感谢Spring Boot，一切都会自动为你配置好！</p>
   </div>
   <div class="paragraph">
-   <p>您需要从此应用程序开始的只是下面的 <code>上传文件应用程序</code> 类(来自 <code>src/main/java/com/example/uploadingfilesApplication.java</code>)：</p>
+   <p>在此应用程序只需从下面 <code>UploadingFilesApplication</code> 类开始(来自 <code>src/main/java/com/example/uploadingfiles/UploadingFilesApplication.java</code>)：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
     <div class="listingblock">
      <div class="content">
-      <pre class="prettyprint highlight"><code data-lang="java">包 com.example.uploadingfiles;
+      <pre class="prettyprint highlight"><code data-lang="java">package com.example.uploadingfiles;
 
-导入 org.springframework.boot.SpringApplication;
-导入 org.springframework.boot.autoconfigure. pringBootApplication;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class UploadingFilesApplication
+public class UploadingFilesApplication {
 
-	public static life main(String[args) Windows
+	public static void main(String[] args) {
 		SpringApplication.run(UploadingFilesApplication.class, args);
 	}
 
@@ -129,15 +129,15 @@ public class UploadingFilesApplication
    </div>
   </div>
   <div class="paragraph">
-   <p>作为Spring MVC自动配置的一部分，Spring Boot 将创建一个 <code>MultipartConfig元素</code> bean，并使自己准备好上传文件。</p>
+   <p>作为Spring MVC自动配置的一部分，Spring Boot 将创建一个 <code>MultipartConfigElement</code> bean，并使其准备用于文件上传。</p>
   </div>
  </div>
 </div>
 <div class="sect1">
- <h2 id="_create_a_file_upload_controller">创建文件上传控制器</h2>
+ <h2 id="_create_a_file_upload_controller">创建文件上传 Controller</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>初始应用程序已经包含几个类来处理存储和加载上传文件到磁盘。 它们都位于 <code>com.example.uploadingfiles.storage</code> 软件包。 您将在新的 <code>文件上传控制器</code> 中使用这些内容。 下面的列表(来自 <code>src/main/java/com/example/uploadingfiles/FileUploadController.java</code>) 显示了文件上传控制器：</p>
+   <p>初始应用程序已经包含几个类来处理磁盘存储和加载上传文件。 它们都位于 <code>com.example.uploadingfiles.storage</code> package。 您将在新的 <code>FileUploadController</code> 中使用这些内容。 下列代码(from <code>src/main/java/com/example/uploadingfiles/FileUploadController.java</code>) 显示了文件上传 controller：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
@@ -219,16 +219,16 @@ public class FileUploadController {
    </div>
   </div>
   <div class="paragraph">
-   <p><code>FileUploadController</code> 类附加说明了 <code>@Controller</code> 这样Spring MVC 可以拿起它并寻找路线。 每个方法都标记为 <code>@GetMap</code> or <code>@PostMap</code> 来将路径和 HTTP 动作与特定控制器动作连接起来。</p>
+   <p><code>FileUploadController</code> 类用 <code>@Controller</code> 注解让 Spring MVC 可以通过路由找到它。 每个方法注解了 <code>@GetMap</code> 或 <code>@PostMap</code> 的方法都将会与路径 & HTTP 动作连起来。</p>
   </div>
   <div class="paragraph">
-   <p>在这种情况下：</p>
+   <p>本例中：</p>
   </div>
   <div class="ulist">
    <ul>
-    <li><p><code>GET /</code>: 查找从 <code>StorageService</code> 上传文件的当前列表并将其加载到 Thymeleaf 模板。 它使用 <code>MvcUriComponentsBuilder</code> 计算到实际资源的链接。</p></li>
-    <li><p><code>GET /files/{filename}</code>: 加载资源 (如果存在) 并通过使用 <code>内容处理</code> 响应头将其发送到浏览器下载。</p></li>
-    <li><p><code>POST /</code>: 处理多部分消息 <code>文件</code> 并将其交给 <code>存储服务</code> 保存.</p></li>
+    <li><p><code>GET /</code>: 从 <code>StorageService</code> 查找之前上传的文件列表并将其加载到 Thymeleaf 模板。 它用 <code>MvcUriComponentsBuilder</code> 算出资源的实际网址。</p></li>
+    <li><p><code>GET /files/{filename}</code>: 加载资源 (如果存在) 并使用 <code>Content-Disposition</code> 响应头将其发送到浏览器以便下载。</p></li>
+    <li><p><code>POST /</code>: 处理 multi-part <code>file</code> 消息并将其交给<code>StorageService</code> 保存.</p></li>
    </ul>
   </div>
   <div class="admonitionblock note">
@@ -236,39 +236,39 @@ public class FileUploadController {
     <tbody>
      <tr>
       <td class="icon"><i class="fa icon-note" title="说明"></i></td>
-      <td class="content">在生产场景中，您更可能将文件存储在一个临时位置， 一个数据库，或者可能是一个 NoSQL 商店(例如 <a href="https://docs.mongodb.org/manual/core/gridfs">Mongo的 GridFS</a>)。 最好不要加载您应用程序的文件系统的内容。</td>
+      <td class="content">在生产场景中，您更可能将文件存储在一个临时位置、一个数据库、或者可能是一个 NoSQL 存储(例如 <a href="https://docs.mongodb.org/manual/core/gridfs">Mongo’s GridFS</a>)。 最好不要加载您应用程序的文件系统的内容。</td>
      </tr>
     </tbody>
    </table>
   </div>
   <div class="paragraph">
-   <p>您将需要提供 <code>存储服务</code> ，以便控制器能够与存储层交互(例如文件系统)。 下面的列表(来自 <code>src/main/java/com/example/uploadingfiles/storage/StorageService.java</code>) 显示了该接口：</p>
+   <p>您将需要提供 <code>StorageService</code> ，以便Controller能够与存储层交互(例如文件系统)。 下列代码 (来自 <code>src/main/java/com/example/uploadingfiles/storage/StorageService.java</code>) 显示了该接口：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
     <div class="listingblock">
      <div class="content">
-      <pre class="prettyprint highlight"><code data-lang="java">软件包 com.example.uploadingfiles.storage;
+      <pre class="prettyprint highlight"><code data-lang="java">package com.example.uploadingfiles.storage;
 
-importer org.springframework.core.io.Resource;
-importer org.springframework.web.multipart.MultipartFile;
+import org.springframework.core.io.Resource;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.nio.file.Path;
-import java.util.stream. tream；
+import java.util.stream.Stream;
 
-公共接口StorageService Group(
+public interface StorageService {
 
-	invate init();
+	void init();
 
-	investigation (MultipartFile file);
+	void store(MultipartFile file);
 
-	Stream&lt;Path&gt; load();
+	Stream&lt;Path&gt; loadAll();
 
-	路径负载(文件名)；
+	Path load(String filename);
 
-	资源负载资源资源(文件名)；
+	Resource loadAsResource(String filename);
 
-	无效删除所有()；
+	void deleteAll();
 
 }</code></pre>
      </div>
@@ -278,10 +278,10 @@ import java.util.stream. tream；
  </div>
 </div>
 <div class="sect1">
- <h2 id="_creating_an_html_template">创建一个 HTML 模板</h2>
+ <h2 id="_creating_an_html_template">创建 HTML 模板</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>下面的 Thymeleaf 模板 (从 <code>src/main/resources/templates/uploadForm.html</code>) 显示如何上传文件和显示上传文件的示例：</p>
+   <p>下面的 Thymeleaf 模板 (从 <code>src/main/resources/templates/uploadForm.html</code>) 示范如何上传文件和显示上传文件：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
@@ -322,9 +322,9 @@ import java.util.stream. tream；
   </div>
   <div class="ulist">
    <ul>
-    <li><p>Spring MVC 在顶部可选的消息： <a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#mvc-flash-attributes">范围伸缩的消息</a>。</p></li>
-    <li><p>允许用户上传文件的表格。</p></li>
-    <li><p>从后端提供的文件列表。</p></li>
+    <li><p>顶部是 Spring MVC 写的一个<a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#mvc-flash-attributes">flash-scoped message</a>.</p></li>
+    <li><p>让用户上传文件的 form。</p></li>
+    <li><p>从后端得到的文件列表。</p></li>
    </ul>
   </div>
  </div>
@@ -333,10 +333,10 @@ import java.util.stream. tream；
  <h2 id="_tuning_file_upload_limits">调整文件上传限制</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>在配置文件上传时，设定文件大小的限制常常是有用的。 想象一下试图处理 5GB 文件上传！ 使用 Spring Boot, 我们可以调整它自动配置的 <code>多部分配置元素</code> 与一些属性设置。</p>
+   <p>在配置文件上传时，限制文件大小常常很有用。 想象一下试图处理 5GB 文件上传！ 在 Spring Boot, 我们可以用一些属性调整它自动配置的 <code>MultipartConfigElement</code> 。</p>
   </div>
   <div class="paragraph">
-   <p>将以下属性添加到您现有的属性设置中( <code>src/main/resources/application.properties</code>)：</p>
+   <p>将以下属性添加到您现有的设置属性中(<code>src/main/resources/application.properties</code>)：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
@@ -349,7 +349,7 @@ spring.servlet.multipart.max-request-size=128KB</code></pre>
    </div>
   </div>
   <div class="paragraph">
-   <p>多部分设置受到以下限制：</p>
+   <p>multipart 设置了以下限制：</p>
   </div>
   <div class="ulist">
    <ul>
@@ -363,7 +363,7 @@ spring.servlet.multipart.max-request-size=128KB</code></pre>
  <h2 id="_run_the_application">运行应用程序</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>你想要上传文件的目标文件夹， 所以您需要增强Spring Initializr 创建并添加一个启动 <code>CommandLineRunner</code> 以在启动时删除和重新创建该文件夹的基本 <code>上传文件应用程序</code> 类。 下面的列表(来自 <code>src/main/java/com/example/uploadingfiles/UploadingFilesApplication.java</code>) 显示了如何这样做：</p>
+   <p>需要上传文件的目标文件夹， 您得增强 Spring Initializr 创建的 <code>UploadingFilesApplication</code> 并添加一个 <code>CommandLineRunner</code> 以在启动时删除和重新创建该文件夹。 下列代码(来自 <code>src/main/java/com/example/uploadingfiles/UploadingFilesApplication.java</code>) 展示怎么做：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
@@ -401,25 +401,25 @@ public class UploadingFilesApplication {
    </div>
   </div>
   <div class="paragraph">
-   <p><code>@SpringBootApplication</code> 是一个添加以下所有内容的方便注释：</p>
+   <p><code>@SpringBootApplication</code> 是一个便捷注解，添加了以下所有内容：</p>
   </div>
   <div class="ulist">
    <ul>
-    <li><p><code>@Configuration</code>: 将类标记为应用程序上下文的 bean 定义的一个来源。</p></li>
-    <li><p><code>@EnableAutoConfiguration</code>: Tells Spring Boot, 以便开始基于类路径设置、其他豆类和各种属性设置添加豆类。 例如，如果 <code>spring-webmvc</code> 在类路径上 此注解将应用程序标记为 web 应用程序并激活密钥行为，例如设置 <code>DispatcherServlet</code>。</p></li>
-    <li><p><code>@ComponentScan</code>: Tells Spring在 <code>com/example</code> 包中寻找其他组件、配置和服务, 让它找到控制器。</p></li>
+    <li><p><code>@Configuration</code>: 将类标记为应用程序上下文中定义 bean 的一个来源。</p></li>
+    <li><p><code>@EnableAutoConfiguration</code>: 让 Spring Boot 基于 classpath 设置、其它 beans 及其它属性设置来添加 beans. 例如，如果 <code>spring-webmvc</code> 在类路径上 ，此注解将应用程序标记为 web 应用程序并激活一些关键行为，例如设置 <code>DispatcherServlet</code>。</p></li>
+    <li><p><code>@ComponentScan</code>: 让 Spring 在 <code>com/example</code> package 中寻找其他组件、配置和服务, 让它找到 controllers。</p></li>
    </ul>
   </div>
   <div class="paragraph">
-   <p><code>main()</code> 方法使用 Spring Boot <code>SpringApplication.run()</code> 方法来启动一个应用。 您是否注意到没有一条XML线？ 没有 <code>web.xml</code> 文件。 此 web 应用程序纯度为 100% 的 Java ，您无需处理配置任何管道或基础设施的问题。</p>
+   <p>方法<code>main()</code> 使用 Spring Boot <code>SpringApplication.run()</code> 方法来启动应用。 您是否注意到没有出现一行XML代码？ 也没有 <code>web.xml</code> 文件。 此 web 应用程序是 100% 的纯 Java ，您也无需配置其它东西。</p>
   </div>
   <div class="sect2">
    <h3 id="_build_an_executable_jar">构建可执行的 JAR</h3>
    <div class="paragraph">
-    <p>您可以从 Gradle 或 Maven 的命令行运行该应用程序。 您也可以构建一个包含所有必要依赖、类和资源的单个可执行文件并运行它。 构建一个可执行的 jar 可以方便船舶，版本， 并在整个开发生命周期、在不同环境中等地将服务作为一种应用来部署。</p>
+    <p>您可以从 Gradle 或 Maven 的命令行运行该应用程序。 您也可以构建一个包含所有必要依赖、类和资源的单个可执行文件并运行它。 构建一个可执行的 jar 可以在整个开发周期或在不同环境中方便打包、发版、部署等等。</p>
    </div>
    <div class="paragraph">
-    <p>如果您使用 Gradle, 您可以使用 <code>运行应用程序。/gradlew bootRun</code>。 或者，您可以使用 <code>/gradlew build</code> 来构建JAR 文件，然后运行 JAR 文件，如下所示：</p>
+    <p>如果您使用 Gradle, 您可以使用 <code>./gradlew bootRun</code> 运行应用程序。 或者，您可以使用 <code>./gradlew build</code> 来构建JAR 文件，然后运行 JAR 文件，如下所示：</p>
    </div>
    <div class="exampleblock">
     <div class="content">
@@ -431,7 +431,7 @@ public class UploadingFilesApplication {
     </div>
    </div>
    <div class="paragraph">
-    <p>如果您使用 Maven，您可以使用 <code>运行应用程序。/mvnw spring-boot:run</code>。 或者，您可以使用 <code>构建JAR 文件。/mvnw 干净的包</code> 然后运行 JAR 文件，如下所示：</p>
+    <p>如果您使用 Maven，您可以使用 <code>./mvnw spring-boot:run</code>运行应用程序。 或者，您可以使用 <code>./mvnw clean package</code> 先构建 JAR 文件然后运行 JAR 文件，如下所示：</p>
    </div>
    <div class="exampleblock">
     <div class="content">
@@ -453,16 +453,16 @@ public class UploadingFilesApplication {
     </table>
    </div>
    <div class="paragraph">
-    <p>这将运行接收文件上传的服务器侧块。 日志输出已显示。 服务应该在几秒钟内启动和运行。</p>
+    <p>这将运行接收文件上传的服务器端。 日志输出已显示。 服务应该在几秒钟内启动和运行。</p>
    </div>
    <div class="paragraph">
-    <p>在服务器运行时，您需要打开浏览器并访问 <code><a href="http://localhost:8080/" class="bare">http://localhost:8080/</a></code> 查看上传表格。 选择一个 (small) 文件并按 <strong>上传</strong>。 您应该从控制器看到成功页面。 如果你选择一个太大的文件，你将会得到一个丑陋的错误页面。</p>
+    <p>在服务器运行时，您需要打开浏览器并访问 <code><a href="http://localhost:8080/" class="bare">http://localhost:8080/</a></code> 查看上传 form。 选择一个(小) 文件并按 <strong> Upload </strong>。 您应该从 controller 看到成功页面。 如果你选择一个太大的文件，你将会得到一个难看的错误页面。</p>
    </div>
    <div class="paragraph">
-    <p>然后您应该在您的浏览器窗口中看到一个类似于以下内容的行：</p>
+    <p>然后在您的浏览器窗口中应该看到一个类似于以下内容的行：</p>
    </div>
    <div class="paragraph">
-    <p>“你成功上传了 &lt;name of your file&gt;！”</p>
+    <p>“You successfully uploaded &lt;name of your file&gt;!”</p>
    </div>
   </div>
  </div>
@@ -471,7 +471,7 @@ public class UploadingFilesApplication {
  <h2 id="_testing_your_application">测试您的应用程序</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>在我们的应用程序中有多种方式测试此特定功能。 以下列表(来自 <code>src/test/java/com/example/uploadingfiles/FileUploadTests)。 ava</code>() 显示一个使用 <code>MockMvc</code> 的示例，以免需要启动服务器容器：</p>
+   <p>在我们的应用程序中有多种方式测试此特定功能。 下列代码(来自 <code>src/test/java/com/example/uploadingfiles/FileUploadTests.java</code>) 显示使用 <code>MockMvc</code> 的示例，以免启动服务器容器：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
@@ -550,10 +550,10 @@ public class FileUploadTests {
    </div>
   </div>
   <div class="paragraph">
-   <p>在这些试验中， 您使用各种模型来设置与您的控制器和 <code>存储服务</code> 的交互，但也使用 <code>MockMultipartFile 文件</code> 来设置与Servlet 容器本身的交互。</p>
+   <p>在这些测试中， 您设置使用各种 mock 与 Controller 及 <code> StorageService </code> 交互，但也使用 <code>MockMultipartFile 文件</code> 来设置与Servlet 容器本身的交互。</p>
   </div>
   <div class="paragraph">
-   <p>关于集成测试的示例，请参阅 <code>FileUploadIntegrationTests</code> 类(在 <code>src/test/java/com/example/uploadingfiles</code> 中)。</p>
+   <p>关于集成测试的示例，请参阅 <code>FileUploadIntegrationTests</code> 类(在 <code>src/test/java/com/example/uploadingfiles</code>中)。</p>
   </div>
  </div>
 </div>
@@ -561,7 +561,7 @@ public class FileUploadTests {
  <h2 id="_summary">总结</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>恭喜！ 您刚刚写了一个使用 Spring 处理文件上传的Web应用程序。</p>
+   <p>恭喜！ 您刚刚写了一个使用 Spring 处理文件上传的 web 应用程序。</p>
   </div>
  </div>
 </div>
