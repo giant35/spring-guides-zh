@@ -95,10 +95,10 @@
  </div>
 </div>
 <div class="sect1">
- <h2 id="scratch">从Spring初始化开始</h2>
+ <h2 id="scratch">从 Spring Initializr 开始</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>您可以使用此 <a href="https://start.spring.io/#!type=maven-project&amp;groupId=com.example&amp;artifactId=rest-service-cors&amp;name=rest-service-cors&amp;description=Demo%20project%20for%20Spring%20Boot&amp;packageName=com.example.rest-service-cors&amp;dependencies=web">预初始化项目</a> 并点击生成以下载ZIP 文件。 此项目被配置为适合本教程中的示例。</p>
+   <p>您可以使用此 <a href="https://start.spring.io/#!type=maven-project&amp;groupId=com.example&amp;artifactId=rest-service-cors&amp;name=rest-service-cors&amp;description=Demo%20project%20for%20Spring%20Boot&amp;packageName=com.example.rest-service-cors&amp;dependencies=web">已初始化项目</a> 并点击生成以下载ZIP 文件。 此项目被配置为适合本教程中的示例。</p>
   </div>
   <div class="paragraph">
    <p>要手动初始化项目：</p>
@@ -107,7 +107,7 @@
    <ol class="arabic">
     <li><p>导航到 <a href="https://start.spring.io" class="bare">https://start.spring.io</a>。 此服务有您应用程序所需的所有依赖库，并且大部分都已经配置好了。</p></li>
     <li><p>选择 Gradle 或 Maven 以及您想要使用的语言。 本指南假定您选择了Java。</p></li>
-    <li><p>点击 <strong>依赖关系</strong> 并选择 <strong>Spring Web</strong>。</p></li>
+    <li><p>点击 <strong>Dependencies</strong> 并选择 <strong>Spring Web</strong>。</p></li>
     <li><p>点击 <strong> Generate </strong>。</p></li>
     <li><p>下载由此生成的 ZIP 文件，这是根据你选择配置生成的一个 web 应用程序的压缩包。</p></li>
    </ol>
@@ -466,7 +466,7 @@ public class GreetingController {
     <p>此外，(或作为替代)精细注释的配置，您也可以定义一些全局的 CORS 配置。 这类似于使用 <code>筛选器</code> 但可以在 Spring MVC 中声明并与精良的 <code>@Crossorigin</code> 配置。 默认情况下，所有来源和 <code>GET</code>, <code>HEAD</code>, 和 <code>POST</code> 方法是被允许的。</p>
    </div>
    <div class="paragraph">
-    <p>下面的列表(来自 <code>src/main/java/com/example/restservicecors/GreetingController.java</code>) 在 <code>GreetingController</code> 类中显示 <code>问候和Javaconfig</code> 方法：</p>
+    <p>下边代码(来自 <code>src/main/java/com/example/restservicecors/GreetingController.java</code>) 在 <code>GreetingController</code> 类中显示 <code>问候和Javaconfig</code> 方法：</p>
    </div>
    <div class="exampleblock">
     <div class="content">
@@ -491,7 +491,7 @@ public class GreetingController {
     </table>
    </div>
    <div class="paragraph">
-    <p>下面的列表(来自 <code>src/main/java/com/example/restservicecors/RestServiceCorsApplication.java</code>) 显示了如何在应用程序类中添加 CORS 映射：</p>
+    <p>下边代码(来自 <code>src/main/java/com/example/restservicecors/RestServiceCorsApplication.java</code>) 显示了如何在应用程序类中添加 CORS 映射：</p>
    </div>
    <div class="exampleblock">
     <div class="content">
@@ -529,7 +529,7 @@ public class GreetingController {
  <h2 id="_creating_the_application_class">创建应用程序类</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>Spring初始化器为您创建了一个赤骨应用程序类。 下面的列表(从 <code>initial/src/main/java/com/example/restservicecors/RestServiceCorsApplication.java</code>) 显示初始类：</p>
+   <p>Spring Initializr为您创建了一个赤骨应用程序类。 下边代码(从 <code>initial/src/main/java/com/example/restservicecors/RestServiceCorsApplication.java</code>) 显示初始类：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
@@ -553,7 +553,7 @@ public class RestServiceCorsApplication {
    </div>
   </div>
   <div class="paragraph">
-   <p>您需要添加一个方法来配置如何处理跨源资源共享。 下面的列表(从 <code>complete/src/main/java/com/example/restservicecors/RestServiceCorsApplication.java</code>) 显示如何这样做：</p>
+   <p>您需要添加一个方法来配置如何处理跨源资源共享。 下边代码(从 <code>complete/src/main/java/com/example/restservicecors/RestServiceCorsApplication.java</code>) 显示如何这样做：</p>
   </div>
   <div class="exampleblock">
    <div class="content">
@@ -625,10 +625,10 @@ public class RestServiceCorsApplication {
   <div class="sect2">
    <h3 id="_build_an_executable_jar">构建可执行的 JAR</h3>
    <div class="paragraph">
-    <p>您可以从 Gradle 或 Maven 的命令行运行该应用程序。 您也可以构建一个包含所有必要依赖、类和资源的单个可执行文件并运行它。 构建一个可执行的 jar 可以方便船舶，版本， 并在整个开发生命周期、在不同环境中等地将服务作为一种应用来部署。</p>
+    <p>您可以从 Gradle 或 Maven 的命令行运行该应用程序。 您也可以构建一个包含所有必要依赖、类和资源的单个可执行文件并运行它。 构建一个可执行的 jar 可以在整个开发周期或在不同环境中方便打包、发版、部署等等。</p>
    </div>
    <div class="paragraph">
-    <p>如果您使用 Gradle, 您可以使用 <code>运行应用程序。/gradlew bootRun</code>。 或者，您可以使用 <code>/gradlew build</code> 来构建JAR 文件，然后运行 JAR 文件，如下所示：</p>
+    <p>如果您使用 Gradle, 您可以使用 <code>./gradlew bootRun</code> 运行应用程序。 或者，您可以使用 <code>./gradlew build</code> 来构建JAR 文件，然后运行 JAR 文件，如下所示：</p>
    </div>
    <div class="exampleblock">
     <div class="content">
